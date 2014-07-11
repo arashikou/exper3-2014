@@ -1,0 +1,25 @@
+{
+  "folders":
+  [
+    {
+      "follow_symlinks": true,
+      "name": "Game 1",
+      "path": "game1"
+    },
+    {
+      "follow_symlinks": true,
+      "name": "Game 2",
+      "path": "game2"
+    },
+    {
+      "follow_symlinks": true,
+      "name": "Game 3",
+      "path": "game3"
+    },
+    {
+      "follow_symlinks": true,
+      "name": "Game 4",
+      "path": "game4"
+    }
+  ]
+}
