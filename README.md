@@ -20,7 +20,7 @@ I'm going to write all four games in Haxe, using the HaxeFlixel engine on top of
 1. I used the AS3 version of Flixel to make one of the few other games I ever created, so I am familiar with its interface.
 1. HaxeFlixel has a low boilerplate cost to starting up a new project, which is something I'll be doing four times.
 1. HaxeFlixel has an API that elides just the right amount of work for what I want to do. It provides the essentials of windowing, audio, input, and sprite-based rendering, and then it gets out of the way. This means I can write four very different 2D games on the same framework.
-1. HaxeFlixel isn't _over_engineered for the kind of simple, 2D games I'm making, so I won't be fighting needless abstractions or be waylaid by working around features I don't even want to use.
+1. HaxeFlixel isn't _over_-engineered for the kind of simple, 2D games I'm making, so I won't be fighting needless abstractions or be waylaid by working around features I don't even want to use.
 1. I'm still a coder at heart, and that means I like working with source code instead of a GUI. EXPER3 is not the time to try to change this.
 
 This does pose some amount of risk. Although I've used many languages like Haxe, I've never written a large project in Haxe itself.
