@@ -12,6 +12,14 @@ But come the 12th, the starting pistol will fire and EXPER3 will begin, and all 
 
 Of course, I also hope whatever is produced here could be of interest to other people, either as a fun game to play or as a reference to how to create a game with the tools I'm using.
 
+# What is the Format of EXPER3?
+
+Amy gave me the choice of either focusing on one big game for the whole month or four smaller games. I chose the latter because I know my eyes are often bigger than my abilities, and I could easily overcommit myself. I want to force myself to keep my focus small.
+
+Like Ludum Dare, EXPER3 has a theme that the games must adhere to. That theme is **power**. How I interpret that is up to me. I'm trying to make sure I interpret it differently in each game as a creative challenge.
+
+EXPER3 also has an unofficial second theme. That theme is **moose**. This isn't actually a rule Amy set, but the fake newspaper she wrote as part of my birthday present needed some space-filler, so she created a second story about the global moose market. It was Amy writing comedy at her best and very funny. It just seems appropriate to include moose in EXPER3 in some capacity.
+
 # What Tools Are You Using?
 
 I'm going to write all four games in Haxe, using the HaxeFlixel engine on top of the OpenFL/Lime framework. This may sound like a thick stack, but it has a number of advantages for me:
@@ -21,9 +29,9 @@ I'm going to write all four games in Haxe, using the HaxeFlixel engine on top of
 1. HaxeFlixel has a low boilerplate cost to starting up a new project, which is something I'll be doing four times.
 1. HaxeFlixel has an API that elides just the right amount of work for what I want to do. It provides the essentials of windowing, audio, input, and sprite-based rendering, and then it gets out of the way. This means I can write four very different 2D games on the same framework.
 1. HaxeFlixel isn't _over_-engineered for the kind of simple, 2D games I'm making, so I won't be fighting needless abstractions or be waylaid by working around features I don't even want to use.
-1. I'm still a coder at heart, and that means I like working with source code instead of a GUI. EXPER3 is not the time to try to change this.
+1. I'm still a coder at heart, and that means I am most comfortable working with source code instead of a GUI. EXPER3 is not the time to try to change this.
 
-This does pose some amount of risk. Although I've used many languages like Haxe, I've never written a large project in Haxe itself.
+This does pose some amount of risk. Although I've used many languages like Haxe, I've never written a large project in Haxe itself. I am betting on this not being a huge impediment, but we shall see.
 
 # What Platforms Do These Games Run On?
 
