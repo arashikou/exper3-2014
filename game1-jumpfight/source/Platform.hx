@@ -3,16 +3,18 @@ package;
 import flixel.FlxG;
 import flixel.FlxObject.UP;
 import flixel.FlxSprite;
-import flixel.util.FlxColorUtil;
+import flixel.util.FlxColor;
 
 // Sprite for a platform
 class Platform extends FlxSprite
 {
-  public function new(width:Int)
-  {
-    super();
+  public inline static var HEIGHT = 2;
 
-    makeGraphic(width, 2, FlxColorUtil.getColor32(255, 255, 255, 255));
+  public function new(start:Int, end:Int, altitude:Int)
+  {
+    super(start, altitude);
+
+    makeGraphic(end - start, HEIGHT, FlxColor.WHITE);
 
     moves = false;
     immovable = true;

@@ -10,7 +10,6 @@ class GameState extends FlxState
 {
   var player:Hero;
 
-  var world:FlxGroup;
   var platforms:FlxTypedGroup<Platform>;
   var walls:FlxTypedGroup<Wall>;
 
@@ -26,27 +25,22 @@ class GameState extends FlxState
     add(player);
 
     platforms = new FlxTypedGroup<Platform>();
-    var floor = new Platform(FlxG.width);
-    floor.y = FlxG.height - 10;
-    platforms.add(floor);
-
+    add(platforms);
     walls = new FlxTypedGroup<Wall>(2);
-    var leftWall = new Wall();
-    leftWall.x = 0;
-    walls.add(leftWall);
-    var rightWall = new Wall();
-    rightWall.x = FlxG.width - rightWall.width;
-    walls.add(rightWall);
+    add(walls);
 
-    world = new FlxGroup();
-    world.add(platforms);
-    world.add(walls);
-    add(world);
+    // Add the floor
+    platforms.add(new Platform(0, FlxG.width, FlxG.height - 10));
+
+    // Add the left and right walls
+    walls.add(new Wall(0));
+    walls.add(new Wall(FlxG.width - Wall.WIDTH));
   }
 
   override public function update():Void
   {
     super.update();
+
     FlxG.collide(player, walls);
     if (FlxG.collide(player, platforms))
     {
