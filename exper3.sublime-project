@@ -4,28 +4,33 @@
     {
       "follow_symlinks": true,
       "name": "Game 1",
-      "path": "game1-jumpfight"
+      "path": "game1-jumpfight",
+      "folder_exclude_patterns": ["export"]
     },
     {
       "follow_symlinks": true,
       "name": "Game 2",
-      "path": "game2"
+      "path": "game2",
+      "folder_exclude_patterns": ["export"]
     },
     {
       "follow_symlinks": true,
       "name": "Game 3",
-      "path": "game3"
+      "path": "game3",
+      "folder_exclude_patterns": ["export"]
     },
     {
       "follow_symlinks": true,
       "name": "Game 4",
-      "path": "game4"
+      "path": "game4",
+      "folder_exclude_patterns": ["export"]
     },
     {
       "follow_symlinks": true,
       "name": "Docs",
       "path": ".",
-      "folder_exclude_patterns": ["game*"]
+      "folder_exclude_patterns": ["game*"],
+      "file_exclude_patterns": ["*.sublime-workspace"]
     }
   ]
 }
