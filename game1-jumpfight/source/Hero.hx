@@ -4,6 +4,7 @@ import flixel.FlxG;
 import flixel.FlxObject.FLOOR;
 import flixel.FlxSprite;
 import flixel.util.FlxColorUtil;
+import flixel.util.FlxMath;
 
 // Constants that control player motion
 private class HeroPhysics
@@ -47,8 +48,9 @@ class Hero extends FlxSprite
     else
     {
       velocity.x += (left + right) * HeroPhysics.AIR_CONTROL;
-      velocity.x = Math.max(-HeroPhysics.GROUND_SPEED,
-          Math.min(velocity.x, HeroPhysics.GROUND_SPEED));
+      velocity.x = FlxMath.bound(velocity.x,
+                                 -HeroPhysics.GROUND_SPEED,
+                                 HeroPhysics.GROUND_SPEED);
     }
 
     // Handle jumping
