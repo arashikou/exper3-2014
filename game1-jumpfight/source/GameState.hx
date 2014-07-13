@@ -18,6 +18,8 @@ class GameState extends FlxState
   {
     super.create();
 
+    FlxG.cameras.useBufferLocking = true;
+
     player = new Hero();
     player.x = (FlxG.width - player.width) / 2;
     player.y = (FlxG.height - player.height) / 2;
