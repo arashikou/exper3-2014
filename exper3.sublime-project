@@ -4,22 +4,26 @@
     {
       "follow_symlinks": true,
       "name": "Game 1",
-      "path": "game1"
+      "path": "game1",
+      "folder_exclude_patterns": ["export"]
     },
     {
       "follow_symlinks": true,
       "name": "Game 2",
-      "path": "game2"
+      "path": "game2",
+      "folder_exclude_patterns": ["export"]
     },
     {
       "follow_symlinks": true,
       "name": "Game 3",
-      "path": "game3"
+      "path": "game3",
+      "folder_exclude_patterns": ["export"]
     },
     {
       "follow_symlinks": true,
       "name": "Game 4",
-      "path": "game4"
+      "path": "game4",
+      "folder_exclude_patterns": ["export"]
     },
     {
       "follow_symlinks": true,
