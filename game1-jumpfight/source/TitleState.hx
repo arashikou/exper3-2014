@@ -28,13 +28,12 @@ class TitleState extends FlxState
     add(startText);
   }
 
-  override public function destroy():Void
-  {
-    super.destroy();
-  }
-
   override public function update():Void
   {
     super.update();
+
+    if (FlxG.keys.firstPressed() != "") {
+      FlxG.switchState(new GameState());
+    }
   }
 }
