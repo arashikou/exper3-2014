@@ -47,6 +47,10 @@ class GameState extends FlxState
   override public function update():Void
   {
     super.update();
-    FlxG.collide(player, world);
+    FlxG.collide(player, walls);
+    if (FlxG.collide(player, platforms))
+    {
+      player.isOnFloor = true;
+    }
   }
 }
