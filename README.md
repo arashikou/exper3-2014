@@ -39,4 +39,18 @@ Although Haxe/Lime/OpenFL/HaxeFlixel (HLOF?) has robust support for multiple pla
 
 # So What Are the Games?
 
-You'll have to wait until EXPER3 starts to find out.
+**_Jump Fight_ - Power as Enabler**
+
+A platforming game focused on ascending a randomly-generated tower while gaining the power to overcome enemies by defeating weaker enemies.
+
+**_The Plug Mazes_ - Power as Electricity**
+
+A puzzle game about completing an electric circuit using the cables and constraints provided.
+
+**_The Moose Drivers_ - Power as Resource**
+
+A light simulation game about moose herding.
+
+**_Madame Pinna's House of Mysteries_ - Insight as Power**
+
+A software toy that tells fortunes via a system of card-dealing.
