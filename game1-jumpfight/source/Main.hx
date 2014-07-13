@@ -8,7 +8,7 @@ import flixel.FlxState;
 
 class Main extends Sprite
 {
-  var initialState:Class<FlxState> = MenuState; // The FlxState the game starts with.
+  var initialState:Class<FlxState> = TitleState; // The FlxState the game starts with.
 
   var zoom:Float = -1; // If -1, zoom, gameWidth, and gameHeight are automatically calculated to fit the window dimensions.
   var gameWidth:Int = 640; // Width of the game in pixels (might be less / more in actual pixels depending on your zoom).
