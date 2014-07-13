@@ -32,7 +32,8 @@ class TitleState extends FlxState
   {
     super.update();
 
-    if (FlxG.keys.firstPressed() != "") {
+    if (FlxG.keys.firstPressed() != "")
+    {
       FlxG.switchState(new GameState());
     }
   }
