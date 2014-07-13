@@ -7,7 +7,7 @@
 
   <!--------------------------------WINDOW SETTINGS------------------------------->
 
-  <window width="640" height="480" fps="60" background="#000000" hardware="true" vsync="true" orientation="landscape" fullscreen="false" resizable="false" />
+  <window width="896" height="896" fps="60" background="#000000" hardware="true" vsync="true" orientation="landscape" fullscreen="false" resizable="false" />
 
   <!--------------------------------PATHS SETTINGS-------------------------------->
 

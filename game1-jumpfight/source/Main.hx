@@ -8,15 +8,12 @@ import flixel.FlxState;
 
 class Main extends Sprite
 {
-  var initialState:Class<FlxState> = TitleState; // The FlxState the game starts with.
+  // Game Settings
+  inline static var initialState = TitleState;
+  inline static var zoom = 2;
+  inline static var framerate = 60;
 
-  var zoom:Float = -1; // If -1, zoom, gameWidth, and gameHeight are automatically calculated to fit the window dimensions.
-  var gameWidth:Int = 640; // Width of the game in pixels (might be less / more in actual pixels depending on your zoom).
-  var gameHeight:Int = 480; // Height of the game in pixels (might be less / more in actual pixels depending on your zoom).
-  var framerate:Int = 60; // How many frames per second the game should run at.
-
-  // You can pretty much ignore everything from here on - your code should go in your states.
-
+  // Based on the code from the default template in HaxeFlixel
   public function new()
   {
     super();
@@ -43,16 +40,10 @@ class Main extends Sprite
 
   private function setupGame():Void
   {
-    if (zoom == -1)
-    {
-      var stageWidth:Int = Lib.current.stage.stageWidth;
-      var stageHeight:Int = Lib.current.stage.stageHeight;
-      var ratioX:Float = stageWidth / gameWidth;
-      var ratioY:Float = stageHeight / gameHeight;
-      zoom = Math.min(ratioX, ratioY);
-      gameWidth = Math.ceil(stageWidth / zoom);
-      gameHeight = Math.ceil(stageHeight / zoom);
-    }
+    var stageWidth = Lib.current.stage.stageWidth;
+    var stageHeight = Lib.current.stage.stageHeight;
+    var gameWidth = Math.floor(stageWidth / zoom);
+    var gameHeight = Math.floor(stageHeight / zoom);
 
     addChild(new FlxGame(gameWidth, gameHeight, initialState, zoom, framerate, framerate));
   }

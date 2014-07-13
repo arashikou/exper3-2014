@@ -12,7 +12,7 @@ class TitleState extends FlxState
     super.create();
 
     var titleText = new FlxText();
-    titleText.size = 100;
+    titleText.size = 90;
     titleText.font = "external_assets/fonts/Anton.ttf";
     titleText.text = "Jump Fight";
     titleText.y = FlxG.height * 0.1;
@@ -20,7 +20,7 @@ class TitleState extends FlxState
     add(titleText);
 
     var startText = new FlxText();
-    startText.size = 20;
+    startText.size = 25;
     startText.font = "external_assets/fonts/Anton.ttf";
     startText.text = "Press Any Key to Start";
     startText.y = FlxG.height * 0.6;
