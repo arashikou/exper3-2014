@@ -29,7 +29,8 @@
       "follow_symlinks": true,
       "name": "Docs",
       "path": ".",
-      "folder_exclude_patterns": ["game*"]
+      "folder_exclude_patterns": ["game*"],
+      "file_exclude_patterns": ["*.sublime-workspace"]
     }
   ]
 }
