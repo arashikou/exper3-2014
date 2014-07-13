@@ -12,7 +12,8 @@ class TitleState extends FlxState
     super.create();
 
     var titleText = new FlxText(0, FlxG.height * 0.1);
-    titleText.size = 70;
+    titleText.size = 100;
+    titleText.font = "external_assets/fonts/Anton.ttf";
     titleText.text = "Jump Fight";
     titleText.x = (FlxG.width - titleText.fieldWidth) / 2;
     add(titleText);
