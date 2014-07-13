@@ -11,7 +11,7 @@ class Wall extends FlxSprite
   {
     super();
 
-    makeGraphic(2, FlxG.height, FlxColorUtil.getColor32(255, 100, 100, 100));
+    makeGraphic(2, FlxG.height, FlxColorUtil.getColor32(255, 100, 0, 0));
 
     moves = false;
     immovable = true;

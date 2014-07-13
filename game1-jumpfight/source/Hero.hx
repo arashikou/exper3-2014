@@ -11,7 +11,7 @@ class Hero extends FlxSprite
   {
     super();
 
-    makeGraphic(16, 16, FlxColorUtil.getColor32(255, 255, 0, 0));
+    makeGraphic(16, 16, FlxColorUtil.getColor32(255, 0, 255, 0));
 
     acceleration.y = 320;
     maxVelocity.y = 200;
@@ -24,22 +24,22 @@ class Hero extends FlxSprite
   {
     super.update();
 
+    // Handle left/right movement
     var left = if (FlxG.keys.pressed.LEFT) -1 else 0;
     var right = if (FlxG.keys.pressed.RIGHT) 1 else 0;
-    var groundAcceleration = left + right;
+    var hAcceleration = left + right;
+    var isQuickTurn = (hAcceleration < 0 && velocity.x > 0) ||
+                      (hAcceleration > 0 && velocity.x < 0);
+    acceleration.x = hAcceleration * if (isQuickTurn) 750 else 500;
 
-    // Increase the magnitude of the acceleration
-    // Increase it more if we're making a quick turn
-    if ((groundAcceleration < 0 && velocity.x > 0) ||
-        (groundAcceleration > 0 && velocity.x < 0))
+    // Handle jumping
+    if (FlxG.keys.justPressed.UP) // && velocity.y == 0)
     {
-      groundAcceleration *= 750;
+      velocity.y = -200;
     }
-    else
+    else if (!FlxG.keys.pressed.UP && velocity.y < -50)
     {
-      groundAcceleration *= 500;
+      velocity.y = -50;
     }
-
-    acceleration.x = groundAcceleration;
   }
 }
