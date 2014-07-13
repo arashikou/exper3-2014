@@ -20,6 +20,12 @@
       "follow_symlinks": true,
       "name": "Game 4",
       "path": "game4"
+    },
+    {
+      "follow_symlinks": true,
+      "name": "Docs",
+      "path": ".",
+      "folder_exclude_patterns": ["game*"]
     }
   ]
 }
