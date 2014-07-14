@@ -76,8 +76,14 @@ class GameState extends FlxState
     // Collide player with enemies
     FlxG.overlap(player, enemies, function(a:Dynamic, b:Dynamic):Void
     {
+      var p:Hero = cast a;
       var e:Monster = cast b;
-      e.kill();
+      if (p.power > e.power)
+        e.kill();
+      else if (p.power < e.power)
+        p.kill();
+      else
+        FlxObject.separate(a, b);
     });
 
     // Bound player on horizontal screen edges
@@ -118,7 +124,7 @@ class GameState extends FlxState
     var currentHeight = worldHeight + totalScrollDistance;
     addRandomPlatforms(currentHeight);
 
-    var monster = new Monster(0);
+    var monster = new Monster(FlxRandom.intRanged(0, 2));
     monster.x = (FlxG.width - monster.width) / 2;
     monster.y = currentHeight - monster.width - 5;
     enemies.add(monster);

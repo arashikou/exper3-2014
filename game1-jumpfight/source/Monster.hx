@@ -18,13 +18,27 @@ private class MonsterPhysics
 // Sprite for enemies
 class Monster extends FlxSprite
 {
-  var maxX:Float;
+  public var power:Int;
 
-  public function new(power:Int)
+  private var maxX:Float;
+
+  public function new(startingPower:Int)
   {
     super();
 
-    makeGraphic(16, 16, FlxColorUtil.getColor32(255, 255, 0, 50));
+    power = startingPower;
+
+    var color = switch (startingPower)
+    {
+      case 0:
+        FlxColorUtil.getColor32(255, 50, 255, 0);
+      case 1:
+        FlxColorUtil.getColor32(255, 255, 255, 50);
+      default:
+        FlxColorUtil.getColor32(255, 255, 0, 50);
+    }
+
+    makeGraphic(16, 16, color);
     maxX = FlxG.width - width;
 
     acceleration.y = MonsterPhysics.GRAVITY;
