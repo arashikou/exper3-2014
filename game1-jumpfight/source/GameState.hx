@@ -1,8 +1,8 @@
 package;
 
 import flixel.FlxG;
+import flixel.FlxObject;
 import flixel.FlxState;
-import flixel.group.FlxGroup;
 import flixel.group.FlxTypedGroup;
 import flixel.util.FlxRandom;
 
@@ -14,6 +14,8 @@ class GameState extends FlxState
 
   private var maxPlayerX:Int;
 
+  private inline static var playerBoundary = 100;
+
   override public function create():Void
   {
     super.create();
@@ -21,6 +23,7 @@ class GameState extends FlxState
     // Set up camera
     FlxG.cameras.useBufferLocking = true;
 
+    // Add the player character
     player = new Hero();
     maxPlayerX = FlxG.width - Std.int(player.width);
     player.x = maxPlayerX / 2;
@@ -42,13 +45,28 @@ class GameState extends FlxState
   {
     super.update();
 
+    // Collide player with platforms
     if (FlxG.collide(player, platforms))
     {
       player.isOnFloor = true;
     }
 
+    // Bound player on horizontal screen edges
     if (player.x < 0) player.x = 0;
     if (player.x > maxPlayerX) player.x = maxPlayerX;
+
+    // Scroll if player nears top of screen
+    if (player.y < playerBoundary)
+    {
+      var scrollDistance = playerBoundary - player.y;
+      player.y += scrollDistance;
+
+      function addScrollDistance(o:FlxObject):Void
+      {
+        o.y += scrollDistance;
+      }
+      platforms.forEach(addScrollDistance);
+    }
   }
 
   private function addRandomFloor(height:Int):Void
@@ -57,7 +75,7 @@ class GameState extends FlxState
     var increment = Std.int(FlxG.width / isPlatform.length);
     for (i in 0...4)
     {
-      // Yes, this may repeat the same segment. That's expected.
+      // Yes, this may repeat the same segment. That's intended.
       isPlatform[FlxRandom.intRanged(0, isPlatform.length - 1)] = false;
     }
     // Parse the isPlatform array into platform objects
