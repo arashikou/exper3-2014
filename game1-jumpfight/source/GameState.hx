@@ -4,6 +4,7 @@ import flixel.FlxG;
 import flixel.FlxObject;
 import flixel.FlxState;
 import flixel.group.FlxTypedGroup;
+import flixel.text.FlxText;
 import flixel.util.FlxRandom;
 
 // Gameplay state
@@ -12,6 +13,7 @@ class GameState extends FlxState
   private var player:Hero;
   private var platforms:FlxTypedGroup<Platform>;
   private var enemies:FlxTypedGroup<Monster>;
+  private var powerMeter:FlxText;
 
   private var highestFloorGenerated:Int;
   private var totalScrollDistance:Float;
@@ -34,6 +36,15 @@ class GameState extends FlxState
     player.x = maxPlayerX / 2;
     player.y = FlxG.height - player.height - 10;
     add(player);
+
+    // Add the power meter
+    powerMeter = new FlxText();
+    powerMeter.size = 75;
+    powerMeter.font = "external_assets/fonts/Anton.ttf";
+    powerMeter.text = "0";
+    powerMeter.y = 10;
+    powerMeter.x = (FlxG.width - powerMeter.fieldWidth) / 2;
+    add(powerMeter);
 
     // Add the floor
     platforms = new FlxTypedGroup<Platform>();
@@ -71,12 +82,12 @@ class GameState extends FlxState
     {
       var scrollDistance = PLAYER_BOUNDARY - player.y;
       totalScrollDistance += scrollDistance;
-      player.y += scrollDistance;
 
       function addScrollDistance(o:FlxObject):Void
       {
         o.y += scrollDistance;
       }
+      player.y += scrollDistance;
       platforms.forEach(addScrollDistance);
       enemies.forEach(addScrollDistance);
     }
@@ -100,6 +111,10 @@ class GameState extends FlxState
     monster.x = (FlxG.width - monster.width) / 2;
     monster.y = currentHeight - monster.width - 5;
     enemies.add(monster);
+
+    // Update the power meter
+    powerMeter.text = Std.string(player.power);
+    powerMeter.x = (FlxG.width - powerMeter.fieldWidth) / 2;
   }
 
   private function addRandomPlatforms(height:Float):Void

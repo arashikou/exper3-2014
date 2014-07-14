@@ -22,12 +22,15 @@ class Hero extends FlxSprite
   // We have to manually manage this state due to a bug in HaxeFlixel physics.
   public var isOnFloor:Bool;
 
+  public var power:Int;
+
   public function new()
   {
     super();
 
     makeGraphic(16, 16, FlxColorUtil.getColor32(255, 100, 255, 100));
 
+    power = 1;
     isOnFloor = false;
     acceleration.y = HeroPhysics.GRAVITY;
     maxVelocity.y = HeroPhysics.TERMINAL_VELOCITY;
