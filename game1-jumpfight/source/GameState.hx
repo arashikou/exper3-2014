@@ -73,6 +73,9 @@ class GameState extends FlxState
     // Collide enemies with platforms
     FlxG.collide(enemies, platforms);
 
+    // Collide enemies with each other
+    FlxG.collide(enemies, enemies);
+
     // Collide player with enemies
     FlxG.overlap(player, enemies, function(a:Dynamic, b:Dynamic):Void
     {
