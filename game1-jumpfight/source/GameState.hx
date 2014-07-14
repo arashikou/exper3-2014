@@ -21,7 +21,7 @@ class GameState extends FlxState
   private var maxPlayerX:Float;
 
   private inline static var FLOOR_SEPARATION = 70;
-  private inline static var PLAYER_BOUNDARY = 100;
+  private inline static var PLAYER_BOUNDARY = 200;
 
   override public function create():Void
   {
