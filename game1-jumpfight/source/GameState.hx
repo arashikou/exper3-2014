@@ -25,7 +25,7 @@ class GameState extends FlxState
 
     player = new Hero();
     player.x = (FlxG.width - player.width) / 2;
-    player.y = (FlxG.height - player.height) / 2;
+    player.y = -100;
     add(player);
 
     platforms = new FlxTypedGroup<Platform>();
@@ -34,7 +34,7 @@ class GameState extends FlxState
     add(walls);
 
     // Add the floor
-    platforms.add(new Platform(0, FlxG.width, FlxG.height - 10));
+    platforms.add(new Platform(0, FlxG.width, 0));
 
     // Add the left and right walls
     walls.add(new Wall(0));
