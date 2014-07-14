@@ -17,7 +17,11 @@ class GameState extends FlxState
   {
     super.create();
 
+    // Set up camera
+    // Note that the game world starts at 0 and values become increasingly
+    // negative over time.
     FlxG.cameras.useBufferLocking = true;
+    FlxG.camera.scroll.y = -FlxG.height;
 
     player = new Hero();
     player.x = (FlxG.width - player.width) / 2;
