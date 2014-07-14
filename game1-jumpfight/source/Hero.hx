@@ -1,7 +1,6 @@
 package;
 
 import flixel.FlxG;
-import flixel.FlxObject.FLOOR;
 import flixel.FlxSprite;
 import flixel.util.FlxColorUtil;
 import flixel.util.FlxMath;
