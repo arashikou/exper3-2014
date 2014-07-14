@@ -56,7 +56,7 @@ class GameState extends FlxState
 
     // Bound player on horizontal screen edges
     if (player.x < 0) player.x = 0;
-    if (player.x > maxPlayerX) player.x = maxPlayerX;
+    else if (player.x > maxPlayerX) player.x = maxPlayerX;
 
     // Scroll if player nears top of screen
     if (player.y < PLAYER_BOUNDARY)
