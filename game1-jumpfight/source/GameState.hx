@@ -12,9 +12,13 @@ class GameState extends FlxState
   private var player:Hero;
   private var platforms:FlxTypedGroup<Platform>;
 
-  private var maxPlayerX:Int;
+  private var highestFloorGenerated:Int;
+  private var totalScrollDistance:Float;
 
-  private inline static var playerBoundary = 100;
+  private var maxPlayerX:Float;
+
+  private inline static var FLOOR_SEPARATION = 70;
+  private inline static var PLAYER_BOUNDARY = 100;
 
   override public function create():Void
   {
@@ -25,7 +29,7 @@ class GameState extends FlxState
 
     // Add the player character
     player = new Hero();
-    maxPlayerX = FlxG.width - Std.int(player.width);
+    maxPlayerX = FlxG.width - player.width;
     player.x = maxPlayerX / 2;
     player.y = FlxG.height - player.height - 10;
     add(player);
@@ -33,12 +37,11 @@ class GameState extends FlxState
     // Add the floor
     platforms = new FlxTypedGroup<Platform>();
     add(platforms);
-    platforms.add(new Platform(0, FlxG.width, 0));
+    platforms.add(new Platform(0, FlxG.width, FlxG.height));
 
-    for (f in 1...7)
-    {
-      addRandomFloor(70 * f);
-    }
+    // Initialize floor generation
+    highestFloorGenerated = 0;
+    totalScrollDistance = 0;
   }
 
   override public function update():Void
@@ -56,9 +59,10 @@ class GameState extends FlxState
     if (player.x > maxPlayerX) player.x = maxPlayerX;
 
     // Scroll if player nears top of screen
-    if (player.y < playerBoundary)
+    if (player.y < PLAYER_BOUNDARY)
     {
-      var scrollDistance = playerBoundary - player.y;
+      var scrollDistance = PLAYER_BOUNDARY - player.y;
+      totalScrollDistance += scrollDistance;
       player.y += scrollDistance;
 
       function addScrollDistance(o:FlxObject):Void
@@ -67,9 +71,24 @@ class GameState extends FlxState
       }
       platforms.forEach(addScrollDistance);
     }
+
+    // Generate new platforms if needed
+    var heightSeen = totalScrollDistance + FlxG.height;
+    while (highestFloorGenerated * FLOOR_SEPARATION < heightSeen)
+    {
+      highestFloorGenerated++;
+      addRandomFloor(highestFloorGenerated);
+    }
   }
 
-  private function addRandomFloor(height:Int):Void
+  private function addRandomFloor(floorNumber:Int):Void
+  {
+    var worldHeight = FlxG.height - (floorNumber * FLOOR_SEPARATION);
+    var currentHeight = worldHeight + totalScrollDistance;
+    addRandomPlatforms(currentHeight);
+  }
+
+  private function addRandomPlatforms(height:Float):Void
   {
     var isPlatform = [true, true, true, true, true, true, true, true];
     var increment = Std.int(FlxG.width / isPlatform.length);

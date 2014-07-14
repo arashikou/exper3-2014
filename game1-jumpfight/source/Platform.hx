@@ -12,7 +12,7 @@ class Platform extends FlxSprite
 
   public function new(start:Float, end:Float, altitude:Float)
   {
-    super(start, FlxG.height - altitude - HEIGHT);
+    super(start, altitude - HEIGHT);
 
     makeGraphic(Std.int(end - start), HEIGHT, FlxColor.WHITE);
 
