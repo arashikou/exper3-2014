@@ -11,6 +11,7 @@ class GameState extends FlxState
 {
   private var player:Hero;
   private var platforms:FlxTypedGroup<Platform>;
+  private var enemies:FlxTypedGroup<Monster>;
 
   private var highestFloorGenerated:Int;
   private var totalScrollDistance:Float;
@@ -39,6 +40,10 @@ class GameState extends FlxState
     add(platforms);
     platforms.add(new Platform(0, FlxG.width, FlxG.height));
 
+    // Add the empty enemy list
+    enemies = new FlxTypedGroup<Monster>();
+    add(enemies);
+
     // Initialize floor generation
     highestFloorGenerated = 0;
     totalScrollDistance = 0;
@@ -53,6 +58,9 @@ class GameState extends FlxState
     {
       player.isOnFloor = true;
     }
+
+    // Collide enemies with platforms
+    FlxG.collide(enemies, platforms);
 
     // Bound player on horizontal screen edges
     if (player.x < 0) player.x = 0;
@@ -70,6 +78,7 @@ class GameState extends FlxState
         o.y += scrollDistance;
       }
       platforms.forEach(addScrollDistance);
+      enemies.forEach(addScrollDistance);
     }
 
     // Generate new platforms if needed
@@ -86,6 +95,11 @@ class GameState extends FlxState
     var worldHeight = FlxG.height - (floorNumber * FLOOR_SEPARATION);
     var currentHeight = worldHeight + totalScrollDistance;
     addRandomPlatforms(currentHeight);
+
+    var monster = new Monster(0);
+    monster.x = (FlxG.width - monster.width) / 2;
+    monster.y = currentHeight - monster.width - 5;
+    enemies.add(monster);
   }
 
   private function addRandomPlatforms(height:Float):Void
