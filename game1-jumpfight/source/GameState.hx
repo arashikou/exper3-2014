@@ -99,6 +99,10 @@ class GameState extends FlxState
       highestFloorGenerated++;
       addRandomFloor(highestFloorGenerated);
     }
+
+    // Update the power meter
+    powerMeter.text = StringTools.lpad(Std.string(player.power), "0", 3);
+    powerMeter.x = (FlxG.width - powerMeter.fieldWidth) / 2;
   }
 
   private function addRandomFloor(floorNumber:Int):Void
@@ -111,10 +115,6 @@ class GameState extends FlxState
     monster.x = (FlxG.width - monster.width) / 2;
     monster.y = currentHeight - monster.width - 5;
     enemies.add(monster);
-
-    // Update the power meter
-    powerMeter.text = StringTools.lpad(Std.string(player.power), "0", 3);
-    powerMeter.x = (FlxG.width - powerMeter.fieldWidth) / 2;
   }
 
   private function addRandomPlatforms(height:Float):Void
