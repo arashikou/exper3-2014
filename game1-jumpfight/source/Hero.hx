@@ -54,7 +54,7 @@ class Hero extends FlxSprite
     }
 
     // Handle jumping
-    if (FlxG.keys.justPressed.UP && isOnFloor)
+    if (FlxG.keys.pressed.UP && isOnFloor)
     {
       // A jump is an instantaneous burst of upward speed.
       velocity.y = -HeroPhysics.JUMP_SPEED;
