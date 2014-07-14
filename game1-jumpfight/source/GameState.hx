@@ -11,7 +11,8 @@ class GameState extends FlxState
   var player:Hero;
 
   var platforms:FlxTypedGroup<Platform>;
-  var walls:FlxTypedGroup<Wall>;
+
+  var maxPlayerX:Int;
 
   override public function create():Void
   {
@@ -24,31 +25,27 @@ class GameState extends FlxState
     FlxG.camera.scroll.y = -FlxG.height;
 
     player = new Hero();
-    player.x = (FlxG.width - player.width) / 2;
+    maxPlayerX = Std.int(FlxG.width - player.width);
+    player.x = maxPlayerX / 2;
     player.y = -100;
     add(player);
 
+    // Add the floor
     platforms = new FlxTypedGroup<Platform>();
     add(platforms);
-    walls = new FlxTypedGroup<Wall>(2);
-    add(walls);
-
-    // Add the floor
     platforms.add(new Platform(0, FlxG.width, 0));
-
-    // Add the left and right walls
-    walls.add(new Wall(0));
-    walls.add(new Wall(FlxG.width - Wall.WIDTH));
   }
 
   override public function update():Void
   {
     super.update();
 
-    FlxG.collide(player, walls);
     if (FlxG.collide(player, platforms))
     {
       player.isOnFloor = true;
     }
+
+    if (player.x < 0) player.x = 0;
+    if (player.x > maxPlayerX) player.x = maxPlayerX;
   }
 }
