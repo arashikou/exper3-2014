@@ -41,7 +41,7 @@ class GameState extends FlxState
     powerMeter = new FlxText();
     powerMeter.size = 75;
     powerMeter.font = "external_assets/fonts/Anton.ttf";
-    powerMeter.text = "0";
+    powerMeter.text = "000";
     powerMeter.y = 10;
     powerMeter.x = (FlxG.width - powerMeter.fieldWidth) / 2;
     add(powerMeter);
@@ -113,7 +113,7 @@ class GameState extends FlxState
     enemies.add(monster);
 
     // Update the power meter
-    powerMeter.text = Std.string(player.power);
+    powerMeter.text = StringTools.lpad(Std.string(player.power), "0", 3);
     powerMeter.x = (FlxG.width - powerMeter.fieldWidth) / 2;
   }
 
