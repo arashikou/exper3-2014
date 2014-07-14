@@ -73,6 +73,13 @@ class GameState extends FlxState
     // Collide enemies with platforms
     FlxG.collide(enemies, platforms);
 
+    // Collide player with enemies
+    FlxG.overlap(player, enemies, function(a:Dynamic, b:Dynamic):Void
+    {
+      var e:Monster = cast b;
+      e.kill();
+    });
+
     // Bound player on horizontal screen edges
     if (player.x < 0) player.x = 0;
     else if (player.x > maxPlayerX) player.x = maxPlayerX;
