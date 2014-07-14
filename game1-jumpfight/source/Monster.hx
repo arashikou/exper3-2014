@@ -44,8 +44,10 @@ class Monster extends FlxSprite
     acceleration.y = MonsterPhysics.GRAVITY;
     maxVelocity.y = MonsterPhysics.TERMINAL_VELOCITY;
 
+    maxVelocity.x = MonsterPhysics.GROUND_SPEED;
     var startingDirection = FlxRandom.intRanged(-1, 1, [0]);
     velocity.x = MonsterPhysics.GROUND_SPEED * startingDirection;
+    acceleration.x = velocity.x;
   }
 
   override public function update():Void
@@ -56,11 +58,13 @@ class Monster extends FlxSprite
     {
       x = 0;
       velocity.x = -velocity.x;
+      acceleration.x = -acceleration.x;
     }
     else if (x > maxX)
     {
       x = maxX;
       velocity.x = -velocity.x;
+      acceleration.x = -acceleration.x;
     }
   }
 }
