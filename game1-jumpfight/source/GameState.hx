@@ -82,11 +82,18 @@ class GameState extends FlxState
       var p:Hero = cast a;
       var e:Monster = cast b;
       if (p.power > e.power)
+      {
         e.kill();
+        p.power++;
+      }
       else if (p.power < e.power)
+      {
         p.kill();
+      }
       else
+      {
         FlxObject.separate(a, b);
+      }
     });
 
     // Bound player on horizontal screen edges
