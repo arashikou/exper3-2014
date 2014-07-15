@@ -2,6 +2,7 @@ package;
 
 import flixel.FlxG;
 import flixel.FlxSprite;
+import flixel.system.FlxSound;
 import flixel.util.FlxColorUtil;
 import flixel.util.FlxMath;
 
@@ -24,6 +25,8 @@ class Hero extends FlxSprite
 
   public var power:Int;
 
+  private var jump:FlxSound;
+
   public function new()
   {
     super();
@@ -34,6 +37,8 @@ class Hero extends FlxSprite
     isOnFloor = false;
     acceleration.y = HeroPhysics.GRAVITY;
     maxVelocity.y = HeroPhysics.TERMINAL_VELOCITY;
+
+    jump = FlxG.sound.load("assets/sounds/Jump.wav");
   }
 
   override public function update():Void
@@ -64,6 +69,7 @@ class Hero extends FlxSprite
       // prime the first few pixels of the jump.
       y -= 2;
       isOnFloor = false;
+      jump.play();
     }
     else if (!FlxG.keys.pressed.UP &&
              velocity.y < -HeroPhysics.JUMP_ABORT_SPEED)
