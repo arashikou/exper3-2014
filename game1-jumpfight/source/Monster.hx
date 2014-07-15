@@ -3,6 +3,7 @@ package;
 import flixel.FlxG;
 import flixel.FlxObject.FLOOR;
 import flixel.FlxSprite;
+import flixel.text.FlxText;
 import flixel.util.FlxColor;
 import flixel.util.FlxMath;
 import flixel.util.FlxRandom;
@@ -21,6 +22,7 @@ class Monster extends FlxSprite
   public var power:Int;
 
   private var maxX:Float;
+  private var powerBadge:FlxText;
 
   public function new(startingPower:Int)
   {
@@ -28,21 +30,28 @@ class Monster extends FlxSprite
 
     power = startingPower;
 
+    powerBadge = new FlxText();
+    powerBadge.text = Std.string(power);
+
     var size = if (power == 0)
     {
       makeGraphic(14, 14, FlxColor.RED);
+      powerBadge.size = 8;
     }
     else if (power <= 50)
     {
       makeGraphic(18, 18, FlxColor.RED);
+      powerBadge.size = 10;
     }
     else if (power < 100)
     {
       makeGraphic(32, 32, FlxColor.RED);
+      powerBadge.size = 16;
     }
     else
     {
       makeGraphic(64, 64, FlxColor.RED);
+      powerBadge.size = 32;
     }
 
     maxX = FlxG.width - width;
@@ -72,5 +81,14 @@ class Monster extends FlxSprite
       velocity.x = -velocity.x;
       acceleration.x = -acceleration.x;
     }
+  }
+
+  override public function draw():Void
+  {
+    super.draw();
+
+    powerBadge.x = x + (width - powerBadge.fieldWidth) / 2;
+    powerBadge.y = y + (height - powerBadge.height) / 2;
+    powerBadge.draw();
   }
 }
