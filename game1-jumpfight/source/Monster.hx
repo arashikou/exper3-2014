@@ -3,7 +3,7 @@ package;
 import flixel.FlxG;
 import flixel.FlxObject.FLOOR;
 import flixel.FlxSprite;
-import flixel.util.FlxColorUtil;
+import flixel.util.FlxColor;
 import flixel.util.FlxMath;
 import flixel.util.FlxRandom;
 
@@ -28,17 +28,23 @@ class Monster extends FlxSprite
 
     power = startingPower;
 
-    var color = switch (startingPower)
+    var size = if (power == 0)
     {
-      case 0:
-        FlxColorUtil.getColor32(255, 50, 255, 0);
-      case 1:
-        FlxColorUtil.getColor32(255, 255, 255, 50);
-      default:
-        FlxColorUtil.getColor32(255, 255, 0, 50);
+      makeGraphic(14, 14, FlxColor.RED);
+    }
+    else if (power <= 50)
+    {
+      makeGraphic(18, 18, FlxColor.RED);
+    }
+    else if (power < 100)
+    {
+      makeGraphic(32, 32, FlxColor.RED);
+    }
+    else
+    {
+      makeGraphic(64, 64, FlxColor.RED);
     }
 
-    makeGraphic(16, 16, color);
     maxX = FlxG.width - width;
 
     acceleration.y = MonsterPhysics.GRAVITY;

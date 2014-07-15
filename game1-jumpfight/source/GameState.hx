@@ -127,7 +127,7 @@ class GameState extends FlxState
     var currentHeight = worldHeight + totalScrollDistance;
     addRandomPlatforms(currentHeight);
 
-    var monster = new Monster(FlxRandom.intRanged(0, 2));
+    var monster = new Monster(FlxRandom.intRanged(0, 4) * 25);
     monster.x = (FlxG.width - monster.width) / 2;
     monster.y = currentHeight - monster.width - 5;
     enemies.add(monster);
