@@ -33,7 +33,7 @@ class Monster extends FlxSprite
     powerBadge = new FlxText();
     powerBadge.text = Std.string(power);
 
-    var size = if (power == 0)
+    if (power == 0)
     {
       makeGraphic(14, 14, FlxColor.RED);
       powerBadge.size = 8;
@@ -59,9 +59,20 @@ class Monster extends FlxSprite
     acceleration.y = MonsterPhysics.GRAVITY;
     maxVelocity.y = MonsterPhysics.TERMINAL_VELOCITY;
 
-    maxVelocity.x = MonsterPhysics.GROUND_SPEED;
+
+    var speedModifier = if (power == 0)
+                          0;
+                        else if (power <= 50)
+                          FlxRandom.floatRanged(0.75, 1.0);
+                        else if (power < 100)
+                          FlxRandom.floatRanged(0.9, 1.2);
+                        else
+                          0.6;
+    var speed = speedModifier * MonsterPhysics.GROUND_SPEED;
+
+    maxVelocity.x = speed;
     var startingDirection = FlxRandom.intRanged(-1, 1, [0]);
-    velocity.x = MonsterPhysics.GROUND_SPEED * startingDirection;
+    velocity.x = speed * startingDirection;
     acceleration.x = velocity.x;
   }
 
