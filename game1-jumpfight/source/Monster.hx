@@ -59,7 +59,6 @@ class Monster extends FlxSprite
     acceleration.y = MonsterPhysics.GRAVITY;
     maxVelocity.y = MonsterPhysics.TERMINAL_VELOCITY;
 
-
     var speedModifier = if (power == 0)
                           0;
                         else if (power <= 50)
