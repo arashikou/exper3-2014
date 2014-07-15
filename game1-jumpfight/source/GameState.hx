@@ -5,6 +5,7 @@ import flixel.FlxObject;
 import flixel.FlxState;
 import flixel.group.FlxTypedGroup;
 import flixel.text.FlxText;
+import flixel.util.FlxMath;
 import flixel.util.FlxRandom;
 
 // Gameplay state
@@ -134,7 +135,11 @@ class GameState extends FlxState
     var currentHeight = worldHeight + totalScrollDistance;
     addRandomPlatforms(currentHeight);
 
-    var monster = new Monster(FlxRandom.intRanged(0, 4) * 25);
+    var newMonsterPower = Std.int(FlxMath.bound(
+                                      FlxRandom.intRanged(-4, 4) + player.power,
+                                      0,
+                                      100));
+    var monster = new Monster(newMonsterPower);
     monster.x = (FlxG.width - monster.width) / 2;
     monster.y = currentHeight - monster.width - 5;
     enemies.add(monster);
