@@ -72,7 +72,13 @@ class GameState extends FlxState
     }
 
     // Collide enemies with platforms
-    FlxG.collide(enemies, platforms);
+    enemies.setAll("isOnFloor", false);
+    FlxG.overlap(enemies, platforms, function(a:Dynamic, b:Dynamic):Void
+    {
+      var e:Monster = cast a;
+      e.isOnFloor = true;
+      FlxObject.separate(a, b);
+    });
 
     // Collide enemies with each other
     FlxG.collide(enemies, enemies);

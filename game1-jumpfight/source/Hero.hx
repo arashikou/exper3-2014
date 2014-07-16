@@ -1,7 +1,7 @@
 package;
 
 import flixel.FlxG;
-import flixel.FlxSprite;
+import flixel.system.FlxSound;
 import flixel.util.FlxColorUtil;
 import flixel.util.FlxMath;
 
@@ -17,12 +17,11 @@ private class HeroPhysics
 }
 
 // Sprite for player character
-class Hero extends FlxSprite
+class Hero extends EnhancedSprite
 {
-  // We have to manually manage this state due to a bug in HaxeFlixel physics.
-  public var isOnFloor:Bool;
-
   public var power:Int;
+
+  private var jump:FlxSound;
 
   public function new()
   {
@@ -31,9 +30,11 @@ class Hero extends FlxSprite
     makeGraphic(16, 16, FlxColorUtil.getColor32(255, 100, 255, 100));
 
     power = 1;
-    isOnFloor = false;
     acceleration.y = HeroPhysics.GRAVITY;
     maxVelocity.y = HeroPhysics.TERMINAL_VELOCITY;
+
+    jump = FlxG.sound.load("assets/sounds/Jump.wav");
+    jump.volume = 0.7;
   }
 
   override public function update():Void
@@ -64,6 +65,7 @@ class Hero extends FlxSprite
       // prime the first few pixels of the jump.
       y -= 2;
       isOnFloor = false;
+      jump.play();
     }
     else if (!FlxG.keys.pressed.UP &&
              velocity.y < -HeroPhysics.JUMP_ABORT_SPEED)
