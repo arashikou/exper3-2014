@@ -4,6 +4,7 @@ import flixel.FlxG;
 import flixel.FlxObject;
 import flixel.FlxState;
 import flixel.group.FlxTypedGroup;
+import flixel.system.FlxSound;
 import flixel.text.FlxText;
 import flixel.util.FlxMath;
 import flixel.util.FlxRandom;
@@ -21,12 +22,17 @@ class GameState extends FlxState
 
   private var maxPlayerX:Float;
 
+  private var death:FlxSound;
+
   private inline static var FLOOR_SEPARATION = 70;
   private inline static var PLAYER_BOUNDARY = 200;
 
   override public function create():Void
   {
     super.create();
+
+    // Load sound
+    death = FlxG.sound.load("assets/sounds/Death.wav");
 
     // Set up camera
     FlxG.cameras.useBufferLocking = true;
@@ -96,6 +102,7 @@ class GameState extends FlxState
       else if (p.power < e.power)
       {
         p.kill();
+        death.play();
       }
       else
       {
