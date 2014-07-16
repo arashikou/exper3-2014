@@ -140,8 +140,8 @@ class GameState extends FlxState
                                       0,
                                       100));
     var monster = new Monster(newMonsterPower);
-    monster.x = (FlxG.width - monster.width) / 2;
-    monster.y = currentHeight - monster.width - 5;
+    monster.x = FlxRandom.intRanged(0, Std.int(FlxG.width - monster.width));
+    monster.y = currentHeight - monster.height;
     enemies.add(monster);
   }
 
