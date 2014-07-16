@@ -34,6 +34,7 @@ class Hero extends EnhancedSprite
     maxVelocity.y = HeroPhysics.TERMINAL_VELOCITY;
 
     jump = FlxG.sound.load("assets/sounds/Jump.wav");
+    jump.volume = 0.7;
   }
 
   override public function update():Void
