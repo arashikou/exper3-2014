@@ -27,16 +27,24 @@ class Monster extends EnhancedSprite
   private var wasOnFloor:Bool;
   private var drop:FlxSound;
 
-  public function new(startingPower:Int)
+  public function new()
   {
     super();
 
-    power = startingPower;
-
-    wasOnFloor = isOnFloor;
     drop = FlxG.sound.load("assets/sounds/MonsterDrop.wav");
-
     powerBadge = new FlxText();
+
+    acceleration.y = MonsterPhysics.GRAVITY;
+    maxVelocity.y = MonsterPhysics.TERMINAL_VELOCITY;
+  }
+
+  public function initialize(newPower:Int)
+  {
+    power = newPower;
+
+    isOnFloor = false;
+    wasOnFloor = isOnFloor;
+
     powerBadge.text = Std.string(power);
 
     if (power == 0)
@@ -61,9 +69,6 @@ class Monster extends EnhancedSprite
     }
 
     maxX = FlxG.width - width;
-
-    acceleration.y = MonsterPhysics.GRAVITY;
-    maxVelocity.y = MonsterPhysics.TERMINAL_VELOCITY;
 
     var speedModifier = if (power == 0)
                           0;

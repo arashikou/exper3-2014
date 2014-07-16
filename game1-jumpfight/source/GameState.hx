@@ -166,7 +166,8 @@ class GameState extends FlxState
                                       FlxRandom.intRanged(-4, 4) + player.power,
                                       0,
                                       100));
-    var monster = new Monster(newMonsterPower);
+    var monster = new Monster();
+    monster.initialize(newMonsterPower);
     monster.x = FlxRandom.intRanged(0, Std.int(FlxG.width - monster.width));
     monster.y = currentHeight - monster.height;
     enemies.add(monster);
