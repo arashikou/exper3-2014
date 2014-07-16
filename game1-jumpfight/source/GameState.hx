@@ -140,6 +140,12 @@ class GameState extends FlxState
     // Update the power meter
     powerMeter.text = StringTools.lpad(Std.string(player.power), "0", 3);
     powerMeter.x = (FlxG.width - powerMeter.fieldWidth) / 2;
+
+    // Return to title after death
+    if (!player.alive && !death.playing)
+    {
+      FlxG.switchState(new TitleState());
+    }
   }
 
   private function addRandomFloor(floorNumber:Int):Void
