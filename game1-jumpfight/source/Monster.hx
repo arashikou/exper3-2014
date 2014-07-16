@@ -2,7 +2,7 @@ package;
 
 import flixel.FlxG;
 import flixel.FlxObject.FLOOR;
-import flixel.FlxSprite;
+import flixel.system.FlxSound;
 import flixel.text.FlxText;
 import flixel.util.FlxColor;
 import flixel.util.FlxMath;
@@ -17,18 +17,24 @@ private class MonsterPhysics
 }
 
 // Sprite for enemies
-class Monster extends FlxSprite
+class Monster extends EnhancedSprite
 {
   public var power:Int;
 
   private var maxX:Float;
   private var powerBadge:FlxText;
 
+  private var wasOnFloor:Bool;
+  private var drop:FlxSound;
+
   public function new(startingPower:Int)
   {
     super();
 
     power = startingPower;
+
+    wasOnFloor = isOnFloor;
+    drop = FlxG.sound.load("assets/sounds/MonsterDrop.wav");
 
     powerBadge = new FlxText();
     powerBadge.text = Std.string(power);
@@ -90,6 +96,15 @@ class Monster extends FlxSprite
       x = maxX;
       velocity.x = -velocity.x;
       acceleration.x = -acceleration.x;
+    }
+
+    if (isOnFloor != wasOnFloor)
+    {
+      wasOnFloor = isOnFloor;
+      if (isOnFloor)
+      {
+        drop.play();
+      }
     }
   }
 
