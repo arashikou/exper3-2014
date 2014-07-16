@@ -208,6 +208,20 @@ class GameState extends FlxState
       monster.y = currentHeight - monster.height;
       enemies.add(monster);
     });
+
+    // Add another monster every 10 floors
+    if (floorNumber % 10 == 0)
+    {
+      var monster = new Monster();
+      var newPower = Std.int(FlxMath.bound(
+                                 FlxRandom.intRanged(-4, 4) + player.power,
+                                 0,
+                                 100));
+      monster.initialize(newPower);
+      monster.x = FlxRandom.intRanged(0, Std.int(FlxG.width - monster.width));
+      monster.y = currentHeight - monster.height;
+      enemies.add(monster);
+    }
   }
 
   private function addRandomPlatforms(height:Float):Void
