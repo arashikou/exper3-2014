@@ -79,6 +79,12 @@ class GameState extends FlxState
         player.isOnFloor = true;
       }
 
+      if (player.y > FlxG.height)
+      {
+        player.kill();
+        death.play();
+      }
+
       // Collide enemies with platforms
       enemies.setAll("isOnFloor", false);
       FlxG.overlap(enemies, platforms, function(a:Dynamic, b:Dynamic):Void
