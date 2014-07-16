@@ -69,81 +69,83 @@ class GameState extends FlxState
 
   override public function update():Void
   {
-    super.update();
-
-    // Collide player with platforms
-    if (FlxG.collide(player, platforms))
+    if (player.alive)
     {
-      player.isOnFloor = true;
-    }
+      super.update();
 
-    // Collide enemies with platforms
-    enemies.setAll("isOnFloor", false);
-    FlxG.overlap(enemies, platforms, function(a:Dynamic, b:Dynamic):Void
-    {
-      var e:Monster = cast a;
-      e.isOnFloor = true;
-      FlxObject.separate(a, b);
-    });
-
-    // Collide enemies with each other
-    FlxG.collide(enemies, enemies);
-
-    // Collide player with enemies
-    FlxG.overlap(player, enemies, function(a:Dynamic, b:Dynamic):Void
-    {
-      var p:Hero = cast a;
-      var e:Monster = cast b;
-      if (p.power > e.power)
+      // Collide player with platforms
+      if (FlxG.collide(player, platforms))
       {
-        e.kill();
-        p.power++;
+        player.isOnFloor = true;
       }
-      else if (p.power < e.power)
+
+      // Collide enemies with platforms
+      enemies.setAll("isOnFloor", false);
+      FlxG.overlap(enemies, platforms, function(a:Dynamic, b:Dynamic):Void
       {
-        p.kill();
-        death.play();
-      }
-      else
-      {
+        var e:Monster = cast a;
+        e.isOnFloor = true;
         FlxObject.separate(a, b);
-      }
-    });
+      });
 
-    // Bound player on horizontal screen edges
-    if (player.x < 0) player.x = 0;
-    else if (player.x > maxPlayerX) player.x = maxPlayerX;
+      // Collide enemies with each other
+      FlxG.collide(enemies, enemies);
 
-    // Scroll if player nears top of screen
-    if (player.y < PLAYER_BOUNDARY)
-    {
-      var scrollDistance = PLAYER_BOUNDARY - player.y;
-      totalScrollDistance += scrollDistance;
-
-      function addScrollDistance(o:FlxObject):Void
+      // Collide player with enemies
+      FlxG.overlap(player, enemies, function(a:Dynamic, b:Dynamic):Void
       {
-        o.y += scrollDistance;
+        var p:Hero = cast a;
+        var e:Monster = cast b;
+        if (p.power > e.power)
+        {
+          e.kill();
+          p.power++;
+        }
+        else if (p.power < e.power)
+        {
+          p.kill();
+          death.play();
+        }
+        else
+        {
+          FlxObject.separate(a, b);
+        }
+      });
+
+      // Bound player on horizontal screen edges
+      if (player.x < 0) player.x = 0;
+      else if (player.x > maxPlayerX) player.x = maxPlayerX;
+
+      // Scroll if player nears top of screen
+      if (player.y < PLAYER_BOUNDARY)
+      {
+        var scrollDistance = PLAYER_BOUNDARY - player.y;
+        totalScrollDistance += scrollDistance;
+
+        function addScrollDistance(o:FlxObject):Void
+        {
+          o.y += scrollDistance;
+        }
+        player.y += scrollDistance;
+        platforms.forEach(addScrollDistance);
+        enemies.forEach(addScrollDistance);
       }
-      player.y += scrollDistance;
-      platforms.forEach(addScrollDistance);
-      enemies.forEach(addScrollDistance);
+
+      // Generate new platforms if needed
+      var heightSeen = totalScrollDistance + FlxG.height;
+      while (highestFloorGenerated * FLOOR_SEPARATION < heightSeen)
+      {
+        highestFloorGenerated++;
+        addRandomFloor(highestFloorGenerated);
+      }
+
+      // Update the power meter
+      powerMeter.text = StringTools.lpad(Std.string(player.power), "0", 3);
+      powerMeter.x = (FlxG.width - powerMeter.fieldWidth) / 2;
     }
-
-    // Generate new platforms if needed
-    var heightSeen = totalScrollDistance + FlxG.height;
-    while (highestFloorGenerated * FLOOR_SEPARATION < heightSeen)
+    else if (!death.playing)
     {
-      highestFloorGenerated++;
-      addRandomFloor(highestFloorGenerated);
-    }
-
-    // Update the power meter
-    powerMeter.text = StringTools.lpad(Std.string(player.power), "0", 3);
-    powerMeter.x = (FlxG.width - powerMeter.fieldWidth) / 2;
-
-    // Return to title after death
-    if (!player.alive && !death.playing)
-    {
+      // Return to title after death
       FlxG.switchState(new TitleState());
     }
   }
