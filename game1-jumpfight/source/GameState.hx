@@ -41,7 +41,7 @@ class GameState extends FlxState
     player = new Hero();
     maxPlayerX = FlxG.width - player.width;
     player.x = maxPlayerX / 2;
-    player.y = FlxG.height - player.height - 10;
+    player.y = FlxG.height - player.height - 2;
     add(player);
 
     // Add the power meter
@@ -61,6 +61,31 @@ class GameState extends FlxState
     // Add the empty enemy list
     enemies = new FlxTypedGroup<Monster>();
     add(enemies);
+
+    // Add the starting enemies
+    var monster = new Monster();
+    monster.initialize(0);
+    monster.x = FlxG.width / 4;
+    monster.y = FlxG.height - monster.height - 2;
+    enemies.add(monster);
+
+    monster = new Monster();
+    monster.initialize(0);
+    monster.x = FlxG.width * 3 / 4;
+    monster.y = FlxG.height - monster.height - 2;
+    enemies.add(monster);
+
+    monster = new Monster();
+    monster.initialize(0);
+    monster.x = 0;
+    monster.y = FlxG.height - monster.height - 2;
+    enemies.add(monster);
+
+    monster = new Monster();
+    monster.initialize(0);
+    monster.x = FlxG.width - monster.width;
+    monster.y = FlxG.height - monster.height - 2;
+    enemies.add(monster);
 
     // Initialize floor generation
     highestFloorGenerated = 0;
