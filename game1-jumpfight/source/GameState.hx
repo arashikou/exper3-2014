@@ -119,6 +119,14 @@ class GameState extends FlxState
         FlxObject.separate(a, b);
       });
 
+      enemies.forEach(function(enemy:Monster):Void
+      {
+        if (enemy.y > FlxG.height)
+        {
+          enemy.kill();
+        }
+      });
+
       // Collide enemies with each other
       FlxG.collide(enemies, enemies);
 
