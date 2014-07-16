@@ -195,15 +195,19 @@ class GameState extends FlxState
     var currentHeight = worldHeight + totalScrollDistance;
     addRandomPlatforms(currentHeight);
 
-    var newMonsterPower = Std.int(FlxMath.bound(
-                                      FlxRandom.intRanged(-4, 4) + player.power,
-                                      0,
-                                      100));
-    var monster = new Monster();
-    monster.initialize(newMonsterPower);
-    monster.x = FlxRandom.intRanged(0, Std.int(FlxG.width - monster.width));
-    monster.y = currentHeight - monster.height;
-    enemies.add(monster);
+    // Spawn monsters for the floor
+    enemies.forEachDead(function(monster:Monster):Void
+    {
+      var newPower = Std.int(FlxMath.bound(
+                                 FlxRandom.intRanged(-4, 4) + player.power,
+                                 0,
+                                 100));
+      monster.revive();
+      monster.initialize(newPower);
+      monster.x = FlxRandom.intRanged(0, Std.int(FlxG.width - monster.width));
+      monster.y = currentHeight - monster.height;
+      enemies.add(monster);
+    });
   }
 
   private function addRandomPlatforms(height:Float):Void
