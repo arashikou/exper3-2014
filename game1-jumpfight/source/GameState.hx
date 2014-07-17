@@ -41,13 +41,6 @@ class GameState extends FlxState
     // Set up camera
     FlxG.cameras.useBufferLocking = true;
 
-    // Add the player character
-    player = new Hero();
-    maxPlayerX = FlxG.width - player.width;
-    player.x = maxPlayerX / 2;
-    player.y = FlxG.height - player.height - 2;
-    add(player);
-
     // Add the power meter
     powerMeter = new FlxText();
     powerMeter.size = 75;
@@ -65,6 +58,13 @@ class GameState extends FlxState
     // Add the empty enemy list
     enemies = new FlxTypedGroup<Monster>();
     add(enemies);
+
+    // Add the player character
+    player = new Hero();
+    maxPlayerX = FlxG.width - player.width;
+    player.x = maxPlayerX / 2;
+    player.y = FlxG.height - player.height - 2;
+    add(player);
 
     // Add the starting enemies
     var monster = new Monster();
