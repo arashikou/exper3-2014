@@ -8,9 +8,9 @@ class EnhancedSprite extends FlxSprite
   // We have to manually manage this state due to a bug in HaxeFlixel physics.
   public var isOnFloor:Bool;
 
-  public function new()
+  public function new(?X:Float = 0, ?Y:Float = 0, ?SimpleGraphic:Dynamic = null)
   {
-    super();
+    super(X, Y, SimpleGraphic);
     isOnFloor = false;
   }
 }

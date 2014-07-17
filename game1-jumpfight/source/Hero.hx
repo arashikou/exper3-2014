@@ -25,9 +25,7 @@ class Hero extends EnhancedSprite
 
   public function new()
   {
-    super();
-
-    makeGraphic(16, 16, FlxColorUtil.getColor32(255, 100, 255, 100));
+    super(0, 0, "assets/images/Hero.png");
 
     power = 1;
     acceleration.y = HeroPhysics.GRAVITY;
