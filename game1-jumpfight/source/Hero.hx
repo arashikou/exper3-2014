@@ -42,17 +42,23 @@ class Hero extends EnhancedSprite
     // Handle left/right movement
     var left = if (FlxG.keys.pressed.LEFT) -1 else 0;
     var right = if (FlxG.keys.pressed.RIGHT) 1 else 0;
+    var direction = left + right;
     if (isOnFloor)
     {
-      velocity.x = (left + right) * HeroPhysics.GROUND_SPEED;
+      velocity.x = direction * HeroPhysics.GROUND_SPEED;
     }
     else
     {
-      velocity.x += (left + right) * HeroPhysics.AIR_CONTROL;
+      velocity.x += direction * HeroPhysics.AIR_CONTROL;
       velocity.x = FlxMath.bound(velocity.x,
                                  -HeroPhysics.GROUND_SPEED,
                                  HeroPhysics.GROUND_SPEED);
     }
+
+    if (direction < 0 && !flipX)
+      flipX = true;
+    else if (direction > 0 && flipX)
+      flipX = false;
 
     // Handle jumping
     var aJumpKeyIsPressed:Bool = FlxG.keys.pressed.UP || FlxG.keys.pressed.X;
