@@ -27,6 +27,9 @@ class Hero extends EnhancedSprite
   {
     super(0, 0, "assets/images/Hero.png");
 
+    width /= 2;
+    centerOffsets();
+
     power = 1;
     acceleration.y = HeroPhysics.GRAVITY;
     maxVelocity.y = HeroPhysics.TERMINAL_VELOCITY;
