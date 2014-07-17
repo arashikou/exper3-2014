@@ -23,6 +23,7 @@ class GameState extends FlxState
   private var maxPlayerX:Float;
 
   private var death:FlxSound;
+  private var powerUp:FlxSound;
 
   private inline static var FLOOR_SEPARATION = 70;
   private inline static var PLAYER_BOUNDARY = 200;
@@ -33,6 +34,7 @@ class GameState extends FlxState
 
     // Load sound
     death = FlxG.sound.load("assets/sounds/Death.wav");
+    powerUp = FlxG.sound.load("assets/sounds/PowerUp.wav");
 
     // Set up camera
     FlxG.cameras.useBufferLocking = true;
@@ -139,6 +141,7 @@ class GameState extends FlxState
         {
           e.kill();
           p.power++;
+          powerUp.play();
         }
         else if (p.power < e.power)
         {
