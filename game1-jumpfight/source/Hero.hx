@@ -57,7 +57,8 @@ class Hero extends EnhancedSprite
     }
 
     // Handle jumping
-    if (FlxG.keys.pressed.UP && isOnFloor)
+    var aJumpKeyIsPressed:Bool = FlxG.keys.pressed.UP || FlxG.keys.pressed.X;
+    if (aJumpKeyIsPressed && isOnFloor)
     {
       // A jump is an instantaneous burst of upward speed.
       velocity.y = -HeroPhysics.JUMP_SPEED;
@@ -67,7 +68,7 @@ class Hero extends EnhancedSprite
       isOnFloor = false;
       jump.play();
     }
-    else if (!FlxG.keys.pressed.UP &&
+    else if (!aJumpKeyIsPressed &&
              velocity.y < -HeroPhysics.JUMP_ABORT_SPEED)
     {
       // If the player releases the jump button before gravity peaks the jump,
