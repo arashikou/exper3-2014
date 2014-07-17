@@ -17,7 +17,7 @@ class Platform extends FlxSprite
     leftSprite = new FlxSprite(0, 0, "assets/images/Platform_L.png");
     centerSprite = new FlxSprite(0, 0, "assets/images/Platform_C.png");
     rightSprite = new FlxSprite(0, 0, "assets/images/Platform_R.png");
-    centerSprite.setGraphicSize(Std.int(end - start + 1 - leftSprite.width - rightSprite.width),
+    centerSprite.setGraphicSize(Std.int(end - start - (leftSprite.width - 1) - (rightSprite.width - 1)),
                                 Std.int(centerSprite.height));
     centerSprite.updateHitbox();
 
@@ -41,8 +41,8 @@ class Platform extends FlxSprite
     rightSprite.x = x + leftSprite.width + centerSprite.width;
     rightSprite.y = y;
 
-    leftSprite.draw();
     centerSprite.draw();
+    leftSprite.draw();
     rightSprite.draw();
   }
 }
