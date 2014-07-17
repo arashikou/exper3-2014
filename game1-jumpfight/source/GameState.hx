@@ -70,25 +70,25 @@ class GameState extends FlxState
     var monster = new Monster();
     monster.initialize(0);
     monster.x = FlxG.width / 4;
-    monster.y = FlxG.height - monster.height - 2;
+    monster.y = FlxRandom.floatRanged(0, FlxG.height - monster.height);
     enemies.add(monster);
 
     monster = new Monster();
     monster.initialize(0);
     monster.x = FlxG.width * 3 / 4;
-    monster.y = FlxG.height - monster.height - 2;
+    monster.y = FlxRandom.floatRanged(0, FlxG.height - monster.height);
     enemies.add(monster);
 
     monster = new Monster();
     monster.initialize(0);
     monster.x = 0;
-    monster.y = FlxG.height - monster.height - 2;
+    monster.y = FlxRandom.floatRanged(0, FlxG.height - monster.height);
     enemies.add(monster);
 
     monster = new Monster();
     monster.initialize(0);
     monster.x = FlxG.width - monster.width;
-    monster.y = FlxG.height - monster.height - 2;
+    monster.y = FlxRandom.floatRanged(0, FlxG.height - monster.height);
     enemies.add(monster);
 
     // Initialize floor generation
