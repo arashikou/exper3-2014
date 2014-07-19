@@ -54,12 +54,15 @@ class Monster extends EnhancedSprite
     {
       loadGraphic("assets/images/ZeroBlob.png");
       powerBadge.size = 8;
+      badgeOffset.x = 0;
       badgeOffset.y = 2;
     }
     else if (power <= 50)
     {
-      makeGraphic(18, 18, FlxColor.RED);
-      powerBadge.size = 10;
+      loadGraphic("assets/images/SmallBlob.png");
+      powerBadge.size = 8;
+      badgeOffset.x = 0;
+      badgeOffset.y = 0;
     }
     else if (power < 100)
     {
