@@ -18,7 +18,7 @@ Amy gave me the choice of either focusing on one big game for the whole month or
 
 Like Ludum Dare, EXPER3 has a theme that the games must adhere to. That theme is **power**. How I interpret that is up to me. I'm trying to make sure I interpret it differently in each game as a creative challenge.
 
-EXPER3 also has an unofficial second theme. That theme is **moose**. This isn't actually a rule Amy set, but the fake newspaper she wrote as part of my birthday present needed some space-filler, so she created a second story about the global moose market. It was Amy writing comedy at her best and very funny. It just seems appropriate to include moose in EXPER3 in some capacity.
+EXPER3 also has an unofficial second theme. That theme is **moose**. This isn't actually a rule Amy set, but the fake newspaper she wrote as part of my birthday present needed some space-filler, and the software she was using filled it in with a second story about the global moose market. It was very funny and left an impression on the people at my birthday party. It just seems appropriate to include moose in EXPER3 in some capacity.
 
 # What Tools Are You Using?
 
