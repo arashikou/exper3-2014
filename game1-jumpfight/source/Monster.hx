@@ -6,6 +6,7 @@ import flixel.system.FlxSound;
 import flixel.text.FlxText;
 import flixel.util.FlxColor;
 import flixel.util.FlxMath;
+import flixel.util.FlxPoint;
 import flixel.util.FlxRandom;
 
 // Constants that control enemy motion
@@ -23,6 +24,7 @@ class Monster extends EnhancedSprite
 
   private var maxX:Float;
   private var powerBadge:FlxText;
+  private var badgeOffset:FlxPoint;
 
   private var wasOnFloor:Bool;
   private var drop:FlxSound;
@@ -33,6 +35,7 @@ class Monster extends EnhancedSprite
 
     drop = FlxG.sound.load("assets/sounds/MonsterDrop.wav");
     powerBadge = new FlxText();
+    badgeOffset = new FlxPoint();
 
     acceleration.y = MonsterPhysics.GRAVITY;
     maxVelocity.y = MonsterPhysics.TERMINAL_VELOCITY;
@@ -49,8 +52,9 @@ class Monster extends EnhancedSprite
 
     if (power == 0)
     {
-      makeGraphic(14, 14, FlxColor.RED);
+      loadGraphic("assets/images/ZeroBlob.png");
       powerBadge.size = 8;
+      badgeOffset.y = 2;
     }
     else if (power <= 50)
     {
@@ -67,6 +71,7 @@ class Monster extends EnhancedSprite
       makeGraphic(64, 64, FlxColor.RED);
       powerBadge.size = 32;
     }
+    updateHitbox();
 
     maxX = FlxG.width - width;
 
@@ -117,8 +122,9 @@ class Monster extends EnhancedSprite
   {
     super.draw();
 
-    powerBadge.x = x + (width - powerBadge.fieldWidth) / 2;
-    powerBadge.y = y + (height - powerBadge.height) / 2;
+    powerBadge.x = x + (width - powerBadge.fieldWidth) / 2 +
+        if (flipX) badgeOffset.x else -badgeOffset.x;
+    powerBadge.y = y + (height - powerBadge.height) / 2 + badgeOffset.y;
     powerBadge.draw();
   }
 }
