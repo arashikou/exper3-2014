@@ -22,7 +22,9 @@ EXPER3 also has an unofficial second theme. That theme is **moose**. This isn't 
 
 # What Tools Are You Using?
 
-I'm going to write all four games in Haxe, using the HaxeFlixel engine on top of the OpenFL/Lime framework. This may sound like a thick stack, but it has a number of advantages for me:
+I'm drawing the art in Paint.NET. I'm creating the sound effects in bfxr. I'm composing the music in Musagi.
+
+For source code, I'm writing all four games in Haxe, using the HaxeFlixel engine on top of the OpenFL/Lime framework. This may sound like a thick stack, but it has a number of advantages for me:
 
 1. Haxe is a modern language with powerful functional programming capabilities.
 1. I used the AS3 version of Flixel to make one of the few other games I ever created, so I am familiar with its interface.
