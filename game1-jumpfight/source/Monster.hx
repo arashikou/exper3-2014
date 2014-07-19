@@ -111,7 +111,7 @@ class Monster extends EnhancedSprite
       acceleration.x = -acceleration.x;
     }
 
-    if (isOnFloor != wasOnFloor)
+    if (isOnFloor && isOnFloor != wasOnFloor)
     {
       wasOnFloor = isOnFloor;
       if (isOnFloor)
