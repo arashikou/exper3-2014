@@ -73,8 +73,10 @@ class Monster extends EnhancedSprite
     }
     else
     {
-      makeGraphic(64, 64, FlxColor.RED);
-      powerBadge.size = 32;
+      loadGraphic("assets/images/CentennialBlob.png");
+      powerBadge.size = 10;
+      badgeOffset.x = 0;
+      badgeOffset.y = 5;
     }
     updateHitbox();
 
