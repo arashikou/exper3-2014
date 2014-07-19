@@ -2,11 +2,14 @@ package;
 
 import flixel.FlxG;
 import flixel.FlxState;
+import flixel.system.FlxSound;
 import flixel.text.FlxText;
 
 // Title Screen state
 class TitleState extends FlxState
 {
+  private var music:FlxSound;
+
   override public function create():Void
   {
     super.create();
@@ -26,6 +29,8 @@ class TitleState extends FlxState
     startText.y = FlxG.height * 0.6;
     startText.x = (FlxG.width - startText.fieldWidth) / 2;
     add(startText);
+
+    music = FlxG.sound.load("assets/music/title.ogg", 1, true, false, true);
   }
 
   override public function update():Void
