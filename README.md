@@ -22,7 +22,9 @@ EXPER3 also has an unofficial second theme. That theme is **moose**. This isn't 
 
 # What Tools Are You Using?
 
-I'm going to write all four games in Haxe, using the HaxeFlixel engine on top of the OpenFL/Lime framework. This may sound like a thick stack, but it has a number of advantages for me:
+I'm drawing the art in Paint.NET. I'm creating the sound effects in bfxr. I'm composing the music in Musagi.
+
+For source code, I'm writing all four games in Haxe, using the HaxeFlixel engine on top of the OpenFL/Lime framework. This may sound like a thick stack, but it has a number of advantages for me:
 
 1. Haxe is a modern language with powerful functional programming capabilities.
 1. I used the AS3 version of Flixel to make one of the few other games I ever created, so I am familiar with its interface.
@@ -36,6 +38,12 @@ This does pose some amount of risk. Although I've used many languages like Haxe,
 # What Platforms Do These Games Run On?
 
 Although Haxe/Lime/OpenFL/HaxeFlixel (HLOF?) has robust support for multiple platforms, for the sake of simplicity during the contest time crunch, I'll be focusing on the same platform I'm developing on: Windows PC. That said, the games should run without modification on Mac OS X and Linux. But I won't be doing any work to support any smartphones, tablets, or game consoles during EXPER3. That's an added complication I just don't need.
+
+# How Can I Run the Games?
+
+If you are not comfortable with compiling source code from the command line, I recommend you wait. I will release downloadable binaries of all the games after the contest is over.
+
+If you are comfortable with compilation, you'll first need to install [Haxe](http://www.openfl.org/documentation/setup/install-haxe/), [Lime](http://www.openfl.org/documentation/setup/install-lime/), [OpenFL](http://www.openfl.org/documentation/setup/install-openfl/), and [HaxeFlixel](http://haxeflixel.com/documentation/install-haxeflixel/), in that order. These games are simple enough that they perform well even on the Neko VM, so there's no need to set up your platform-specific Lime toolchain. Once this is done, you can `cd` into any game's directory and execute `lime test neko` to run the game.
 
 # So What Are the Games?
 

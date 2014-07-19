@@ -4,7 +4,7 @@
     {
       "follow_symlinks": true,
       "name": "Game 1",
-      "path": "game1",
+      "path": "game1-jumpfight",
       "folder_exclude_patterns": ["export"]
     },
     {
