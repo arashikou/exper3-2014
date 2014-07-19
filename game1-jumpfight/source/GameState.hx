@@ -142,7 +142,7 @@ class GameState extends FlxState
         if (p.power > e.power)
         {
           e.kill();
-          p.power++;
+          p.power = FlxMath.maxAdd(p.power, 1, 100, 1);
           powerUp.play();
         }
         else if (p.power < e.power)
