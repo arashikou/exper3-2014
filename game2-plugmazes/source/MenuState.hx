@@ -12,28 +12,30 @@ import flixel.util.FlxMath;
  */
 class MenuState extends FlxState
 {
-	/**
-	 * Function that is called up when to state is created to set it up. 
-	 */
-	override public function create():Void
-	{
-		super.create();
-	}
-	
-	/**
-	 * Function that is called when this state is destroyed - you might want to 
-	 * consider setting all objects this state uses to null to help garbage collection.
-	 */
-	override public function destroy():Void
-	{
-		super.destroy();
-	}
+  /**
+   * Function that is called up when to state is created to set it up.
+   */
+  override public function create():Void
+  {
+    super.create();
 
-	/**
-	 * Function that is called once every frame.
-	 */
-	override public function update():Void
-	{
-		super.update();
-	}	
+    add(new Button("assets/images/TestButton.png", 300, 100));
+  }
+
+  /**
+   * Function that is called when this state is destroyed - you might want to
+   * consider setting all objects this state uses to null to help garbage collection.
+   */
+  override public function destroy():Void
+  {
+    super.destroy();
+  }
+
+  /**
+   * Function that is called once every frame.
+   */
+  override public function update():Void
+  {
+    super.update();
+  }
 }
