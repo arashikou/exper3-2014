@@ -19,7 +19,7 @@ class MenuState extends FlxState
   {
     super.create();
 
-    add(new Button("assets/images/TestButton.png", 300, 100));
+    add(new TextButton("Let Us Test"));
   }
 
   /**
