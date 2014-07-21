@@ -43,7 +43,10 @@ class CableSegment extends FlxSprite
       // This is somewhere in the middle of the chain.
       var enterDirection = getDirection(before);
       var exitDirection = getDirection(after);
-      animation.play(enterDirection.shorthand + "-to-" + exitDirection.shorthand);
+      if (enterDirection.priority > exitDirection.priority)
+        animation.play(enterDirection.shorthand + "-to-" + exitDirection.shorthand);
+      else
+        animation.play(exitDirection.shorthand + "-to-" + enterDirection.shorthand);
     }
   }
 

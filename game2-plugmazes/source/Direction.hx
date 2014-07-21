@@ -3,10 +3,10 @@ package;
 @:enum
 abstract Direction(Int)
 {
-  public var UP    = 0;
-  public var RIGHT = 1;
+  public var UP    = 3;
   public var DOWN  = 2;
-  public var LEFT  = 3;
+  public var LEFT  = 1;
+  public var RIGHT = 0;
 
   public var shorthand(get, never):String;
   inline public function get_shorthand():String
@@ -26,5 +26,11 @@ abstract Direction(Int)
         // reason it still demands a default.
         throw "This should be impossible.";
     }
+  }
+
+  public var priority(get, never):Int;
+  inline public function get_priority():Int
+  {
+    return cast(this, Int);
   }
 }
