@@ -19,6 +19,9 @@ class MenuState extends FlxState
   {
     super.create();
 
+    var throwaway = PuzzleParser.parse(1);
+    trace(throwaway);
+
     var leftArrow = new Button("assets/images/LeftArrowButton.png", 30, 60);
     leftArrow.x = FlxG.width / 2 - 50 - leftArrow.width;
     add(leftArrow);
