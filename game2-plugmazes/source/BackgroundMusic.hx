@@ -15,7 +15,7 @@ class BackgroundMusic
 
   static public function play():Void
   {
-    currentTrack = FlxRandom.intRanged(0, _tracks.length - 1);
+    currentTrack = -1;
     playTrack();
   }
 
