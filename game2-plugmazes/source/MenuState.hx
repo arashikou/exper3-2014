@@ -19,7 +19,12 @@ class MenuState extends FlxState
   {
     super.create();
 
-    add(new TextButton("Let Us Test"));
+    var button = new TextButton("Let Us Test");
+    button.clickCallback = function():Void
+    {
+      FlxG.switchState(new PlayState());
+    };
+    add(button);
   }
 
   /**

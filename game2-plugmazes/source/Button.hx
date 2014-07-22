@@ -31,6 +31,10 @@ class Button extends FlxSprite
       }
       else
       {
+        if (FlxG.mouse.justReleased)
+        {
+          clickCallback();
+        }
         animation.play("hover");
       }
     }
