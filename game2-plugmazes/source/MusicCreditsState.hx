@@ -9,7 +9,7 @@ class MusicCreditsState extends FlxState
 {
   private var credits:FlxText;
 
-  static inline private var CREDIT_TEXT =
+  static private var CREDIT_TEXT = StringTools.replace(
 "Music \"Dubstep Light\" by Jason Shaw
 Available at audionautix.com
 Under CC BY license http://creativecommons.org/licenses/by/3.0/
@@ -20,7 +20,8 @@ Under CC BY-NC license http://creativecommons.org/licenses/by-nc/3.0/
 
 Music \"Space Jazz\" by Martijn de Boer (NiGiD) featuring Doxent Zsigmond (doxent)
 Available at ccMixter.org http://ccmixter.org/files/NiGiD/46628
-Under CC BY license http://creativecommons.org/licenses/by/3.0/";
+Under CC BY license http://creativecommons.org/licenses/by/3.0/",
+      "\r\n", "\n");
 
   override public function create():Void
   {
