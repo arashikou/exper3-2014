@@ -33,5 +33,15 @@ Under CC BY license http://creativecommons.org/licenses/by/3.0/";
     credits.text = CREDIT_TEXT;
     credits.y = 25;
     add(credits);
+
+    var button = new TextButton("Return to Title");
+    button.clickCallback = function():Void
+    {
+      FlxG.switchState(new MenuState());
+    };
+    button.x = (FlxG.width - button.width) / 2;
+    button.y = FlxG.height - button.height;
+    add(button);
+    BackgroundMusic.play();
   }
 }

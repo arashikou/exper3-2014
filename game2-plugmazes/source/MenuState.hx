@@ -25,7 +25,6 @@ class MenuState extends FlxState
       FlxG.switchState(new MusicCreditsState());
     };
     add(button);
-    BackgroundMusic.play();
   }
 
   /**
