@@ -1,8 +1,6 @@
 package;
 
-import flixel.FlxSprite;
-
-class Outlet extends FlxSprite
+class Outlet extends ConductiveSprite
 {
   public function new(spriteSheet:String, direction:Direction)
   {
