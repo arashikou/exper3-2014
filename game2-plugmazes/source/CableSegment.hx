@@ -47,10 +47,10 @@ class CableSegment extends FlxSprite
     animation.add("D-plug", [ 5]);
     animation.add("L-plug", [ 6]);
     animation.add("R-plug", [ 7]);
-    animation.add("U-to-R", [ 8]);
-    animation.add("U-to-L", [ 9]);
-    animation.add("D-to-R", [10]);
-    animation.add("D-to-L", [11]);
+    animation.add("U-to-L", [ 8]);
+    animation.add("U-to-R", [ 9]);
+    animation.add("D-to-L", [10]);
+    animation.add("D-to-R", [11]);
     animation.add("U-to-D", [12]);
     animation.add("L-to-R", [13]);
   }
