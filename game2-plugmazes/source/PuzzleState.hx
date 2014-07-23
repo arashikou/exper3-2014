@@ -17,7 +17,7 @@ class PuzzleState extends FlxState
   {
     super();
 
-    var _bg = new PuzzleBG(w, h, FlxColor.IVORY);
+    _bg = new PuzzleBG(w, h, FlxColor.IVORY);
     _bg.x = (FlxG.width - _bg.width) / 2;
     _bg.y = (FlxG.height - _bg.height) / 2;
     add(_bg);
