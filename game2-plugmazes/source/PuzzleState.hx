@@ -5,7 +5,7 @@ import flixel.FlxSprite;
 import flixel.group.FlxTypedGroup;
 import flixel.util.FlxColor;
 
-class PuzzleField extends FlxSprite
+class PuzzleState extends FlxSprite
 {
   private var _outlet:Outlet;
   private var _cables:FlxTypedGroup<Cable>;
