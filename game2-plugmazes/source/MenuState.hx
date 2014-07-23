@@ -19,9 +19,6 @@ class MenuState extends FlxState
   {
     super.create();
 
-    var throwaway = PuzzleParser.parse(1);
-    trace(throwaway);
-
     var leftArrow = new Button("assets/images/LeftArrowButton.png", 30, 60);
     leftArrow.x = FlxG.width / 2 - 50 - leftArrow.width;
     add(leftArrow);
@@ -33,6 +30,10 @@ class MenuState extends FlxState
     var playButton = new TextButton("Play");
     playButton.x = (FlxG.width - playButton.width) / 2;
     playButton.y = (FlxG.height - playButton.height) / 2;
+    playButton.clickCallback = function():Void
+    {
+      FlxG.switchState(PuzzleParser.parse(1));
+    };
     add(playButton);
 
     var musicButton = new TextButton("Music Credits");
