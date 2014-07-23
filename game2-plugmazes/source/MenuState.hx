@@ -32,7 +32,7 @@ class MenuState extends FlxState
     playButton.y = (FlxG.height - playButton.height) / 2;
     playButton.clickCallback = function():Void
     {
-      FlxG.switchState(PuzzleParser.parse(1));
+      FlxG.switchState(new PuzzleState(1));
     };
     add(playButton);
 

@@ -7,26 +7,46 @@ import flixel.util.FlxColor;
 
 class PuzzleState extends FlxState
 {
+  private var _puzzleNumber:Int;
+  private var _width:Int;
+  private var _height:Int;
   private var _bg:PuzzleBG;
   private var _outlet:Outlet;
   private var _cables:FlxTypedGroup<Cable>;
 
   static inline private var TEST_SPRITESHEET = "assets/images/TestCable.png";
 
-  public function new(w:Int, h:Int)
+  public function new(puzzleNumber:Int)
   {
     super();
+    _puzzleNumber = puzzleNumber;
+  }
 
-    _bg = new PuzzleBG(w, h, FlxColor.IVORY);
-    _bg.x = (FlxG.width - _bg.width) / 2;
-    _bg.y = (FlxG.height - _bg.height) / 2;
-    add(_bg);
+  override public function create():Void
+  {
+    super.create();
 
     _cables = new FlxTypedGroup<Cable>();
+
+    PuzzleParser.parse(_puzzleNumber, this);
+
     add(_cables);
   }
 
-  public function setOutlet(xPos:Int, yPos:Int)
+  public function setDimensions(w:Int, h:Int):Void
+  {
+    _width = w;
+    _height = h;
+
+    _bg = new PuzzleBG(_width * Constants.CELL_SIZE,
+                       _height * Constants.CELL_SIZE,
+                       FlxColor.IVORY);
+    _bg.x = (FlxG.width - _bg.width) / 2;
+    _bg.y = (FlxG.height - _bg.height) / 2;
+    add(_bg);
+  }
+
+  public function setOutlet(xPos:Int, yPos:Int):Void
   {
     _outlet = new Outlet(TEST_SPRITESHEET);
     _outlet.x = _bg.x + xPos * Constants.CELL_SIZE;
@@ -35,7 +55,7 @@ class PuzzleState extends FlxState
   }
 
   public function addCable(xPos:Int, yPos:Int, direction:Direction,
-                           maxLength:Int, powered:Bool)
+                           maxLength:Int, powered:Bool):Void
   {
     var cableBase = new CableSegment(TEST_SPRITESHEET);
     cableBase.x = _bg.x + xPos * Constants.CELL_SIZE;
