@@ -1,5 +1,7 @@
 package;
 
+import flixel.util.FlxPoint;
+
 @:enum
 abstract Direction(Int)
 {
@@ -9,7 +11,7 @@ abstract Direction(Int)
   public var RIGHT = 0;
 
   public var shorthand(get, never):String;
-  inline public function get_shorthand():String
+  public function get_shorthand():String
   {
     return switch (this)
     {
@@ -32,5 +34,25 @@ abstract Direction(Int)
   inline public function get_priority():Int
   {
     return cast(this, Int);
+  }
+
+  public var offset(get, never):FlxPoint;
+  public function get_offset():FlxPoint
+  {
+    return switch (this)
+    {
+      case Direction.UP:
+        new FlxPoint(0, 1);
+      case Direction.DOWN:
+        new FlxPoint(0, -1);
+      case Direction.RIGHT:
+        new FlxPoint(1, 0);
+      case Direction.LEFT:
+        new FlxPoint(-1, 0);
+      default:
+        // Haxe should detect that we have exhausted the enum, but for some
+        // reason it still demands a default.
+        throw "This should be impossible.";
+    }
   }
 }
