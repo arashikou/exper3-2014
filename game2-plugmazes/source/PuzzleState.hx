@@ -1,12 +1,13 @@
 package;
 
 import flixel.FlxG;
-import flixel.FlxSprite;
+import flixel.FlxState;
 import flixel.group.FlxTypedGroup;
 import flixel.util.FlxColor;
 
-class PuzzleState extends FlxSprite
+class PuzzleState extends FlxState
 {
+  private var _bg:PuzzleBG;
   private var _outlet:Outlet;
   private var _cables:FlxTypedGroup<Cable>;
 
@@ -15,22 +16,30 @@ class PuzzleState extends FlxSprite
   public function new(w:Int, h:Int)
   {
     super();
-    makeGraphic(w, h, FlxColor.IVORY);
+
+    var _bg = new PuzzleBG(w, h, FlxColor.IVORY);
+    _bg.x = (FlxG.width - _bg.width) / 2;
+    _bg.y = (FlxG.height - _bg.height) / 2;
+    add(_bg);
+
+    _cables = new FlxTypedGroup<Cable>();
+    add(_cables);
   }
 
   public function setOutlet(xPos:Int, yPos:Int)
   {
     _outlet = new Outlet(TEST_SPRITESHEET);
-    _outlet.x = x + xPos * Constants.CELL_SIZE;
-    _outlet.y = y + yPos * Constants.CELL_SIZE;
+    _outlet.x = _bg.x + xPos * Constants.CELL_SIZE;
+    _outlet.y = _bg.y + yPos * Constants.CELL_SIZE;
+    add(_outlet);
   }
 
   public function addCable(xPos:Int, yPos:Int, direction:Direction,
                            maxLength:Int, powered:Bool)
   {
     var cableBase = new CableSegment(TEST_SPRITESHEET);
-    cableBase.x = x + xPos * Constants.CELL_SIZE;
-    cableBase.y = y + yPos * Constants.CELL_SIZE;
+    cableBase.x = _bg.x + xPos * Constants.CELL_SIZE;
+    cableBase.y = _bg.y + yPos * Constants.CELL_SIZE;
 
     var cablePlug = new CableSegment(TEST_SPRITESHEET);
     var offset = direction.offset;
@@ -51,20 +60,10 @@ class PuzzleState extends FlxSprite
   {
     super.update();
 
-    _cables.update();
-    _outlet.update();
-
     if (_outlet.isPowered())
     {
       // Player wins!
       FlxG.switchState(new MenuState());
     }
-  }
-
-  override public function draw():Void
-  {
-    super.draw();
-    _cables.draw();
-    _outlet.draw();
   }
 }
