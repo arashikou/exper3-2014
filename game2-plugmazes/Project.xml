@@ -31,6 +31,7 @@
   <!--haxedef name="FLX_RECORD" /-->
 
   <!--Disable unused input types-->
+  <haxedef name="FLX_NO_KEYBOARD" />
   <haxedef name="FLX_NO_TOUCH" />
   <haxedef name="FLX_NO_GAMEPAD" />
 
