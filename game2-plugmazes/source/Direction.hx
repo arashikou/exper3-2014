@@ -55,4 +55,21 @@ abstract Direction(Int)
         throw "This should be impossible.";
     }
   }
+
+  static public function parse(val:String):Direction
+  {
+    return switch (val)
+    {
+      case "U":
+        Direction.UP;
+      case "D":
+        Direction.DOWN;
+      case "R":
+        Direction.RIGHT;
+      case "L":
+        Direction.LEFT;
+      default:
+        throw "Unknown shorthand.";
+    }
+  }
 }
