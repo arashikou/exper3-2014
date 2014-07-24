@@ -1,40 +1,81 @@
 package;
 
-import flixel.FlxSprite;
-
-class CableSegment extends FlxSprite
+class CableSegment extends ConductiveSprite
 {
-  public function new(spriteSheet:String)
+  private var _previous:CableSegment;
+  private var _next:CableSegment;
+
+  public function new(spriteSheet:String, previous:CableSegment)
   {
     super();
+
     loadGraphic(spriteSheet, true, Constants.CELL_SIZE, Constants.CELL_SIZE);
     loadAnimations();
+
+    _previous = previous;
+    if (_previous != null)
+    {
+      _previous._next = this;
+    }
   }
 
-  public function chooseShape(before:CableSegment, after:CableSegment):Void
+  public function cutOffHere():Void
   {
-    if (before == null)
+    if (_next != null && _next.alive)
+    {
+      _next.kill();
+    }
+    _next = null;
+  }
+
+  override public function isPowered():Bool
+  {
+    return
+      if (_previous != null)
+        _previous.isPowered();
+      else
+        super.isPowered();
+  }
+
+  override public function connectTo(source:Powerable):Void
+  {
+    // Disallow connection for non-base pieces.
+    if (_previous == null)
+      super.connectTo(source);
+  }
+
+  override public function kill():Void
+  {
+    cutOffHere();
+    super.kill();
+  }
+
+  override public function draw():Void
+  {
+    if (_previous == null)
     {
       // This is the start of the chain.
-      var exitDirection = getDirection(after);
+      var exitDirection = getDirection(_next);
       animation.play(exitDirection.shorthand + "-base");
     }
-    else if (after == null)
+    else if (_next == null)
     {
       // This is the end of the chain.
-      var enterDirection = getDirection(before);
+      var enterDirection = getDirection(_previous);
       animation.play(enterDirection.shorthand + "-plug");
     }
     else
     {
       // This is somewhere in the middle of the chain.
-      var enterDirection = getDirection(before);
-      var exitDirection = getDirection(after);
+      var enterDirection = getDirection(_previous);
+      var exitDirection = getDirection(_next);
       if (enterDirection.priority > exitDirection.priority)
         animation.play(enterDirection.shorthand + "-to-" + exitDirection.shorthand);
       else
         animation.play(exitDirection.shorthand + "-to-" + enterDirection.shorthand);
     }
+
+    super.draw();
   }
 
   private function loadAnimations():Void
