@@ -42,9 +42,9 @@ abstract Direction(Int)
     return switch (this)
     {
       case Direction.UP:
-        new FlxPoint(0, 1);
-      case Direction.DOWN:
         new FlxPoint(0, -1);
+      case Direction.DOWN:
+        new FlxPoint(0, 1);
       case Direction.RIGHT:
         new FlxPoint(1, 0);
       case Direction.LEFT:
