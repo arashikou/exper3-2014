@@ -86,4 +86,14 @@ class PuzzleState extends FlxState
       FlxG.switchState(new MenuState());
     }
   }
+
+  override public function draw():Void
+  {
+    _cables.forEach(function(cable:Cable):Void
+    {
+      cable.updateAppearance();
+    });
+
+    super.draw();
+  }
 }
