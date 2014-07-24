@@ -2,7 +2,7 @@ package;
 
 import flixel.FlxSprite;
 
-class ConductiveSprite extends FlxSprite implements Powerable
+class ConductiveSprite extends FlxSprite implements Powerable implements Connectable
 {
   private var _source: Powerable;
 
@@ -15,13 +15,8 @@ class ConductiveSprite extends FlxSprite implements Powerable
         false;
   }
 
-  public function connectTo(source:Powerable)
+  public function connectTo(source:Powerable):Void
   {
     _source = source;
-  }
-
-  public function disconnect()
-  {
-    connectTo(null);
   }
 }
