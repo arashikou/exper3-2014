@@ -4,8 +4,9 @@ class CableSegment extends ConductiveSprite
 {
   private var _previous:CableSegment;
   private var _next:CableSegment;
+  private var _maxLength:Null<UInt>;
 
-  public function new(spriteSheet:String, previous:CableSegment)
+  public function new(spriteSheet:String, previous:CableSegment, ?maxLength:UInt)
   {
     super();
 
@@ -17,6 +18,26 @@ class CableSegment extends ConductiveSprite
     {
       _previous._next = this;
     }
+  }
+
+  public function length():UInt
+  {
+    var pastLength =
+      if (_previous != null)
+        _previous.length();
+      else
+        0;
+    return pastLength + 1;
+  }
+
+  public function lengthRemaining():UInt
+  {
+    var pastLength =
+      if (_previous != null)
+        _previous.lengthRemaining();
+      else
+        _maxLength;
+    return pastLength - 1;
   }
 
   public function cutOffHere():Void
