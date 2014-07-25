@@ -11,7 +11,7 @@ import haxe.ds.Vector;
 
 class PuzzleState extends FlxState
 {
-  private var _puzzleNumber:Int;
+  private var _puzzleNumber:UInt;
   private var _width:Int;
   private var _height:Int;
   private var _bg:PuzzleBG;
@@ -20,7 +20,7 @@ class PuzzleState extends FlxState
   private var _mouse:MouseAttendant;
   private var _winSound:FlxSound;
 
-  public function new(puzzleNumber:Int)
+  public function new(puzzleNumber:UInt)
   {
     super();
     _puzzleNumber = puzzleNumber;

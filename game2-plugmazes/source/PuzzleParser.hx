@@ -4,7 +4,7 @@ import openfl.Assets;
 
 class PuzzleParser
 {
-  static public function parse(level:Int, state:PuzzleState):Void
+  static public function parse(level:UInt, state:PuzzleState):Void
   {
     var assetName = "assets/levels/" + level + ".txt";
     var asset = Assets.getText(assetName);

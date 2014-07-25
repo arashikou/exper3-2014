@@ -10,17 +10,34 @@ import flixel.util.FlxMath;
 
 class TitleState extends FlxState
 {
+  private var _currentLevel:UInt;
+  private var _levelDisplay:FlxText;
+
+  public function new(startingLevel:UInt = 1)
+  {
+    super();
+    _currentLevel = startingLevel;
+  }
+
   override public function create():Void
   {
     super.create();
     bgColor = FlxColor.BLACK;
 
     var leftArrow = new Button("assets/images/LeftArrowButton.png", 30, 60);
-    leftArrow.x = FlxG.width / 2 - 50 - leftArrow.width;
+    leftArrow.x = FlxG.width / 2 - 100 - leftArrow.width;
+    leftArrow.clickCallback = function():Void
+    {
+      _currentLevel--;
+    };
     add(leftArrow);
 
     var rightArrow = new Button("assets/images/RightArrowButton.png", 30, 60);
-    rightArrow.x = FlxG.width / 2 + 50;
+    rightArrow.x = FlxG.width / 2 + 100;
+    rightArrow.clickCallback = function():Void
+    {
+      _currentLevel++;
+    };
     add(rightArrow);
 
     var playButton = new TextButton("Play");
@@ -28,7 +45,7 @@ class TitleState extends FlxState
     playButton.y = (FlxG.height - playButton.height) / 2;
     playButton.clickCallback = function():Void
     {
-      FlxG.switchState(new PuzzleState(2));
+      FlxG.switchState(new PuzzleState(_currentLevel));
     };
     add(playButton);
 
@@ -40,15 +57,19 @@ class TitleState extends FlxState
       FlxG.switchState(new MusicCreditsState());
     };
     add(musicButton);
-  }
 
-  override public function destroy():Void
-  {
-    super.destroy();
+    _levelDisplay = new FlxText();
+    _levelDisplay.size = 36;
+    _levelDisplay.font = "external_assets/fonts/NovaMono.ttf";
+    _levelDisplay.color = FlxColor.WHEAT;
+    add(_levelDisplay);
   }
 
   override public function update():Void
   {
     super.update();
+
+    _levelDisplay.text = Std.string(_currentLevel);
+    _levelDisplay.x = (FlxG.width - _levelDisplay.fieldWidth) / 2;
   }
 }
