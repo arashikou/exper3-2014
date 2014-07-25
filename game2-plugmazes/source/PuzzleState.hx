@@ -156,6 +156,16 @@ private class MouseAttendant
             // If the length is greater than 1, it is not a base and therefore
             // is safe to grab.
             _segmentInHand = segment;
+
+            // Unplug anything near the old plug, if we're about to cut the cable.
+            var oldPlug = _segmentInHand.getPlug();
+            if (oldPlug != _segmentInHand)
+            {
+              var plugX = Std.int((oldPlug.x - offsetX) / Constants.CELL_SIZE);
+              var plugY = Std.int((oldPlug.y - offsetY) / Constants.CELL_SIZE);
+              connectAround(plugX, plugY, oldPlug, null);
+            }
+
             _segmentInHand.cutOffHere();
           }
         }

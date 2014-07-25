@@ -73,6 +73,15 @@ class CableSegment extends ConductiveSprite
         _next.inDescendants(what);
   }
 
+  public function getPlug():CableSegment
+  {
+    return
+      if (_next == null)
+        this;
+      else
+        _next.getPlug();
+  }
+
   override public function isPowered():Bool
   {
     return
