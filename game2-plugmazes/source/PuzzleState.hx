@@ -175,7 +175,7 @@ private class MouseAttendant
             _segmentInHand.cutOffHere();
           }
         }
-        else if (_segmentInHand.lengthRemaining() > 0)
+        else if (_grid[x][y] == null && _segmentInHand.lengthRemaining() > 0)
         {
           // Prevent adding in non-adjacent squares;
           var diff = Math.abs(x - segmentX) + Math.abs(y - segmentY);
