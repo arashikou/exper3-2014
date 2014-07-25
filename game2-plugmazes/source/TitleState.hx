@@ -5,6 +5,7 @@ import flixel.FlxSprite;
 import flixel.FlxState;
 import flixel.text.FlxText;
 import flixel.ui.FlxButton;
+import flixel.util.FlxColor;
 import flixel.util.FlxMath;
 
 class TitleState extends FlxState
@@ -12,6 +13,7 @@ class TitleState extends FlxState
   override public function create():Void
   {
     super.create();
+    bgColor = FlxColor.BLACK;
 
     var leftArrow = new Button("assets/images/LeftArrowButton.png", 30, 60);
     leftArrow.x = FlxG.width / 2 - 50 - leftArrow.width;
