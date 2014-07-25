@@ -100,7 +100,7 @@ class PuzzleState extends FlxState
     if (_outlet.isPowered())
     {
       // Player wins!
-      FlxG.switchState(new MenuState());
+      FlxG.switchState(new TitleState());
     }
   }
 

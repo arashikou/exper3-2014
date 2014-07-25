@@ -38,7 +38,7 @@ Under CC BY license http://creativecommons.org/licenses/by/3.0/",
     var button = new TextButton("Return to Title");
     button.clickCallback = function():Void
     {
-      FlxG.switchState(new MenuState());
+      FlxG.switchState(new TitleState());
     };
     button.x = (FlxG.width - button.width) / 2;
     button.y = FlxG.height - button.height;
