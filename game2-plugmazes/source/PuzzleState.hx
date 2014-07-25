@@ -150,10 +150,13 @@ private class MouseAttendant
       var segmentY = Std.int((_segmentInHand.y - offsetY) / Constants.CELL_SIZE);
       if (segmentX != x || segmentY != y)
       {
-        _segmentInHand = new CableSegment(Constants.TEST_SPRITESHEET, _segmentInHand);
-        _segmentInHand.x = offsetX + x * Constants.CELL_SIZE;
-        _segmentInHand.y = offsetY + y * Constants.CELL_SIZE;
-        _grid[x][y] = _segmentInHand;
+        if (_segmentInHand.lengthRemaining() > 0)
+        {
+          _segmentInHand = new CableSegment(Constants.TEST_SPRITESHEET, _segmentInHand);
+          _segmentInHand.x = offsetX + x * Constants.CELL_SIZE;
+          _segmentInHand.y = offsetY + y * Constants.CELL_SIZE;
+          _grid[x][y] = _segmentInHand;
+        }
       }
       // Check if mouse has moved.
       // If so, check if cable can go there.
