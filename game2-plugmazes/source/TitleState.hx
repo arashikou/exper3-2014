@@ -54,7 +54,7 @@ class TitleState extends FlxState
     musicButton.y = FlxG.height - musicButton.height;
     musicButton.clickCallback = function():Void
     {
-      FlxG.switchState(new MusicCreditsState());
+      FlxG.switchState(new MusicCreditsState(_currentLevel));
     };
     add(musicButton);
 

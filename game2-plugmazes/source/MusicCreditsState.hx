@@ -7,6 +7,8 @@ import flixel.util.FlxColor;
 
 class MusicCreditsState extends FlxState
 {
+  private var _puzzleMemory:UInt;
+
   static private var CREDIT_TEXT = StringTools.replace(
 'This game uses the following musical tracks:
 
@@ -28,6 +30,12 @@ This game also uses the following sound effects:
 Used under CC BY license http://creativecommons.org/licenses/by/3.0/',
       "\r\n", "\n");
 
+  public function new(puzzleMemory:UInt)
+  {
+    super();
+    _puzzleMemory = puzzleMemory;
+  }
+
   override public function create():Void
   {
     super.create();
@@ -43,7 +51,7 @@ Used under CC BY license http://creativecommons.org/licenses/by/3.0/',
     var button = new TextButton("Return to Title");
     button.clickCallback = function():Void
     {
-      FlxG.switchState(new TitleState());
+      FlxG.switchState(new TitleState(_puzzleMemory));
     };
     button.x = (FlxG.width - button.width) / 2;
     button.y = FlxG.height - button.height;
