@@ -117,6 +117,8 @@ private class MouseAttendant
   {
     var x = Std.int((FlxG.mouse.x - offsetX) / Constants.CELL_SIZE);
     var y = Std.int((FlxG.mouse.y - offsetY) / Constants.CELL_SIZE);
+    if (x < 0 || x >= _grid.length || y < 0 || y >= _grid[0].length) return;
+
     if (FlxG.mouse.justPressed)
     {
       var target = _grid[x][y];
