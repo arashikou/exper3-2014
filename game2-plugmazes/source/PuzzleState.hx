@@ -5,6 +5,8 @@ import flixel.FlxState;
 import flixel.group.FlxTypedGroup;
 import flixel.util.FlxColor;
 
+import haxe.ds.Vector;
+
 class PuzzleState extends FlxState
 {
   private var _puzzleNumber:Int;
@@ -12,7 +14,7 @@ class PuzzleState extends FlxState
   private var _height:Int;
   private var _bg:PuzzleBG;
   private var _outlet:Outlet;
-  private var _cables:FlxTypedGroup<Cable>;
+  private var _grid:Vector<Vector<ConductiveSprite>>;
 
   static inline private var TEST_SPRITESHEET = "assets/images/TestCable.png";
 
@@ -25,13 +27,7 @@ class PuzzleState extends FlxState
   override public function create():Void
   {
     super.create();
-
-    _cables = new FlxTypedGroup<Cable>();
-
     PuzzleParser.parse(_puzzleNumber, this);
-
-    add(_cables);
-
     BackgroundMusic.play();
   }
 
@@ -46,35 +42,39 @@ class PuzzleState extends FlxState
     _bg.x = (FlxG.width - _bg.width) / 2;
     _bg.y = (FlxG.height - _bg.height) / 2;
     add(_bg);
+
+    _grid = new Vector<Vector<ConductiveSprite>>(_width);
+    for (index in 0..._width)
+    {
+      _grid[index] = new Vector<ConductiveSprite>(_height);
+    }
   }
 
-  public function setOutlet(xPos:Int, yPos:Int):Void
+  public function setOutlet(x:Int, y:Int):Void
   {
     _outlet = new Outlet(TEST_SPRITESHEET);
-    _outlet.x = _bg.x + xPos * Constants.CELL_SIZE;
-    _outlet.y = _bg.y + yPos * Constants.CELL_SIZE;
-    add(_outlet);
+    _outlet.x = _bg.x + x * Constants.CELL_SIZE;
+    _outlet.y = _bg.y + y * Constants.CELL_SIZE;
+    _grid[x][y] = _outlet;
   }
 
-  public function addCable(xPos:Int, yPos:Int, direction:Direction,
+  public function addCable(x:Int, y:Int, direction:Direction,
                            maxLength:Int, powered:Bool):Void
   {
-    var cableBase = new CableSegment(TEST_SPRITESHEET);
-    cableBase.x = _bg.x + xPos * Constants.CELL_SIZE;
-    cableBase.y = _bg.y + yPos * Constants.CELL_SIZE;
+    var cableBase = new CableSegment(TEST_SPRITESHEET, null, maxLength);
+    cableBase.x = _bg.x + x * Constants.CELL_SIZE;
+    cableBase.y = _bg.y + y * Constants.CELL_SIZE;
+    _grid[x][y] = cableBase;
 
-    var cablePlug = new CableSegment(TEST_SPRITESHEET);
+    var cablePlug = new CableSegment(TEST_SPRITESHEET, cableBase);
     var offset = direction.offset;
     cablePlug.x = cableBase.x + offset.x * Constants.CELL_SIZE;
     cablePlug.y = cableBase.y + offset.y * Constants.CELL_SIZE;
-
-    var startingSegments = [ cableBase, cablePlug ];
-    var newCable = new Cable(maxLength, startingSegments);
-    _cables.add(newCable);
+    _grid[Std.int(x + offset.x)][Std.int(y + offset.y)] = cablePlug;
 
     if (powered)
     {
-      newCable.connectTo(new PowerSource());
+      cableBase.connectTo(new PowerSource());
     }
   }
 
@@ -91,11 +91,11 @@ class PuzzleState extends FlxState
 
   override public function draw():Void
   {
-    _cables.forEach(function(cable:Cable):Void
-    {
-      cable.updateAppearance();
-    });
-
     super.draw();
+
+    for (column in _grid)
+      for (cell in column)
+        if (cell != null)
+          cell.draw();
   }
 }
