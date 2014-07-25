@@ -15,6 +15,7 @@ class PuzzleState extends FlxState
   private var _bg:PuzzleBG;
   private var _outlet:Outlet;
   private var _grid:Vector<Vector<ConductiveSprite>>;
+  private var _mouse:MouseAttendant;
 
   static inline private var TEST_SPRITESHEET = "assets/images/TestCable.png";
 
@@ -48,6 +49,7 @@ class PuzzleState extends FlxState
     {
       _grid[index] = new Vector<ConductiveSprite>(_height);
     }
+    _mouse = new MouseAttendant(_grid);
   }
 
   public function setOutlet(x:Int, y:Int):Void
@@ -82,6 +84,8 @@ class PuzzleState extends FlxState
   {
     super.update();
 
+    _mouse.update(_bg.x, _bg.y);
+
     if (_outlet.isPowered())
     {
       // Player wins!
@@ -97,5 +101,55 @@ class PuzzleState extends FlxState
       for (cell in column)
         if (cell != null)
           cell.draw();
+  }
+}
+
+private class MouseAttendant
+{
+  private var _grid:Vector<Vector<ConductiveSprite>>;
+  private var _segmentInHand:CableSegment;
+
+  public function new(grid:Vector<Vector<ConductiveSprite>>)
+  {
+    _grid = grid;
+    FlxG.watch.add(this, "_segmentInHand", "Segment");
+  }
+
+  public function update(offsetX:Float, offsetY:Float):Void
+  {
+    if (FlxG.mouse.justPressed)
+    {
+      var x = Std.int((FlxG.mouse.x - offsetX) / Constants.CELL_SIZE);
+      var y = Std.int((FlxG.mouse.y - offsetY) / Constants.CELL_SIZE);
+      var target = _grid[x][y];
+      if (target != null)
+      {
+        // It is apparently idiomatic Haxe to try the cast and catch the
+        // exception rather than pre-checking.
+        try
+        {
+          var segment = cast(target, CableSegment);
+          if (segment.length() > 1)
+          {
+            // If the length is greater than 1, it is not a base and therefore
+            // is safe to grab.
+            _segmentInHand = segment;
+            _segmentInHand.cutOffHere();
+          }
+        }
+        catch (ignored:String) {}
+      }
+    }
+    else if (FlxG.mouse.justReleased)
+    {
+      _segmentInHand = null;
+    }
+    else if (_segmentInHand != null)
+    {
+      // Check if mouse has moved.
+      // If so, check if cable can go there.
+      // If so, extend/shrink the cable.
+      // Update connectedness accordingly.
+    }
   }
 }
