@@ -162,8 +162,12 @@ private class MouseAttendant
       {
         if (_grid[x][y] == _segmentInHand.previous)
         {
-          _segmentInHand = _segmentInHand.previous;
-          _segmentInHand.cutOffHere();
+          // Don't allow cutting off if we're down to the minimum length.
+          if (_segmentInHand.length() > 2)
+          {
+            _segmentInHand = _segmentInHand.previous;
+            _segmentInHand.cutOffHere();
+          }
         }
         else if (_segmentInHand.lengthRemaining() > 0)
         {
