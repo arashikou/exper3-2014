@@ -115,10 +115,10 @@ private class MouseAttendant
 
   public function update(offsetX:Float, offsetY:Float):Void
   {
+    var x = Std.int((FlxG.mouse.x - offsetX) / Constants.CELL_SIZE);
+    var y = Std.int((FlxG.mouse.y - offsetY) / Constants.CELL_SIZE);
     if (FlxG.mouse.justPressed)
     {
-      var x = Std.int((FlxG.mouse.x - offsetX) / Constants.CELL_SIZE);
-      var y = Std.int((FlxG.mouse.y - offsetY) / Constants.CELL_SIZE);
       var target = _grid[x][y];
       if (target != null)
       {
@@ -144,6 +144,15 @@ private class MouseAttendant
     }
     else if (_segmentInHand != null)
     {
+      var segmentX = Std.int((_segmentInHand.x - offsetX) / Constants.CELL_SIZE);
+      var segmentY = Std.int((_segmentInHand.y - offsetY) / Constants.CELL_SIZE);
+      if (segmentX != x || segmentY != y)
+      {
+        _segmentInHand = new CableSegment(Constants.TEST_SPRITESHEET, _segmentInHand);
+        _segmentInHand.x = offsetX + x * Constants.CELL_SIZE;
+        _segmentInHand.y = offsetY + y * Constants.CELL_SIZE;
+        _grid[x][y] = _segmentInHand;
+      }
       // Check if mouse has moved.
       // If so, check if cable can go there.
       // If so, extend/shrink the cable.
