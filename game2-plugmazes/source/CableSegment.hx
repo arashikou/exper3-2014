@@ -18,6 +18,8 @@ class CableSegment extends ConductiveSprite
     {
       _previous._next = this;
     }
+
+    _maxLength = maxLength;
   }
 
   public function length():UInt
