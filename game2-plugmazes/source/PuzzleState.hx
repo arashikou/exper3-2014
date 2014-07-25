@@ -84,6 +84,18 @@ class PuzzleState extends FlxState
 
     _mouse.update(_bg.x, _bg.y);
 
+    // Exfoliate. i.e. Remove dead cells.
+    for (x in 0..._grid.length)
+    {
+      var column = _grid[x];
+      for (y in 0...column.length)
+      {
+        var cell = column[y];
+        if (cell != null && !cell.alive)
+          _grid[x][y] = null;
+      }
+    }
+
     if (_outlet.isPowered())
     {
       // Player wins!
