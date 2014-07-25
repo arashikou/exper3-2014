@@ -51,6 +51,17 @@ class CableSegment extends ConductiveSprite
     _next = null;
   }
 
+  public function inDescendants(what:CableSegment):Bool
+  {
+    return
+      if (_next == what)
+        true;
+      else if (_next == null)
+        false;
+      else
+        _next.inDescendants(what);
+  }
+
   override public function isPowered():Bool
   {
     return

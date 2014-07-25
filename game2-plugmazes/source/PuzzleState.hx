@@ -164,7 +164,7 @@ private class MouseAttendant
         // Disconnect
         var segmentX = Std.int((_segmentInHand.x - offsetX) / Constants.CELL_SIZE);
         var segmentY = Std.int((_segmentInHand.y - offsetY) / Constants.CELL_SIZE);
-        connectAround(segmentX, segmentY, null);
+        connectAround(segmentX, segmentY, _segmentInHand, null);
 
         // Check if we are backtracking or growing
         if (_grid[x][y] == _segmentInHand.previous)
@@ -193,12 +193,12 @@ private class MouseAttendant
         // Reconnect
         segmentX = Std.int((_segmentInHand.x - offsetX) / Constants.CELL_SIZE);
         segmentY = Std.int((_segmentInHand.y - offsetY) / Constants.CELL_SIZE);
-        connectAround(segmentX, segmentY, _segmentInHand);
+        connectAround(segmentX, segmentY, _segmentInHand, _segmentInHand);
       }
     }
   }
 
-  private function connectAround(x:Int, y:Int, what:Powerable)
+  private function connectAround(x:Int, y:Int, who:CableSegment, what:Powerable)
   {
     var targets = [];
     if (x - 1 >= 0)
@@ -213,7 +213,20 @@ private class MouseAttendant
     for (target in targets)
     {
       if (target != null)
+      {
+        var isDescendant =
+          try
+          {
+            var segment = cast(target, CableSegment);
+            segment.inDescendants(who);
+          }
+          catch (error:String)
+          {
+            false;
+          }
+       if (!isDescendant)
         target.connectTo(what);
+      }
     }
   }
 }
