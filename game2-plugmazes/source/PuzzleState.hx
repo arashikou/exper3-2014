@@ -31,6 +31,8 @@ class PuzzleState extends FlxState
     PuzzleParser.parse(_puzzleNumber, this);
 
     add(_cables);
+
+    BackgroundMusic.play();
   }
 
   public function setDimensions(w:Int, h:Int):Void
