@@ -123,7 +123,6 @@ private class MouseAttendant
   public function new(grid:Vector<Vector<ConductiveSprite>>)
   {
     _grid = grid;
-    FlxG.watch.add(this, "_segmentInHand", "Segment");
   }
 
   public function update(offsetX:Float, offsetY:Float):Void
