@@ -34,12 +34,11 @@ class CableSegment extends ConductiveSprite
 
   public function lengthRemaining():UInt
   {
-    var pastLength =
+    return
       if (previous != null)
-        previous.lengthRemaining();
+        previous.lengthRemaining() - 1;
       else
         _maxLength;
-    return pastLength - 1;
   }
 
   public function cutOffHere():Void
