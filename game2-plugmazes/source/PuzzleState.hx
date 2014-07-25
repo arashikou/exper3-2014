@@ -31,7 +31,7 @@ class PuzzleState extends FlxState
     super.create();
     PuzzleParser.parse(_puzzleNumber, this);
     BackgroundMusic.play();
-    bgColor = FlxColor.IVORY;
+    bgColor = FlxColor.GRAY;
   }
 
   public function setDimensions(w:Int, h:Int):Void
