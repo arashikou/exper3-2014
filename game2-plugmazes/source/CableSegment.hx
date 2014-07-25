@@ -1,10 +1,14 @@
 package;
 
+import flixel.text.FlxText;
+import flixel.util.FlxColor;
+
 class CableSegment extends ConductiveSprite
 {
   public var previous(default, null):CableSegment;
   private var _next:CableSegment;
   private var _maxLength:Null<UInt>;
+  private var _lengthDisplay:FlxText;
 
   public function new(spriteSheet:String, parent:CableSegment, ?maxLength:UInt)
   {
@@ -19,7 +23,15 @@ class CableSegment extends ConductiveSprite
       previous._next = this;
     }
 
-    _maxLength = maxLength;
+    if (previous == null)
+    {
+      _maxLength = maxLength;
+      _lengthDisplay = new FlxText();
+      _lengthDisplay.size = 14;
+      _lengthDisplay.font = "external_assets/fonts/NovaMono.ttf";
+      _lengthDisplay.color = FlxColor.BLACK;
+      _lengthDisplay.text = Std.string(_maxLength);
+    }
   }
 
   public function length():UInt
@@ -109,6 +121,13 @@ class CableSegment extends ConductiveSprite
     }
 
     super.draw();
+
+    if (_lengthDisplay != null)
+    {
+      _lengthDisplay.x = x + (width - _lengthDisplay.fieldWidth) / 2;
+      _lengthDisplay.y = y + (height - _lengthDisplay.height) / 2;
+      _lengthDisplay.draw();
+    }
   }
 
   private function loadAnimations():Void
