@@ -17,8 +17,6 @@ class PuzzleState extends FlxState
   private var _grid:Vector<Vector<ConductiveSprite>>;
   private var _mouse:MouseAttendant;
 
-  static inline private var TEST_SPRITESHEET = "assets/images/TestCable.png";
-
   public function new(puzzleNumber:Int)
   {
     super();
@@ -54,7 +52,7 @@ class PuzzleState extends FlxState
 
   public function setOutlet(x:Int, y:Int):Void
   {
-    _outlet = new Outlet(TEST_SPRITESHEET);
+    _outlet = new Outlet(Constants.TEST_SPRITESHEET);
     _outlet.x = _bg.x + x * Constants.CELL_SIZE;
     _outlet.y = _bg.y + y * Constants.CELL_SIZE;
     _grid[x][y] = _outlet;
@@ -63,12 +61,12 @@ class PuzzleState extends FlxState
   public function addCable(x:Int, y:Int, direction:Direction,
                            maxLength:Int, powered:Bool):Void
   {
-    var cableBase = new CableSegment(TEST_SPRITESHEET, null, maxLength);
+    var cableBase = new CableSegment(Constants.TEST_SPRITESHEET, null, maxLength);
     cableBase.x = _bg.x + x * Constants.CELL_SIZE;
     cableBase.y = _bg.y + y * Constants.CELL_SIZE;
     _grid[x][y] = cableBase;
 
-    var cablePlug = new CableSegment(TEST_SPRITESHEET, cableBase);
+    var cablePlug = new CableSegment(Constants.TEST_SPRITESHEET, cableBase);
     var offset = direction.offset;
     cablePlug.x = cableBase.x + offset.x * Constants.CELL_SIZE;
     cablePlug.y = cableBase.y + offset.y * Constants.CELL_SIZE;
