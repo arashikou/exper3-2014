@@ -4,6 +4,7 @@ import flixel.FlxG;
 import flixel.FlxState;
 import flixel.group.FlxTypedGroup;
 import flixel.util.FlxColor;
+import flixel.util.FlxMath;
 
 import haxe.ds.Vector;
 
@@ -160,6 +161,12 @@ private class MouseAttendant
     {
       if (_grid[x][y] != _segmentInHand)
       {
+        // Disconnect
+        var segmentX = Std.int((_segmentInHand.x - offsetX) / Constants.CELL_SIZE);
+        var segmentY = Std.int((_segmentInHand.y - offsetY) / Constants.CELL_SIZE);
+        connectAround(segmentX, segmentY, null);
+
+        // Check if we are backtracking or growing
         if (_grid[x][y] == _segmentInHand.previous)
         {
           // Don't allow cutting off if we're down to the minimum length.
@@ -172,8 +179,6 @@ private class MouseAttendant
         else if (_segmentInHand.lengthRemaining() > 0)
         {
           // Prevent adding in non-adjacent squares;
-          var segmentX = Std.int((_segmentInHand.x - offsetX) / Constants.CELL_SIZE);
-          var segmentY = Std.int((_segmentInHand.y - offsetY) / Constants.CELL_SIZE);
           var diff = Math.abs(x - segmentX) + Math.abs(y - segmentY);
           if (diff == 1)
           {
@@ -184,11 +189,31 @@ private class MouseAttendant
             _grid[x][y] = _segmentInHand;
           }
         }
+
+        // Reconnect
+        segmentX = Std.int((_segmentInHand.x - offsetX) / Constants.CELL_SIZE);
+        segmentY = Std.int((_segmentInHand.y - offsetY) / Constants.CELL_SIZE);
+        connectAround(segmentX, segmentY, _segmentInHand);
       }
-      // Check if mouse has moved.
-      // If so, check if cable can go there.
-      // If so, extend/shrink the cable.
-      // Update connectedness accordingly.
+    }
+  }
+
+  private function connectAround(x:Int, y:Int, what:Powerable)
+  {
+    var targets = [];
+    if (x - 1 >= 0)
+      targets.push(_grid[x - 1][y]);
+    if (x + 1 < _grid.length)
+      targets.push(_grid[x + 1][y]);
+    if (y - 1 >= 0)
+      targets.push(_grid[x][y - 1]);
+    if (y + 1 < _grid[x].length)
+      targets.push(_grid[x][y + 1]);
+
+    for (target in targets)
+    {
+      if (target != null)
+        target.connectTo(what);
     }
   }
 }
