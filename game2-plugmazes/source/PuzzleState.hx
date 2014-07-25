@@ -158,11 +158,14 @@ private class MouseAttendant
     }
     else if (_segmentInHand != null)
     {
-      var segmentX = Std.int((_segmentInHand.x - offsetX) / Constants.CELL_SIZE);
-      var segmentY = Std.int((_segmentInHand.y - offsetY) / Constants.CELL_SIZE);
-      if (segmentX != x || segmentY != y)
+      if (_grid[x][y] != _segmentInHand)
       {
-        if (_segmentInHand.lengthRemaining() > 0)
+        if (_grid[x][y] == _segmentInHand.previous)
+        {
+          _segmentInHand = _segmentInHand.previous;
+          _segmentInHand.cutOffHere();
+        }
+        else if (_segmentInHand.lengthRemaining() > 0)
         {
           _segmentInHand = new CableSegment(Constants.TEST_SPRITESHEET, _segmentInHand);
           _segmentInHand.x = offsetX + x * Constants.CELL_SIZE;

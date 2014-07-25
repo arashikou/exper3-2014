@@ -2,21 +2,21 @@ package;
 
 class CableSegment extends ConductiveSprite
 {
-  private var _previous:CableSegment;
+  public var previous(default, null):CableSegment;
   private var _next:CableSegment;
   private var _maxLength:Null<UInt>;
 
-  public function new(spriteSheet:String, previous:CableSegment, ?maxLength:UInt)
+  public function new(spriteSheet:String, parent:CableSegment, ?maxLength:UInt)
   {
     super();
 
     loadGraphic(spriteSheet, true, Constants.CELL_SIZE, Constants.CELL_SIZE);
     loadAnimations();
 
-    _previous = previous;
-    if (_previous != null)
+    previous = parent;
+    if (previous != null)
     {
-      _previous._next = this;
+      previous._next = this;
     }
 
     _maxLength = maxLength;
@@ -25,8 +25,8 @@ class CableSegment extends ConductiveSprite
   public function length():UInt
   {
     var pastLength =
-      if (_previous != null)
-        _previous.length();
+      if (previous != null)
+        previous.length();
       else
         0;
     return pastLength + 1;
@@ -35,8 +35,8 @@ class CableSegment extends ConductiveSprite
   public function lengthRemaining():UInt
   {
     var pastLength =
-      if (_previous != null)
-        _previous.lengthRemaining();
+      if (previous != null)
+        previous.lengthRemaining();
       else
         _maxLength;
     return pastLength - 1;
@@ -54,8 +54,8 @@ class CableSegment extends ConductiveSprite
   override public function isPowered():Bool
   {
     return
-      if (_previous != null)
-        _previous.isPowered();
+      if (previous != null)
+        previous.isPowered();
       else
         super.isPowered();
   }
@@ -63,7 +63,7 @@ class CableSegment extends ConductiveSprite
   override public function connectTo(source:Powerable):Void
   {
     // Disallow connection for non-base pieces.
-    if (_previous == null)
+    if (previous == null)
       super.connectTo(source);
   }
 
@@ -75,7 +75,7 @@ class CableSegment extends ConductiveSprite
 
   override public function draw():Void
   {
-    if (_previous == null)
+    if (previous == null)
     {
       // This is the start of the chain.
       var exitDirection = getDirection(_next);
@@ -84,13 +84,13 @@ class CableSegment extends ConductiveSprite
     else if (_next == null)
     {
       // This is the end of the chain.
-      var enterDirection = getDirection(_previous);
+      var enterDirection = getDirection(previous);
       animation.play(enterDirection.shorthand + "-plug");
     }
     else
     {
       // This is somewhere in the middle of the chain.
-      var enterDirection = getDirection(_previous);
+      var enterDirection = getDirection(previous);
       var exitDirection = getDirection(_next);
       if (enterDirection.priority > exitDirection.priority)
         animation.play(enterDirection.shorthand + "-to-" + exitDirection.shorthand);
