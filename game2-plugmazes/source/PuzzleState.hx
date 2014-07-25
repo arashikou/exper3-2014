@@ -104,6 +104,7 @@ class PuzzleState extends FlxState
     }
     else if (_winSound == null)
     {
+      BackgroundMusic.fadeOut();
       _winSound = FlxG.sound.play("external_assets/sounds/StartTheMachine.ogg");
     }
     else if (!_winSound.playing)
