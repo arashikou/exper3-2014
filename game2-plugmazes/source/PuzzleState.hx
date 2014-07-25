@@ -3,6 +3,7 @@ package;
 import flixel.FlxG;
 import flixel.FlxState;
 import flixel.group.FlxTypedGroup;
+import flixel.system.FlxSound;
 import flixel.util.FlxColor;
 import flixel.util.FlxMath;
 
@@ -17,6 +18,7 @@ class PuzzleState extends FlxState
   private var _outlet:Outlet;
   private var _grid:Vector<Vector<ConductiveSprite>>;
   private var _mouse:MouseAttendant;
+  private var _winSound:FlxSound;
 
   public function new(puzzleNumber:Int)
   {
@@ -82,23 +84,29 @@ class PuzzleState extends FlxState
 
   override public function update():Void
   {
-    super.update();
-
-    _mouse.update(_bg.x, _bg.y);
-
-    // Exfoliate. i.e. Remove dead cells.
-    for (x in 0..._grid.length)
+    if (!_outlet.isPowered())
     {
-      var column = _grid[x];
-      for (y in 0...column.length)
+      super.update();
+
+      _mouse.update(_bg.x, _bg.y);
+
+      // Exfoliate. i.e. Remove dead cells.
+      for (x in 0..._grid.length)
       {
-        var cell = column[y];
-        if (cell != null && !cell.alive)
-          _grid[x][y] = null;
+        var column = _grid[x];
+        for (y in 0...column.length)
+        {
+          var cell = column[y];
+          if (cell != null && !cell.alive)
+            _grid[x][y] = null;
+        }
       }
     }
-
-    if (_outlet.isPowered())
+    else if (_winSound == null)
+    {
+      _winSound = FlxG.sound.play("external_assets/sounds/StartTheMachine.ogg");
+    }
+    else if (!_winSound.playing)
     {
       // Player wins!
       FlxG.switchState(new TitleState());

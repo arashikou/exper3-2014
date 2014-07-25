@@ -10,17 +10,24 @@ class MusicCreditsState extends FlxState
   private var credits:FlxText;
 
   static private var CREDIT_TEXT = StringTools.replace(
-"Music \"Dubstep Light\" by Jason Shaw
+'This game uses the following musical tracks:
+
+"Dubstep Light" by Jason Shaw
 Available at audionautix.com
-Under CC BY license http://creativecommons.org/licenses/by/3.0/
+Used under CC BY license http://creativecommons.org/licenses/by/3.0/
 
-Music \"Late Nigtht Tribe\" by earritation featuring mactonite and Darkroom
+"Late Nigtht Tribe" by earritation featuring mactonite and Darkroom
 Available at ccMixter.org http://ccmixter.org/files/earritation/46736
-Under CC BY-NC license http://creativecommons.org/licenses/by-nc/3.0/
+Used under CC BY-NC license http://creativecommons.org/licenses/by-nc/3.0/
 
-Music \"Space Jazz\" by Martijn de Boer (NiGiD) featuring Doxent Zsigmond (doxent)
+"Space Jazz" by Martijn de Boer (NiGiD) featuring Doxent Zsigmond (doxent)
 Available at ccMixter.org http://ccmixter.org/files/NiGiD/46628
-Under CC BY license http://creativecommons.org/licenses/by/3.0/",
+Used under CC BY license http://creativecommons.org/licenses/by/3.0/
+
+This game also uses the following sound effects:
+
+"Start the Machine" by parabolix http://www.freesound.org/people/parabolix/
+Used under CC BY license http://creativecommons.org/licenses/by/3.0/',
       "\r\n", "\n");
 
   override public function create():Void
