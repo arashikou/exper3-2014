@@ -171,10 +171,18 @@ private class MouseAttendant
         }
         else if (_segmentInHand.lengthRemaining() > 0)
         {
-          _segmentInHand = new CableSegment(Constants.TEST_SPRITESHEET, _segmentInHand);
-          _segmentInHand.x = offsetX + x * Constants.CELL_SIZE;
-          _segmentInHand.y = offsetY + y * Constants.CELL_SIZE;
-          _grid[x][y] = _segmentInHand;
+          // Prevent adding in non-adjacent squares;
+          var segmentX = Std.int((_segmentInHand.x - offsetX) / Constants.CELL_SIZE);
+          var segmentY = Std.int((_segmentInHand.y - offsetY) / Constants.CELL_SIZE);
+          var diff = Math.abs(x - segmentX) + Math.abs(y - segmentY);
+          if (diff == 1)
+          {
+            // Add a new segment
+            _segmentInHand = new CableSegment(Constants.TEST_SPRITESHEET, _segmentInHand);
+            _segmentInHand.x = offsetX + x * Constants.CELL_SIZE;
+            _segmentInHand.y = offsetY + y * Constants.CELL_SIZE;
+            _grid[x][y] = _segmentInHand;
+          }
         }
       }
       // Check if mouse has moved.
