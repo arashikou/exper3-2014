@@ -7,8 +7,6 @@ import flixel.util.FlxColor;
 
 class MusicCreditsState extends FlxState
 {
-  private var credits:FlxText;
-
   static private var CREDIT_TEXT = StringTools.replace(
 'This game uses the following musical tracks:
 
@@ -34,7 +32,7 @@ Used under CC BY license http://creativecommons.org/licenses/by/3.0/',
   {
     super.create();
 
-    credits = new FlxText();
+    var credits = new FlxText();
     credits.size = 18;
     credits.font = "external_assets/fonts/NovaMono.ttf";
     credits.color = FlxColor.WHITE;
