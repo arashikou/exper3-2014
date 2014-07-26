@@ -110,7 +110,7 @@ class PuzzleState extends FlxState
     else if (!_winSound.playing)
     {
       // Player wins!
-      FlxG.switchState(new TitleState(_puzzleNumber));
+      FlxG.switchState(new TitleState(_puzzleNumber + 1));
     }
   }
 
