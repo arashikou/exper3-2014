@@ -8,7 +8,7 @@ import flixel.FlxState;
 
 class Main extends Sprite
 {
-  inline static var initialState = MenuState;
+  inline static var initialState = TitleState;
   inline static var framerate = 60;
 
   // Based on the code from the default template in HaxeFlixel
