@@ -4,3 +4,4 @@ Licenses used by external assets include:
 * SIL Open Font License 1.1
 * Creative Commons Attribution 3.0 Unported License
 * Creative Commons Attribution-NonCommercial 3.0 Unported License
+* Apache License 2.0
