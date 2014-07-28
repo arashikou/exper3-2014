@@ -39,4 +39,9 @@ class TitleState extends FlxState
       add(loadButton);
     }
   }
+
+  override public function destroy():Void
+  {
+    _saveData.destroy();
+  }
 }
