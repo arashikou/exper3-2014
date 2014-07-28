@@ -33,7 +33,7 @@ class TitleState extends FlxState
     add(newButton);
 
     _saveData = new FlxSave();
-    _saveData.bind("the-only-save");
+    _saveData.bind(Constants.saveName);
 
     if (_saveData.data.version != null)
     {

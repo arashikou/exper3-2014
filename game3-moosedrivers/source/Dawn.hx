@@ -16,7 +16,7 @@ class Dawn extends FlxState
   override public function create():Void
   {
     var saveData = new FlxSave();
-    saveData.bind("the-only-save");
+    saveData.bind(Constants.saveName);
     _state.save(saveData);
     saveData.close();
   }
