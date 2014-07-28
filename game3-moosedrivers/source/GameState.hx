@@ -4,6 +4,17 @@ import flixel.util.FlxSave;
 
 class GameState
 {
+  // Variables that persist betwen days and are saved
+  public var mooseCount:UInt;
+  public var batteryLevel:UInt;
+  public var humanFoodLevel:UInt;
+  public var mooseFeedLevel:UInt;
+  public var distanceToNextTown:UInt;
+  public var nameOfNextTown:String;
+
+  // Variables that only exist during days
+  public var moosepower:UInt;
+
   public function new()
   {
   }
