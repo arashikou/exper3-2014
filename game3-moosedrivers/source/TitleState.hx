@@ -13,7 +13,7 @@ class TitleState extends FlxState
 
     var title = new FlxText();
     title.size = 80;
-    title.font = "external_assets/fonts/Roboto-Regular.ttf";
+    title.font = "external_assets/fonts/Roboto.ttf";
     title.color = FlxColor.WHITE;
     title.text = "The Moose Drivers";
     title.y = 96;
