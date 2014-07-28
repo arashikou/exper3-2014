@@ -19,5 +19,15 @@ class TitleState extends FlxState
     title.y = 96;
     title.x = Std.int((FlxG.width - title.fieldWidth) / 2);
     add(title);
+
+    var newButton = new TextButton("New Game");
+    newButton.y = 350;
+    newButton.x = Std.int((FlxG.width - newButton.width) / 2);
+    add(newButton);
+
+    var loadButton = new TextButton("Load Game");
+    loadButton.y = 475;
+    loadButton.x = Std.int((FlxG.width - loadButton.width) / 2);
+    add(loadButton);
   }
 }
