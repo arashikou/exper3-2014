@@ -4,9 +4,12 @@ import flixel.FlxG;
 import flixel.FlxState;
 import flixel.text.FlxText;
 import flixel.util.FlxColor;
+import flixel.util.FlxSave;
 
 class TitleState extends FlxState
 {
+  private var _saveData:FlxSave;
+
   override public function create():Void
   {
     super.create();
@@ -25,9 +28,15 @@ class TitleState extends FlxState
     newButton.x = (FlxG.width - newButton.width) / 2;
     add(newButton);
 
-    var loadButton = new TextButton("Load Game");
-    loadButton.y = 475;
-    loadButton.x = (FlxG.width - loadButton.width) / 2;
-    add(loadButton);
+    _saveData = new FlxSave();
+    _saveData.bind("the-only-save");
+
+    if (_saveData.data.version != null)
+    {
+      var loadButton = new TextButton("Load Game");
+      loadButton.y = 475;
+      loadButton.x = (FlxG.width - loadButton.width) / 2;
+      add(loadButton);
+    }
   }
 }
