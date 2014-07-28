@@ -4,7 +4,7 @@ class Constants
 {
   inline static public var saveName = "the-only-save";
 
-  inline static public var townNames = [
+  static public var townNames = [
     "Ottawa",
     "Vancouver",
     "Calgary",
