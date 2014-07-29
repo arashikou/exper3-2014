@@ -6,6 +6,7 @@ class SimulationStatus
 {
   // Variables that persist betwen days and are saved
   public var mooseCount:UInt;
+  public var driverCount:UInt;
   public var batteryLevel:UInt;
   public var humanFoodLevel:UInt;
   public var mooseFeedLevel:UInt;
@@ -18,6 +19,7 @@ class SimulationStatus
   public function new()
   {
     mooseCount = 5;
+    driverCount = 2;
     batteryLevel = 5;
     humanFoodLevel = 5;
     mooseFeedLevel = 5;
