@@ -55,6 +55,6 @@ class TitleState extends FlxState
 
   private function beginGame(state:GameState):Void
   {
-    FlxG.switchState(new Dawn(state));
+    FlxG.switchState(new DawnState(state));
   }
 }

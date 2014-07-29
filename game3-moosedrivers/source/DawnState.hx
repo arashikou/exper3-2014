@@ -3,7 +3,7 @@ package;
 import flixel.FlxState;
 import flixel.util.FlxSave;
 
-class Dawn extends FlxState
+class DawnState extends FlxState
 {
   private var _state:GameState;
 
