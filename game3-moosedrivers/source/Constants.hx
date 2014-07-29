@@ -18,7 +18,13 @@ class Constants
     "Milwaukee",
     "New York City",
     "Tucson",
-    "Beijing"
+    "Beijing",
+    "London",
+    "Doomstadt",
+    "Tokyo",
+    "Mexico City",
+    "Paris",
+    "Stockholm"
   ];
 
   static public function getTownName(?omissionList:Array<String>)
