@@ -97,7 +97,7 @@ class HubState extends SimulationState
     _moosepowerReadout.text = _status.moosepower + " Moosepower";
     _herdReadout.text = "Herd: " + _status.mooseCount + " Moose & " +
                         _status.driverCount + " Drivers";
-    _energyReadout.text = "Batteries: " + _status.mooseCount + " Energy";
+    _energyReadout.text = "Batteries: " + _status.batteryLevel + " Energy";
     _humanFoodReadout.text = "Human Food: " + _status.humanFoodLevel + " Meals";
     _mooseFeedReadout.text = "Moose Feed: " + _status.mooseFeedLevel + " Sachets";
     _reverseOdometer.text = _status.distanceToNextTown + " km to " + _status.nameOfNextTown;
