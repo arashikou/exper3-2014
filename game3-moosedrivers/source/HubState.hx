@@ -1,5 +1,7 @@
 package;
 
+import flixel.FlxG;
+import flixel.FlxSprite;
 import flixel.util.FlxColor;
 
 class HubState extends SimulationState
@@ -42,6 +44,11 @@ class HubState extends SimulationState
     _reverseOdometer.x = 10;
     _reverseOdometer.y = 148;
     add(_reverseOdometer);
+
+    var image = new FlxSprite("assets/images/Road.png");
+    image.x = FlxG.width - 10 - image.width;
+    image.y = 10;
+    add(image);
   }
 
   override public function update():Void
