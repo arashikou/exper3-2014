@@ -3,6 +3,7 @@ package;
 import flixel.FlxG;
 import flixel.FlxSprite;
 import flixel.util.FlxColor;
+import flixel.util.FlxRandom;
 
 class HubState extends SimulationState
 {
@@ -49,6 +50,45 @@ class HubState extends SimulationState
     image.x = FlxG.width - 10 - image.width;
     image.y = 10;
     add(image);
+
+    var cycleButton = new TextButton("Moosercycle");
+    cycleButton.x = 10;
+    cycleButton.y = FlxG.height - 10 - cycleButton.height;
+    cycleButton.clickCallback = function():Void
+    {
+      if (_status.moosepower > 0)
+      {
+        _status.batteryLevel += FlxRandom.weightedPick([3, 1]) + 1;
+        _status.moosepower--;
+      }
+    };
+    add(cycleButton);
+
+    var moveButton = new TextButton("Travel 1 km");
+    moveButton.x = 10;
+    moveButton.y = cycleButton.y - 10 - moveButton.height;
+    moveButton.clickCallback = function():Void
+    {
+      if (_status.moosepower > 0)
+      {
+        _status.distanceToNextTown--;
+        _status.moosepower--;
+      }
+    };
+    add(moveButton);
+
+    var huntButton = new TextButton("Hunt for Food");
+    huntButton.x = moveButton.x + 10 + moveButton.width;
+    huntButton.y = moveButton.y;
+    huntButton.clickCallback = function():Void
+    {
+      if (_status.moosepower > 0)
+      {
+        _status.humanFoodLevel += FlxRandom.intRanged(2, 5);
+        _status.moosepower--;
+      }
+    };
+    add(huntButton);
   }
 
   override public function update():Void
