@@ -53,6 +53,7 @@ class HubState extends SimulationState
 
   override public function update():Void
   {
+    super.update();
     _moosepowerReadout.text = _status.moosepower + " Moosepower";
     _herdReadout.text = "Herd: " + _status.mooseCount + " Moose & " +
                         _status.driverCount + " Drivers";
