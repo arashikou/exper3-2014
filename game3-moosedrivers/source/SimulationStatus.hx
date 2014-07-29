@@ -17,6 +17,13 @@ class SimulationStatus
 
   public function new()
   {
+    mooseCount = 5;
+    batteryLevel = 5;
+    humanFoodLevel = 5;
+    mooseFeedLevel = 5;
+    distanceToNextTown = 5;
+    nameOfNextTown = Constants.getTownName();
+    moosepower = 0;
   }
 
   static public function load(saveData:FlxSave):SimulationStatus
