@@ -13,6 +13,7 @@ class HubState extends SimulationState
   private var _humanFoodReadout:MooseText;
   private var _mooseFeedReadout:MooseText;
   private var _reverseOdometer:MooseText;
+  private var _prediction:MooseText;
 
   override public function create():Void
   {
@@ -45,6 +46,10 @@ class HubState extends SimulationState
     _reverseOdometer.x = 10;
     _reverseOdometer.y = 148;
     add(_reverseOdometer);
+
+    _prediction = new MooseText(16, FlxColor.RED);
+    _prediction.y = 200;
+    add(_prediction);
 
     var image = new FlxSprite("assets/images/Road.png");
     image.x = FlxG.width - 10 - image.width;
@@ -101,5 +106,9 @@ class HubState extends SimulationState
     _humanFoodReadout.text = "Human Food: " + _status.humanFoodLevel + " Meals";
     _mooseFeedReadout.text = "Moose Feed: " + _status.mooseFeedLevel + " Sachets";
     _reverseOdometer.text = _status.distanceToNextTown + " km to " + _status.nameOfNextTown;
+    _prediction.text = "You will need " + _status.driverCount + " Meals, " +
+                       _status.mooseCount + " Sachets of Feed, and " +
+                       _status.driverCount * 2 + " Energy tonight.";
+    _prediction.x = (FlxG.width - _prediction.fieldWidth) / 2;
   }
 }
