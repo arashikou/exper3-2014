@@ -1,18 +1,9 @@
 package;
 
-import flixel.FlxState;
 import flixel.util.FlxSave;
 
-class DawnState extends FlxState
+class DawnState extends SimulationState
 {
-  private var _status:SimulationStatus;
-
-  public function new(status:SimulationStatus)
-  {
-    super();
-    _status = status;
-  }
-
   override public function create():Void
   {
     var saveData = new FlxSave();
