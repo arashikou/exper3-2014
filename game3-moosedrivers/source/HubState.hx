@@ -18,29 +18,29 @@ class HubState extends SimulationState
     _moosepowerReadout.y = 10;
     add(_moosepowerReadout);
 
-    _mooseReadout = new MooseText(18, FlxColor.WHITE);
+    _mooseReadout = new MooseText(24, FlxColor.WHITE);
     _mooseReadout.x = 10;
     _mooseReadout.y = 44;
     add(_mooseReadout);
 
-    _energyReadout = new MooseText(18, FlxColor.WHITE);
+    _energyReadout = new MooseText(24, FlxColor.WHITE);
     _energyReadout.x = 10;
-    _energyReadout.y = 64;
+    _energyReadout.y = 70;
     add(_energyReadout);
 
-    _humanFoodReadout = new MooseText(18, FlxColor.WHITE);
+    _humanFoodReadout = new MooseText(24, FlxColor.WHITE);
     _humanFoodReadout.x = 10;
-    _humanFoodReadout.y = 84;
+    _humanFoodReadout.y = 96;
     add(_humanFoodReadout);
 
-    _mooseFeedReadout = new MooseText(18, FlxColor.WHITE);
+    _mooseFeedReadout = new MooseText(24, FlxColor.WHITE);
     _mooseFeedReadout.x = 10;
-    _mooseFeedReadout.y = 104;
+    _mooseFeedReadout.y = 122;
     add(_mooseFeedReadout);
 
     _reverseOdometer = new MooseText(32, FlxColor.WHITE);
     _reverseOdometer.x = 10;
-    _reverseOdometer.y = 124;
+    _reverseOdometer.y = 148;
     add(_reverseOdometer);
   }
 
