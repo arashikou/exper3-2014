@@ -69,6 +69,15 @@ class HubState extends SimulationState
     };
     add(cycleButton);
 
+    var nextButton = new TextButton("Next Day");
+    nextButton.x = cycleButton.x + 10 + cycleButton.width;
+    nextButton.y = cycleButton.y;
+    nextButton.clickCallback = function():Void
+    {
+      FlxG.switchState(new DawnState(_status));
+    };
+    add(nextButton);
+
     var moveButton = new TextButton("Travel 1 km");
     moveButton.x = 10;
     moveButton.y = cycleButton.y - 10 - moveButton.height;
