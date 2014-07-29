@@ -37,6 +37,7 @@ class DawnState extends SimulationState
 
   private function timerDone(timer:FlxTimer):Void
   {
+    _status.moosepower = _status.mooseCount;
     FlxG.switchState(new HubState(_status));
   }
 }
