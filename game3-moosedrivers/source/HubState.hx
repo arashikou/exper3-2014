@@ -7,7 +7,7 @@ import flixel.util.FlxColor;
 class HubState extends SimulationState
 {
   private var _moosepowerReadout:MooseText;
-  private var _mooseReadout:MooseText;
+  private var _herdReadout:MooseText;
   private var _energyReadout:MooseText;
   private var _humanFoodReadout:MooseText;
   private var _mooseFeedReadout:MooseText;
@@ -20,10 +20,10 @@ class HubState extends SimulationState
     _moosepowerReadout.y = 10;
     add(_moosepowerReadout);
 
-    _mooseReadout = new MooseText(24, FlxColor.WHITE);
-    _mooseReadout.x = 10;
-    _mooseReadout.y = 44;
-    add(_mooseReadout);
+    _herdReadout = new MooseText(24, FlxColor.WHITE);
+    _herdReadout.x = 10;
+    _herdReadout.y = 44;
+    add(_herdReadout);
 
     _energyReadout = new MooseText(24, FlxColor.WHITE);
     _energyReadout.x = 10;
@@ -54,7 +54,8 @@ class HubState extends SimulationState
   override public function update():Void
   {
     _moosepowerReadout.text = _status.moosepower + " Moosepower";
-    _mooseReadout.text = "Herd: " + _status.mooseCount + " Moose";
+    _herdReadout.text = "Herd: " + _status.mooseCount + " Moose & " +
+                        _status.driverCount + " Drivers";
     _energyReadout.text = "Batteries: " + _status.mooseCount + " Energy";
     _humanFoodReadout.text = "Human Food: " + _status.humanFoodLevel + " Meals";
     _mooseFeedReadout.text = "Moose Feed: " + _status.mooseFeedLevel + " Sachets";
