@@ -21,9 +21,9 @@ class SimulationStatus
     mooseCount = 5;
     driverCount = 2;
     batteryLevel = 5;
-    humanFoodLevel = 5;
-    mooseFeedLevel = 5;
-    distanceToNextTown = 5;
+    humanFoodLevel = 4;
+    mooseFeedLevel = 15;
+    distanceToNextTown = 11;
     nameOfNextTown = Constants.getTownName();
     moosepower = 0;
   }
