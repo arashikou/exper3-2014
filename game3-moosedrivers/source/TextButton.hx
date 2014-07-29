@@ -1,21 +1,17 @@
 package;
 
-import flixel.text.FlxText;
 import flixel.util.FlxColorUtil;
 
 class TextButton extends Button
 {
   public var text(get, set):String;
 
-  private var _text:FlxText;
+  private var _text:MooseText;
 
   public function new(text:String)
   {
     super("assets/images/TextButton.png", 300, 100);
-    _text = new FlxText();
-    _text.size = 32;
-    _text.font = "external_assets/fonts/Roboto.ttf";
-    _text.color = FlxColorUtil.getColor24(82, 198, 39);
+    _text = new MooseText(32, FlxColorUtil.getColor24(82, 198, 39));
     _text.text = text;
   }
 

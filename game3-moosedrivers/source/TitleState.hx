@@ -2,7 +2,6 @@ package;
 
 import flixel.FlxG;
 import flixel.FlxState;
-import flixel.text.FlxText;
 import flixel.util.FlxColor;
 import flixel.util.FlxSave;
 
@@ -14,10 +13,7 @@ class TitleState extends FlxState
   {
     super.create();
 
-    var title = new FlxText();
-    title.size = 80;
-    title.font = "external_assets/fonts/Roboto.ttf";
-    title.color = FlxColor.WHITE;
+    var title = new MooseText(80, FlxColor.WHITE);
     title.text = "The Moose Drivers";
     title.y = 96;
     title.x = (FlxG.width - title.fieldWidth) / 2;
