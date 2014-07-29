@@ -4,6 +4,7 @@ import flixel.FlxG;
 import flixel.FlxSprite;
 import flixel.tweens.FlxTween;
 import flixel.util.FlxSave;
+import flixel.util.FlxTimer;
 
 class DawnState extends SimulationState
 {
@@ -25,10 +26,16 @@ class DawnState extends SimulationState
     dawn.alpha = 0;
     add(dawn);
 
-    var tween = FlxTween.tween(dawn, {alpha: 1}, 6, {complete:tweenDone});
+    var tween = FlxTween.tween(dawn, { alpha: 1 }, 4,
+                               { complete:tweenDone, startDelay: 2 });
   }
 
-  private function tweenDone(Tween:FlxTween):Void
+  private function tweenDone(tween:FlxTween):Void
+  {
+    var timer = new FlxTimer(2, timerDone);
+  }
+
+  private function timerDone(timer:FlxTimer):Void
   {
     FlxG.switchState(new HubState(_status));
   }
