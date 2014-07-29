@@ -2,7 +2,7 @@ package;
 
 import flixel.util.FlxSave;
 
-class GameState
+class SimulationStatus
 {
   // Variables that persist betwen days and are saved
   public var mooseCount:UInt;
@@ -19,14 +19,14 @@ class GameState
   {
   }
 
-  static public function load(saveData:FlxSave):GameState
+  static public function load(saveData:FlxSave):SimulationStatus
   {
     var version:Int = saveData.data.version;
     var serializedState:String = saveData.data.serializedState;
     return switch (version)
     {
       case 1:
-        new GameState();
+        new SimulationStatus();
       default:
         throw "Unrecognized Save Version";
     }

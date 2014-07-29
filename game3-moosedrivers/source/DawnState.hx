@@ -5,19 +5,19 @@ import flixel.util.FlxSave;
 
 class DawnState extends FlxState
 {
-  private var _state:GameState;
+  private var _status:SimulationStatus;
 
-  public function new(state:GameState)
+  public function new(status:SimulationStatus)
   {
     super();
-    _state = state;
+    _status = status;
   }
 
   override public function create():Void
   {
     var saveData = new FlxSave();
     saveData.bind(Constants.saveName);
-    _state.save(saveData);
+    _status.save(saveData);
     saveData.close();
   }
 }

@@ -28,7 +28,7 @@ class TitleState extends FlxState
     newButton.x = (FlxG.width - newButton.width) / 2;
     newButton.clickCallback = function():Void
     {
-      beginGame(new GameState());
+      beginGame(new SimulationStatus());
     };
     add(newButton);
 
@@ -42,7 +42,7 @@ class TitleState extends FlxState
       loadButton.x = (FlxG.width - loadButton.width) / 2;
       loadButton.clickCallback = function():Void
       {
-        beginGame(GameState.load(_saveData));
+        beginGame(SimulationStatus.load(_saveData));
       };
       add(loadButton);
     }
@@ -53,7 +53,7 @@ class TitleState extends FlxState
     _saveData.destroy();
   }
 
-  private function beginGame(state:GameState):Void
+  private function beginGame(state:SimulationStatus):Void
   {
     FlxG.switchState(new DawnState(state));
   }
