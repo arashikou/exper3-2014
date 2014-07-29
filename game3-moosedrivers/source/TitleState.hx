@@ -53,8 +53,8 @@ class TitleState extends FlxState
     _saveData.destroy();
   }
 
-  private function beginGame(state:SimulationStatus):Void
+  private function beginGame(status:SimulationStatus):Void
   {
-    FlxG.switchState(new DawnState(state));
+    FlxG.switchState(new DawnState(status));
   }
 }
