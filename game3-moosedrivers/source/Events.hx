@@ -127,6 +127,6 @@ class Events
 
   static public function abandonRiverCrossing(status:SimulationStatus):EventResult
   {
-    return new EventResult("Saddened at the waste of your last moosepower, you turn the herd around and return to your previous campsite.");
+    return new EventResult("Saddened at the waste of your last moosepower, you turn the herd around and return to your previous rest site.");
   }
 }
