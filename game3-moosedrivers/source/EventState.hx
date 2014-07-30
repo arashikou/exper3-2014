@@ -29,33 +29,22 @@ class EventState extends SimulationState
     text.y = image.y + image.height + 10;
     add(text);
 
-    if (result.options.length == 0)
+    for(index in 0...result.options.length)
     {
-      var continueButton = new TextButton("Continue");
-      continueButton.x = FlxG.width - 10 - continueButton.width;
-      continueButton.y = FlxG.height - 10 - continueButton.height;
-      continueButton.clickCallback = function():Void
+      var option = result.options[index];
+      if (option != null)
       {
-        FlxG.switchState(new HubState(_status));
-      };
-      add(continueButton);
-    }
-    else
-    {
-      for(index in 0...result.options.length)
-      {
-        var option = result.options[index];
-        if (option != null)
+        var button = new TextButton(option.text);
+        button.x = (10 * (index + 1)) + (button.width * index);
+        button.y = FlxG.height - 10 - button.height;
+        button.clickCallback = function():Void
         {
-          var button = new TextButton(option.text);
-          button.x = (10 * (index + 1)) + (button.width * index);
-          button.y = FlxG.height - 10 - button.height;
-          button.clickCallback = function():Void
-          {
-            FlxG.switchState(new EventState(_status, option.next));
-          };
-          add(button);
-        }
+          if (option.nextState == null)
+            FlxG.switchState(new EventState(_status, option.nextEvent));
+          else
+            FlxG.switchState(Type.createInstance(option.nextState, [_status]));
+        };
+        add(button);
       }
     }
   }

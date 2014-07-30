@@ -11,20 +11,27 @@ class EventResult
   {
     message = vMessage;
     if (vOptions == null)
-      options = [];
+      options = defaultOptions;
     else
       options = vOptions;
   }
+
+  static private var defaultOptions =
+  [
+    new Option("Continue", HubState)
+  ];
 }
 
 class Option
 {
   public var text(default, null):String;
-  public var next(default, null):Event;
+  public var nextEvent(default, null):Event;
+  public var nextState(default, null):Class<SimulationState>;
 
-  public function new(vText:String, vNext:Event)
+  public function new(vText:String, ?vNextEvent:Event, ?vNextState:Class<SimulationState>)
   {
     text = vText;
-    next = vNext;
+    nextEvent = vNextEvent;
+    nextState = vNextState;
   }
 }
