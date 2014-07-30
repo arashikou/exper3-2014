@@ -18,7 +18,7 @@ class Events
       status.moosepower--;
       return new EventResult("Your moose generated " + increase + " Energy!");
     }
-  };
+  }
 
   static public function hunt(status:SimulationStatus):EventResult
   {
@@ -31,7 +31,7 @@ class Events
       status.moosepower--;
       return new EventResult("Your moose brings back " + increase + " Meals worth of human food!");
     }
-  };
+  }
 
   static public function uneventfulTravel(status:SimulationStatus):EventResult
   {
