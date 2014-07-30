@@ -25,7 +25,7 @@ class SimulationStatus
   {
     mooseCount = 5;
     driverCount = 2;
-    batteryLevel = 5;
+    batteryLevel = 24;
     humanFoodLevel = 4;
     mooseFeedLevel = 15;
     distanceToNextTown = 11;
