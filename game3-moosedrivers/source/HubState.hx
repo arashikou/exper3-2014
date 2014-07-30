@@ -79,7 +79,7 @@ class HubState extends SimulationState
     moveButton.y = cycleButton.y - 10 - moveButton.height;
     moveButton.clickCallback = function():Void
     {
-      FlxG.switchState(new EventState(_status, Events.uneventfulTravel));
+      FlxG.switchState(new EventState(_status, Events.travel));
     };
     add(moveButton);
 
