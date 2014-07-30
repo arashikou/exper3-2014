@@ -44,10 +44,11 @@ class Events
         if (FlxRandom.chanceRoll(25))
           // We have to use this instead of getObject because Haxe can't handle
           // arrays of function pointers apparently. (WTF?)
-          switch (FlxRandom.intRanged(0, 1))
+          switch (FlxRandom.intRanged(0, 2))
           {
             case 0: favorableTravel;
             case 1: riverTravel;
+            case 2: creviceTravel;
             default: throw "Impossible!";
           }
         else
@@ -131,6 +132,33 @@ class Events
   static public function abandonRiverCrossing(status:SimulationStatus):EventResult
   {
     return new EventResult("Saddened at the waste of your last moosepower, you turn the herd around and return to your previous rest site.");
+  }
+
+  static public function creviceTravel(status:SimulationStatus):EventResult
+  {
+    return
+      if (status.moosepower == 0)
+        new EventResult(
+          "You find the way blocked by a crevice! Without any moosepower left, you'll have to see if you can find another route tomorrow.");
+      else
+        new EventResult(
+          "You find the way blocked by a crevice! You can search for a way across, but it will cost a moosepower.",
+          [
+            new Option("Give Up", abandonCrevice),
+            new Option("Search", crossCrevice)
+          ]);
+  }
+
+  static public function abandonCrevice(status:SimulationStatus):EventResult
+  {
+    return new EventResult("You return the herd to your previous rest site to consider your options.");
+  }
+
+  static public function crossCrevice(status:SimulationStatus):EventResult
+  {
+    status.moosepower--;
+    status.distanceToNextTown--;
+    return new EventResult("It turns out the crevice is not long, and eventually you are able to go around.", postTravelOptions);
   }
 
   static public function postTravel(status:SimulationStatus):EventResult
