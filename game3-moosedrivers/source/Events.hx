@@ -58,17 +58,19 @@ class Events
     }
   }
 
+  static private var postTravelOptions = [ new Option("Continue", postTravel) ];
+
   static public function uneventfulTravel(status:SimulationStatus):EventResult
   {
     status.distanceToNextTown--;
-    return new EventResult("You pause after another kilometer has passed.");
+    return new EventResult("You pause after another kilometer has passed.", postTravelOptions);
   }
 
   static public function favorableTravel(status:SimulationStatus):EventResult
   {
     status.distanceToNextTown--;
     if (status.distanceToNextTown > 0) status.distanceToNextTown--;
-    return new EventResult("The road is easy, and you travel two kilometers on just one moosepower.");
+    return new EventResult("The road is easy, and you travel two kilometers on just one moosepower.", postTravelOptions);
   }
 
   static public function riverTravel(status:SimulationStatus):EventResult
@@ -115,18 +117,40 @@ class Events
           "With a yelp, one of the drivers falls in and disappears! Saddened but thankful, the rest of the herd makes it safely across.";
         default:
           throw "Impossible!";
-      });
+      },
+      postTravelOptions);
   }
 
   static public function crossRiverSafe(status:SimulationStatus):EventResult
   {
     status.moosepower--;
     status.distanceToNextTown--;
-    return new EventResult("About half a kilometer downstream, you find a shallows and cross.");
+    return new EventResult("About half a kilometer downstream, you find a shallows and cross.", postTravelOptions);
   }
 
   static public function abandonRiverCrossing(status:SimulationStatus):EventResult
   {
     return new EventResult("Saddened at the waste of your last moosepower, you turn the herd around and return to your previous rest site.");
+  }
+
+  static public function postTravel(status:SimulationStatus):EventResult
+  {
+    if (status.distanceToNextTown == 0)
+    {
+      var oldDestination = status.nameOfNextTown;
+      var amount = Std.int(FlxRandom.floatRanged(3, 6) * status.mooseCount);
+      status.mooseFeedLevel += amount;
+      status.nameOfNextTown = Constants.getTownName([status.nameOfNextTown]);
+      status.distanceToNextTown = Std.int(FlxRandom.floatRanged(3, 5) * status.mooseCount);
+      return new EventResult(
+        "Congratulations! You made it to " + oldDestination +
+        "! The grateful townsfolk offer you " + amount +
+        " Sachets of moose feed as a reward for your hard work! Now on to " +
+        status.nameOfNextTown + "!");
+    }
+    else
+    {
+      return new EventResult("You stop to rest.");
+    }
   }
 }
