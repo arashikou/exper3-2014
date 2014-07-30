@@ -92,11 +92,7 @@ class HubState extends SimulationState
     huntButton.y = moveButton.y;
     huntButton.clickCallback = function():Void
     {
-      if (_status.moosepower > 0)
-      {
-        _status.humanFoodLevel += FlxRandom.intRanged(2, 5);
-        _status.moosepower--;
-      }
+      FlxG.switchState(new EventState(_status, Events.hunt));
     };
     add(huntButton);
   }
