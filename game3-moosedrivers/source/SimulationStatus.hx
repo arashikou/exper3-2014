@@ -16,6 +16,11 @@ class SimulationStatus
   // Variables that only exist during days
   public var moosepower:UInt;
 
+  // Variables that are derived
+  public var neededFood(get, never):UInt;
+  public var neededFeed(get, never):UInt;
+  public var neededEnergy(get, never):UInt;
+
   public function new()
   {
     mooseCount = 5;
@@ -45,5 +50,20 @@ class SimulationStatus
   {
     saveData.data.version = 1;
     saveData.data.serializedState = "";
+  }
+
+  public function get_neededFood():UInt
+  {
+    return driverCount;
+  }
+
+  public function get_neededFeed():UInt
+  {
+    return mooseCount;
+  }
+
+  public function get_neededEnergy():UInt
+  {
+    return driverCount * 2;
   }
 }

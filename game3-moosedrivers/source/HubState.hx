@@ -102,9 +102,9 @@ class HubState extends SimulationState
     _humanFoodReadout.text = "Human Food: " + _status.humanFoodLevel + " Meals";
     _mooseFeedReadout.text = "Moose Feed: " + _status.mooseFeedLevel + " Sachets";
     _reverseOdometer.text = _status.distanceToNextTown + " km to " + _status.nameOfNextTown;
-    _prediction.text = "You will need " + _status.driverCount + " Meals, " +
-                       _status.mooseCount + " Sachets of Feed, and " +
-                       _status.driverCount * 2 + " Energy tonight.";
+    _prediction.text = "You will need " + _status.neededFood + " Meals, " +
+                       _status.neededFeed + " Sachets of Feed, and " +
+                       _status.neededEnergy + " Energy tonight.";
     _prediction.x = (FlxG.width - _prediction.fieldWidth) / 2;
   }
 }
