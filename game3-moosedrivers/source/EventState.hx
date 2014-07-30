@@ -16,18 +16,20 @@ class EventState extends SimulationState
 
   override public function create():Void
   {
+    var result = _event(_status);
+
     var image = new FlxSprite("assets/images/DefaultEvent.png");
     image.x = (FlxG.width - image.width) / 2;
     image.y = 10;
     add(image);
 
     var text = new MooseText(16, FlxColor.WHITE);
-    text.text = _event.action(_status);
+    text.text = result.message;
     text.x = 10;
     text.y = image.y + image.height + 10;
     add(text);
 
-    if (_event.options.length == 0)
+    if (result.options.length == 0)
     {
       var continueButton = new TextButton("Continue");
       continueButton.x = FlxG.width - 10 - continueButton.width;
@@ -40,9 +42,9 @@ class EventState extends SimulationState
     }
     else
     {
-      for(index in 0..._event.options.length)
+      for(index in 0...result.options.length)
       {
-        var option = _event.options[index];
+        var option = result.options[index];
         if (option != null)
         {
           var button = new TextButton(option.text);

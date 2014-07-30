@@ -1,6 +1,21 @@
 package;
 
-import haxe.ds.Vector;
+typedef Event = SimulationStatus -> EventResult;
+
+class EventResult
+{
+  public var message(default, null):String;
+  public var options(default, null):Array<Option>;
+
+  public function new(vMessage:String, ?vOptions:Array<Option>)
+  {
+    message = vMessage;
+    if (vOptions == null)
+      options = [];
+    else
+      options = vOptions;
+  }
+}
 
 class Option
 {
@@ -11,20 +26,5 @@ class Option
   {
     text = vText;
     next = vNext;
-  }
-}
-
-class Event
-{
-  public var action(default, null):SimulationStatus -> String;
-  public var options(default, null):Vector<Option>;
-
-  public function new(vAction:SimulationStatus -> String, ?vOptions:Array<Option>)
-  {
-    action = vAction;
-    if (vOptions == null)
-      options = new Vector<Option>(0);
-    else
-      options = Vector.fromArrayCopy(vOptions);
   }
 }
