@@ -13,7 +13,7 @@ class Events
       return new EventResult("You have no moosepower left to run the moosercycle.");
     else
     {
-      var increase = FlxRandom.weightedPick([3, 1]) + 1;
+      var increase = FlxRandom.weightedPick([9, 3, 3, 1]) + 4;
       status.batteryLevel += increase;
       status.moosepower--;
       return new EventResult("Your moose generated " + increase + " Energy!");

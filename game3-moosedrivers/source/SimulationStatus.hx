@@ -64,6 +64,6 @@ class SimulationStatus
 
   public function get_neededEnergy():UInt
   {
-    return driverCount * 2;
+    return driverCount * 2 + mooseCount;
   }
 }
