@@ -26,6 +26,8 @@ class EventState extends SimulationState
     var text = new MooseText(16, FlxColor.WHITE);
     text.text = result.message;
     text.x = 10;
+    text.fieldWidth = FlxG.width - 20;
+    text.wordWrap = true;
     text.y = image.y + image.height + 10;
     add(text);
 
