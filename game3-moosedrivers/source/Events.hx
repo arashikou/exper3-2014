@@ -69,9 +69,15 @@ class Events
 
   static public function favorableTravel(status:SimulationStatus):EventResult
   {
-    status.distanceToNextTown--;
-    if (status.distanceToNextTown > 0) status.distanceToNextTown--;
-    return new EventResult("The road is easy, and you travel two kilometers on just one moosepower.", postTravelOptions);
+    if (status.distanceToNextTown == 1)
+    {
+      return uneventfulTravel(status);
+    }
+    else
+    {
+      status.distanceToNextTown -= 2;
+      return new EventResult("The road is easy, and you travel two kilometers on just one moosepower.", postTravelOptions);
+    }
   }
 
   static public function riverTravel(status:SimulationStatus):EventResult
