@@ -79,11 +79,7 @@ class HubState extends SimulationState
     moveButton.y = cycleButton.y - 10 - moveButton.height;
     moveButton.clickCallback = function():Void
     {
-      if (_status.moosepower > 0)
-      {
-        _status.distanceToNextTown--;
-        _status.moosepower--;
-      }
+      FlxG.switchState(new EventState(_status, Events.uneventfulTravel));
     };
     add(moveButton);
 

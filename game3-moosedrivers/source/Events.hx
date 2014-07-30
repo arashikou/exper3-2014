@@ -33,4 +33,18 @@ class Events
       }
     }
   );
+
+  static public var uneventfulTravel = new Event(
+    function(status:SimulationStatus):String
+    {
+      if (status.moosepower == 0)
+        return "You have no moosepower left to travel on.";
+      else
+      {
+        status.distanceToNextTown--;
+        status.moosepower--;
+        return "Your herd moseys on down the trail for another kilometer.";
+      }
+    }
+  );
 }
