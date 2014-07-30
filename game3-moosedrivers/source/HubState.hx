@@ -61,11 +61,7 @@ class HubState extends SimulationState
     cycleButton.y = FlxG.height - 10 - cycleButton.height;
     cycleButton.clickCallback = function():Void
     {
-      if (_status.moosepower > 0)
-      {
-        _status.batteryLevel += FlxRandom.weightedPick([3, 1]) + 1;
-        _status.moosepower--;
-      }
+      FlxG.switchState(new EventState(_status, Events.moosercycle));
     };
     add(cycleButton);
 
