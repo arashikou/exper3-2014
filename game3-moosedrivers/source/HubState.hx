@@ -69,7 +69,7 @@ class HubState extends SimulationState
     nextButton.y = cycleButton.y;
     nextButton.clickCallback = function():Void
     {
-      FlxG.switchState(new DawnState(_status));
+      FlxG.switchState(new EventState(_status, Events.night));
     };
     add(nextButton);
 

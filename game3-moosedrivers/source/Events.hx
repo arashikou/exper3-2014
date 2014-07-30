@@ -153,4 +153,93 @@ class Events
       return new EventResult("You stop to rest.");
     }
   }
+
+  static public function night(status:SimulationStatus):EventResult
+  {
+    var message = "You make camp for the night.";
+
+    // Check Food Levels
+    if (status.humanFoodLevel > status.neededFood)
+    {
+      status.humanFoodLevel -= status.neededFood;
+      message += " You eat heartily.";
+    }
+    else
+    {
+      var atRisk = status.neededFood - status.humanFoodLevel;
+      status.humanFoodLevel = 0;
+      var deathToll = 0;
+      for (i in 0...atRisk)
+      {
+        if (FlxRandom.chanceRoll(50)) deathToll++;
+      }
+      status.driverCount -= deathToll;
+      message += " There is not enough food to go around";
+      if (deathToll == 1)
+      {
+        message += ", and a driver dies of starvation in his bedroll.";
+      }
+      else if (deathToll > 0)
+      {
+        message += ". " + deathToll + " drivers die of starvation.";
+      }
+      else
+      {
+        message += ".";
+      }
+    }
+
+    // Check Feed Levels
+    if (status.mooseFeedLevel > status.neededFeed)
+    {
+      status.mooseFeedLevel -= status.neededFeed;
+      message += " The moose are well-fed.";
+    }
+    else
+    {
+      var atRisk = status.neededFeed - status.mooseFeedLevel;
+      status.mooseFeedLevel = 0;
+      var deathToll = 0;
+      for (i in 0...atRisk)
+      {
+        if (FlxRandom.chanceRoll(50)) deathToll++;
+      }
+      status.mooseCount -= deathToll;
+      message += " There is not enough moose feed for the entire herd";
+      if (deathToll == 1)
+      {
+        message += ". In the morning, you find one has died.";
+      }
+      else if (deathToll > 0)
+      {
+        message += ", and " + deathToll + " moose die in the night.";
+      }
+      else
+      {
+        message += ".";
+      }
+    }
+
+    // Check Energy Levels
+    if (status.batteryLevel > status.neededEnergy)
+    {
+      status.batteryLevel -= status.neededEnergy;
+    }
+    else
+    {
+      if (status.batteryLevel == 0)
+      {
+        message += " The batteries remain empty.";
+      }
+      else
+      {
+        message += " The batteries run dry.";
+      }
+      status.batteryLevel = 0;
+      message += " The mood in the camp is sour. Both moose and driver grumble over lost comforts.";
+      // TODO: Add consequences for not enough energy.
+    }
+
+    return new EventResult(message, [new Option("Continue", DawnState)]);
+  }
 }
