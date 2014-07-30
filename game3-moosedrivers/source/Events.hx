@@ -44,11 +44,12 @@ class Events
         if (FlxRandom.chanceRoll(25))
           // We have to use this instead of getObject because Haxe can't handle
           // arrays of function pointers apparently. (WTF?)
-          switch (FlxRandom.intRanged(0, 2))
+          switch (FlxRandom.intRanged(0, 3))
           {
             case 0: favorableTravel;
             case 1: riverTravel;
             case 2: creviceTravel;
+            case 3: deadEndTravel;
             default: throw "Impossible!";
           }
         else
@@ -165,6 +166,11 @@ class Events
     status.moosepower--;
     status.distanceToNextTown--;
     return new EventResult("It turns out the crevice is not long, and eventually you are able to go around.", postTravelOptions);
+  }
+
+  static public function deadEndTravel(status:SimulationStatus):EventResult
+  {
+    return new EventResult("The path has collapsed here. You'll have to turn around and try another route.");
   }
 
   static public function postTravel(status:SimulationStatus):EventResult
