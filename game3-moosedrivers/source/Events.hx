@@ -190,8 +190,74 @@ class Events
     }
     else
     {
-      return new EventResult("You stop to rest.");
+      // A random event occurs if we did not reach town.
+      return switch (FlxRandom.weightedPick([200, 100]))
+      {
+        case 0:
+          wildMan(status);
+        case 1:
+          hiredHand(status);
+        default:
+          throw "Impossible!";
+      }
     }
+  }
+
+  static public function wildMan(status:SimulationStatus):EventResult
+  {
+    return new EventResult("As you stop to rest, a wild Moosenman appears in the trees. \"I see you have a herd of moose. Please, I need one. Will you sell me a moose for $50?\"",
+      [
+        new Option("Accept", yesWildMan),
+        new Option("Reject", noWildMan)
+      ]);
+  }
+
+  static public function yesWildMan(status:SimulationStatus):EventResult
+  {
+    status.mooseCount--;
+    status.money += 5000;
+    return new EventResult("You make the trade, and the Moosenman disappears into the canopy with his prize in tow.");
+  }
+
+  static public function noWildMan(status:SimulationStatus):EventResult
+  {
+    if (FlxRandom.chanceRoll(10) && status.humanFoodLevel >= 2)
+    {
+      status.humanFoodLevel -= 2;
+      return new EventResult("The Moosenman becomes enraged and attacks you! Before you can catch him, he grabs some food and runs off.");
+    }
+    else
+    {
+      return new EventResult("The Moosenman is disappointed but unsurprised. Clearly you are not the first driver he has made this offer to.");
+    }
+  }
+
+  static public function hiredHand(status:SimulationStatus):EventResult
+  {
+    var options = [ null, new Option("Reject", noHiredHand) ];
+    if (status.money > 3000)
+      options[0] = new Option("Accept", yesHiredHand);
+
+    return new EventResult("A man in a long poncho rests under the trees ahead. He says he is a moose driver who has fallen into debt. If you pay his $30 in debt, he'll agree to work for you.", options);
+  }
+
+  static public function yesHiredHand(status:SimulationStatus):EventResult
+  {
+    status.money -= 3000;
+    if (FlxRandom.chanceRoll(10))
+    {
+      return new EventResult("After you pay the man's debts, he is nowhere to be found. You've been had!");
+    }
+    else
+    {
+      status.driverCount++;
+      return new EventResult("His debts paid, the driver joins you on your journey.");
+    }
+  }
+
+  static public function noHiredHand(status:SimulationStatus):EventResult
+  {
+    return new EventResult("You pass the hired hand by.");
   }
 
   static public function night(status:SimulationStatus):EventResult
