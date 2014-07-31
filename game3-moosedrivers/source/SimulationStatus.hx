@@ -45,7 +45,17 @@ class SimulationStatus
     return switch (version)
     {
       case 1:
-        new SimulationStatus();
+        var parts = serializedState.split("/");
+        var state = new SimulationStatus();
+        state.mooseCount = Std.parseInt(parts[0]);
+        state.driverCount = Std.parseInt(parts[1]);
+        state.batteryLevel = Std.parseInt(parts[2]);
+        state.humanFoodLevel = Std.parseInt(parts[3]);
+        state.mooseFeedLevel = Std.parseInt(parts[4]);
+        state.money = Std.parseInt(parts[5]);
+        state.distanceToNextTown = Std.parseInt(parts[6]);
+        state.nameOfNextTown = parts[7];
+        state;
       default:
         throw "Unrecognized Save Version";
     }
@@ -54,7 +64,14 @@ class SimulationStatus
   public function save(saveData:FlxSave):Void
   {
     saveData.data.version = 1;
-    saveData.data.serializedState = "";
+    saveData.data.serializedState = mooseCount + "/" +
+                                    driverCount + "/" +
+                                    batteryLevel + "/" +
+                                    humanFoodLevel + "/" +
+                                    mooseFeedLevel + "/" +
+                                    money + "/" +
+                                    distanceToNextTown + "/" +
+                                    nameOfNextTown;
   }
 
   public function get_neededFood():UInt
