@@ -31,7 +31,7 @@ class SimulationStatus
     driverCount = 2;
     batteryLevel = 24;
     humanFoodLevel = 4;
-    mooseFeedLevel = 15;
+    mooseFeedLevel = 25;
     money = 10000;
     distanceToNextTown = 11;
     nameOfNextTown = Constants.getTownName();
