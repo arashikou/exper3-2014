@@ -17,6 +17,12 @@ class HubState extends SimulationState
 
   override public function create():Void
   {
+    // Abort if no one is left
+    if (_status.mooseCount == 0 || _status.driverCount == 0)
+    {
+      FlxG.switchState(new GameOverState(_status));
+    }
+
     _moosepowerReadout = new MooseText(32, FlxColor.WHITE);
     _moosepowerReadout.x = 10;
     _moosepowerReadout.y = 10;
