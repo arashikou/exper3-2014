@@ -308,7 +308,7 @@ class Events
     var message = "You make camp for the night.";
 
     // Check Food Levels
-    if (status.humanFoodLevel > status.neededFood)
+    if (status.humanFoodLevel >= status.neededFood)
     {
       status.humanFoodLevel -= status.neededFood;
       message += " You eat heartily.";
@@ -339,7 +339,7 @@ class Events
     }
 
     // Check Feed Levels
-    if (status.mooseFeedLevel > status.neededFeed)
+    if (status.mooseFeedLevel >= status.neededFeed)
     {
       status.mooseFeedLevel -= status.neededFeed;
       message += " The moose are well-fed.";
@@ -370,7 +370,7 @@ class Events
     }
 
     // Check Energy Levels
-    if (status.batteryLevel > status.neededEnergy)
+    if (status.batteryLevel >= status.neededEnergy)
     {
       status.batteryLevel -= status.neededEnergy;
     }
