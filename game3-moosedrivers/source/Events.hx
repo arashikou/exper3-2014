@@ -307,6 +307,32 @@ class Events
   {
     var message = "You make camp for the night.";
 
+    // Check Energy Levels
+    if (status.batteryLevel >= status.neededEnergy)
+    {
+      if (status.poorMorale)
+      {
+        message += " With power restored, the mood in the camp improves significantly.";
+      }
+
+      status.batteryLevel -= status.neededEnergy;
+      status.poorMorale = false;
+    }
+    else
+    {
+      if (status.poorMorale)
+      {
+        message += " The batteries remain empty.";
+      }
+      else
+      {
+        message += " The batteries run dry.";
+      }
+      status.batteryLevel = 0;
+      status.poorMorale = true;
+      message += " The mood in the camp is sour. Both moose and driver grumble over lost comforts.";
+    }
+
     // Check Food Levels
     if (status.humanFoodLevel >= status.neededFood)
     {
@@ -367,32 +393,6 @@ class Events
       {
         message += ".";
       }
-    }
-
-    // Check Energy Levels
-    if (status.batteryLevel >= status.neededEnergy)
-    {
-      if (status.poorMorale)
-      {
-        message += " With power restored, the mood in the camp improves significantly.";
-      }
-
-      status.batteryLevel -= status.neededEnergy;
-      status.poorMorale = false;
-    }
-    else
-    {
-      if (status.poorMorale)
-      {
-        message += " The batteries remain empty.";
-      }
-      else
-      {
-        message += " The batteries run dry.";
-      }
-      status.batteryLevel = 0;
-      status.poorMorale = true;
-      message += " The mood in the camp is sour. Both moose and driver grumble over lost comforts.";
     }
 
     return new EventResult(message, [new Option("Continue", DawnState)]);
