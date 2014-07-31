@@ -224,11 +224,21 @@ class Events
 
   static public function yesWildMoose(status:SimulationStatus):EventResult
   {
-    if (FlxRandom.chanceRoll(10))
+    var chanceOfBenignFailure =
+      if (status.poorMorale)
+        5;
+      else
+        10;
+    var chanceOfSuccess =
+      if (status.poorMorale)
+        30;
+      else
+        70;
+    if (FlxRandom.chanceRoll(chanceOfBenignFailure))
     {
       return new EventResult("The moose is not even interested in your feed sachets. It bounds off, leaving the feed untouched.");
     }
-    else if (FlxRandom.chanceRoll(50))
+    else if (FlxRandom.chanceRoll(chanceOfSuccess))
     {
       status.mooseFeedLevel--;
       status.mooseCount++;
@@ -264,7 +274,12 @@ class Events
 
   static public function noWildMan(status:SimulationStatus):EventResult
   {
-    if (FlxRandom.chanceRoll(10) && status.humanFoodLevel >= 2)
+    var chanceOfFailure =
+      if (status.poorMorale)
+        30;
+      else
+        10;
+    if (FlxRandom.chanceRoll(chanceOfFailure) && status.humanFoodLevel >= 2)
     {
       status.humanFoodLevel -= 2;
       return new EventResult("The Moosenman becomes enraged and attacks you! Before you can catch him, he grabs some food and runs off.");
@@ -287,7 +302,12 @@ class Events
   static public function yesHiredHand(status:SimulationStatus):EventResult
   {
     status.money -= 3000;
-    if (FlxRandom.chanceRoll(10))
+    var chanceOfFailure =
+      if (status.poorMorale)
+        50;
+      else
+        10;
+    if (FlxRandom.chanceRoll(chanceOfFailure))
     {
       return new EventResult("After you pay the man's debts, he is nowhere to be found. You've been had!");
     }
