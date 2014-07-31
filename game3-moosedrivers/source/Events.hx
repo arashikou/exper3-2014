@@ -104,13 +104,13 @@ class Events
   {
     status.distanceToNextTown--;
     return new EventResult(
-      switch (FlxRandom.weightedPick([150, 100, 100, 100, 30, 30]))
+      switch (FlxRandom.weightedPick([200, 100, 100, 100, 30, 30]))
       {
         case 0:
           "Thanks to your good driving, you make it safely across.";
         case 1:
           status.batteryLevel--;
-          "A battery shorts out in the crossing, and you lose 1 Energy, but you make it across.";
+          "A battery shorts out in the crossing, discharging 1 Energy, but you make it across.";
         case 2:
           status.humanFoodLevel--;
           "The water spoils 1 Meal's worth of food, but you make it across.";
