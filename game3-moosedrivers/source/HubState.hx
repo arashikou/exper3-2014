@@ -53,7 +53,7 @@ class HubState extends SimulationState
     add(_reverseOdometer);
 
     _prediction = new MooseText(16, FlxColor.RED);
-    _prediction.y = 200;
+    _prediction.y = 226;
     add(_prediction);
 
     var image = new FlxSprite("assets/images/Road.png");
