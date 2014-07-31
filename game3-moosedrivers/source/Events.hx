@@ -333,6 +333,12 @@ class Events
       message += " The mood in the camp is sour. Both moose and driver grumble over lost comforts.";
     }
 
+    var chanceOfDeath =
+      if (status.poorMorale)
+        65;
+      else
+        45;
+
     // Check Food Levels
     if (status.humanFoodLevel >= status.neededFood)
     {
@@ -346,7 +352,7 @@ class Events
       var deathToll = 0;
       for (i in 0...atRisk)
       {
-        if (FlxRandom.chanceRoll(50)) deathToll++;
+        if (FlxRandom.chanceRoll(chanceOfDeath)) deathToll++;
       }
       status.driverCount -= deathToll;
       message += " There is not enough food to go around";
@@ -377,7 +383,7 @@ class Events
       var deathToll = 0;
       for (i in 0...atRisk)
       {
-        if (FlxRandom.chanceRoll(50)) deathToll++;
+        if (FlxRandom.chanceRoll(chanceOfDeath)) deathToll++;
       }
       status.mooseCount -= deathToll;
       message += " There is not enough moose feed for the entire herd";
