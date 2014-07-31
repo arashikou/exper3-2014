@@ -11,6 +11,7 @@ class HubState extends SimulationState
   private var _energyReadout:MooseText;
   private var _humanFoodReadout:MooseText;
   private var _mooseFeedReadout:MooseText;
+  private var _walletReadout:MooseText;
   private var _reverseOdometer:MooseText;
   private var _prediction:MooseText;
 
@@ -41,9 +42,14 @@ class HubState extends SimulationState
     _mooseFeedReadout.y = 122;
     add(_mooseFeedReadout);
 
+    _walletReadout = new MooseText(24, FlxColor.WHITE);
+    _walletReadout.x = 10;
+    _walletReadout.y = 148;
+    add(_walletReadout);
+
     _reverseOdometer = new MooseText(32, FlxColor.WHITE);
     _reverseOdometer.x = 10;
-    _reverseOdometer.y = 148;
+    _reverseOdometer.y = 174;
     add(_reverseOdometer);
 
     _prediction = new MooseText(16, FlxColor.RED);
@@ -101,6 +107,7 @@ class HubState extends SimulationState
     _energyReadout.text = "Batteries: " + _status.batteryLevel + " Energy";
     _humanFoodReadout.text = "Human Food: " + _status.humanFoodLevel + " Meals";
     _mooseFeedReadout.text = "Moose Feed: " + _status.mooseFeedLevel + " Sachets";
+    _walletReadout.text = "Money: " + _status.moneyString;
     _reverseOdometer.text = _status.distanceToNextTown + " km to " + _status.nameOfNextTown;
     _prediction.text = "You will need " + _status.neededFood + " Meals, " +
                        _status.neededFeed + " Sachets of Feed, and " +
