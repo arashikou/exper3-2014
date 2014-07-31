@@ -191,16 +191,59 @@ class Events
     else
     {
       // A random event occurs if we did not reach town.
-      return switch (FlxRandom.weightedPick([200, 100]))
+      return switch (FlxRandom.weightedPick([200, 100, 100]))
       {
         case 0:
-          wildMan(status);
+          wildMoose(status);
         case 1:
+          wildMan(status);
+        case 2:
           hiredHand(status);
         default:
           throw "Impossible!";
       }
     }
+  }
+
+  static public function wildMoose(status:SimulationStatus):EventResult
+  {
+    var message = "As you travel, a flicker of motion catches your eye. Could it be? A wild moose?!?";
+    if (status.mooseFeedLevel > 0)
+    {
+      return new EventResult(message + " Maybe with some feed, you could catch it and add it to your herd.",
+        [
+          new Option("Try", yesWildMoose),
+          new Option("Don't", noWildMoose)
+        ]);
+    }
+    else
+    {
+      return new EventResult(message + " If only you had a way to catch it and add it to your herd.");
+    }
+  }
+
+  static public function yesWildMoose(status:SimulationStatus):EventResult
+  {
+    if (FlxRandom.chanceRoll(10))
+    {
+      return new EventResult("The moose is not even interested in your feed sachets. It bounds off, leaving the feed untouched.");
+    }
+    else if (FlxRandom.chanceRoll(50))
+    {
+      status.mooseFeedLevel--;
+      status.mooseCount++;
+      return new EventResult("Gently, you coax the moose into the herd, then leash it to a senior moose until it accepts its new lot in life.");
+    }
+    else
+    {
+      status.mooseFeedLevel--;
+      return new EventResult("The moose takes the bait, but when you go to leash it, it startles and runs away!");
+    }
+  }
+
+  static public function noWildMoose(status:SimulationStatus):EventResult
+  {
+    return new EventResult("You watch the moose majestically retreat into the tall grass.");
   }
 
   static public function wildMan(status:SimulationStatus):EventResult
