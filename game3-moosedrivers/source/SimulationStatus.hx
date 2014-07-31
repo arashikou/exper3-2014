@@ -13,6 +13,7 @@ class SimulationStatus
   public var money:UInt;
   public var distanceToNextTown:UInt;
   public var nameOfNextTown:String;
+  public var poorMorale:Bool;
 
   // Variables that only exist during days
   public var moosepower:UInt;
@@ -35,6 +36,7 @@ class SimulationStatus
     money = 10000;
     distanceToNextTown = 11;
     nameOfNextTown = Constants.getTownName();
+    poorMorale = false;
     moosepower = 0;
   }
 
@@ -55,6 +57,7 @@ class SimulationStatus
         state.money = Std.parseInt(parts[5]);
         state.distanceToNextTown = Std.parseInt(parts[6]);
         state.nameOfNextTown = parts[7];
+        state.poorMorale = (parts[8] == "P");
         state;
       default:
         throw "Unrecognized Save Version";
@@ -71,7 +74,8 @@ class SimulationStatus
                                     mooseFeedLevel + "/" +
                                     money + "/" +
                                     distanceToNextTown + "/" +
-                                    nameOfNextTown;
+                                    nameOfNextTown + "/" +
+                                    (poorMorale ? "P" : "G");
   }
 
   public function get_neededFood():UInt
