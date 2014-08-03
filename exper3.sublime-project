@@ -10,13 +10,13 @@
     {
       "follow_symlinks": true,
       "name": "Game 2",
-      "path": "game2",
+      "path": "game2-plugmazes",
       "folder_exclude_patterns": ["export"]
     },
     {
       "follow_symlinks": true,
       "name": "Game 3",
-      "path": "game3",
+      "path": "game3-moosedrivers",
       "folder_exclude_patterns": ["export"]
     },
     {
