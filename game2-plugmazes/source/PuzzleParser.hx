@@ -33,6 +33,7 @@ class PuzzleParser
     regex = ~/^ *([0-9]+) +([0-9]+), +([0-9]+) +([A-Za-z]+) *(!?)$/;
     for (index in 2...lines.length)
     {
+      if (lines[index].length == 0) continue;
       if (!regex.match(lines[index]))
       {
         throw "Invalid cable row.";
