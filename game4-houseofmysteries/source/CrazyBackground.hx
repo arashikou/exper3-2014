@@ -34,16 +34,20 @@ class CrazyBackground extends FlxGroup
     _spinner.y = (FlxG.height - _spinner.height) / 2;
     add(_spinner);
 
-    var emitter = new FlxTypedEmitter<Star>(0, -32, 100);
-    emitter.setSize(FlxG.width, 0);
-    // Because emitters have ridiculous defaults, we have to unset them.
-    emitter.setRotation(0, 0);
-    for (ignored in 0...emitter.maxSize)
+    var emitterSpacing = FlxG.width / 3;
+    for (x in 0...3)
     {
-      emitter.add(new Star());
+      var emitter = new FlxTypedEmitter<Star>(emitterSpacing * x, -50, 100);
+      emitter.setSize(Std.int(emitterSpacing), 0);
+      // Because emitters have ridiculous defaults, we have to unset them.
+      emitter.setRotation(0, 0);
+      for (ignored in 0...emitter.maxSize)
+      {
+        emitter.add(new Star());
+      }
+      emitter.start(false, 0, 0.1);
+      add(emitter);
     }
-    emitter.start(false, 0, 0.1);
-    add(emitter);
   }
 
   override public function update():Void
