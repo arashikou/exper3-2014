@@ -78,6 +78,6 @@ class Star extends FlxParticle
     velocity.x = 0;
     velocity.y = SPEED / distance;
     angle = FlxRandom.floatRanged(0, 72);
-    alpha = 0.3;
+    alpha = 0.2;
   }
 }
