@@ -9,6 +9,8 @@ class GameOverState extends SimulationState
 {
   override public function create():Void
   {
+    super.create();
+
     var saveData = new FlxSave();
     saveData.bind(Constants.saveName);
     saveData.erase();

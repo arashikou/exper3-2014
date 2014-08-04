@@ -16,6 +16,8 @@ class EventState extends SimulationState
 
   override public function create():Void
   {
+    super.create();
+
     var result = _event(_status);
 
     var image = new FlxSprite("assets/images/DefaultEvent.png");
