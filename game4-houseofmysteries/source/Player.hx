@@ -8,16 +8,12 @@ using flixel.util.FlxSpriteUtil;
 
 class Player extends FlxSprite
 {
-  public var heart(default,null):FlxSprite;
-
   inline static private var Y_SPEED = 400;
 
   public function new()
   {
     super();
     makeGraphic(32, 32, FlxColor.WHEAT);
-    heart = new FlxSprite();
-    heart.makeGraphic(2, 2, FlxColor.RED);
     y = FlxG.height - height;
   }
 
@@ -36,15 +32,5 @@ class Player extends FlxSprite
     y += yMove * FlxG.elapsed * Y_SPEED;
 
     bound();
-
-    heart.x = x + (width - heart.width) / 2;
-    heart.y = y + (height - heart.height) / 2;
-    heart.update();
-  }
-
-  override public function draw():Void
-  {
-    super.draw();
-    heart.draw();
   }
 }
