@@ -29,7 +29,7 @@ class Player extends FlxSprite
     var xMove = 0;
     if (FlxG.keys.pressed.D) xMove += 1;
     if (FlxG.keys.pressed.A) xMove -= 1;
-    x = (FlxG.width / 2) + xMove * (FlxG.width / 4);
+    x = (FlxG.width / 2) + xMove * (FlxG.width / 4) - width / 2;
 
     var yMove = 0;
     if (FlxG.keys.pressed.S) yMove += 1;
