@@ -11,6 +11,7 @@ class FlightState extends FlxState
   {
     super.create();
     FlxG.mouse.load("assets/images/Target.png", 1, -8, -8);
+    add(new CrazyBackground());
 
     player = new Player();
     add(player);
