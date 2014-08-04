@@ -46,6 +46,7 @@ class TitleState extends FlxState
 
   override public function destroy():Void
   {
+    super.destroy();
     _saveData.destroy();
   }
 

@@ -10,6 +10,8 @@ class DawnState extends SimulationState
 {
   override public function create():Void
   {
+    super.create();
+
     var saveData = new FlxSave();
     saveData.bind(Constants.saveName);
     _status.save(saveData);
