@@ -28,12 +28,14 @@ class Player extends FlxSprite
     var xMove = 0;
     if (FlxG.keys.pressed.D) xMove += 1;
     if (FlxG.keys.pressed.A) xMove -= 1;
+    x = (FlxG.width / 2) + xMove * (FlxG.width / 4);
+
     var yMove = 0;
     if (FlxG.keys.pressed.S) yMove += 1;
     if (FlxG.keys.pressed.W) yMove -= 1;
     var speed = FlxG.keys.pressed.SHIFT ? LOW_SPEED : HIGH_SPEED;
-    x += xMove * FlxG.elapsed * speed;
     y += yMove * FlxG.elapsed * speed;
+
     bound();
 
     heart.x = x + (width - heart.width) / 2;
