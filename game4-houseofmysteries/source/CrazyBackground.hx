@@ -24,15 +24,18 @@ class CrazyBackground extends FlxGroup
     base.makeGraphic(FlxG.width, FlxG.height, FlxColor.PURPLE);
     add(base);
 
-    var spinner = new FlxSprite("assets/images/CrazyBGSpin.png");
-    spinner.blend = BlendMode.MULTIPLY;
-    spinner.scale.x = 0.71;
-    spinner.scale.y = 0.71;
-    spinner.centerOrigin();
-    spinner.x = (FlxG.width - spinner.width) / 2;
-    spinner.y = (FlxG.height - spinner.height) / 2;
-    spinner.angularVelocity = SPINNER_SPEED;
-    add(spinner);
+    for (direction in [1, -1])
+    {
+      var spinner = new FlxSprite("assets/images/CrazyBGSpin.png");
+      spinner.blend = BlendMode.MULTIPLY;
+      spinner.scale.x = 0.71;
+      spinner.scale.y = 0.71;
+      spinner.centerOrigin();
+      spinner.x = (FlxG.width - spinner.width) / 2;
+      spinner.y = (FlxG.height - spinner.height) / 2;
+      spinner.angularVelocity = SPINNER_SPEED * direction;
+      add(spinner);
+    }
 
     var emitterSpacing = FlxG.width / 3;
     for (x in 0...3)
