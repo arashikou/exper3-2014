@@ -14,8 +14,7 @@ import flash.display.BlendMode;
 // Very popular with New Age Retro Hippies
 class CrazyBackground extends FlxGroup
 {
-  inline static private var SPINNER_SPEED = 1;
-  private var _spinner:FlxSprite;
+  inline static private var SPINNER_SPEED = 60;
 
   public function new()
   {
@@ -25,14 +24,15 @@ class CrazyBackground extends FlxGroup
     base.makeGraphic(FlxG.width, FlxG.height, FlxColor.PURPLE);
     add(base);
 
-    _spinner = new FlxSprite("assets/images/CrazyBGSpin.png");
-    _spinner.blend = BlendMode.MULTIPLY;
-    _spinner.scale.x = 0.71;
-    _spinner.scale.y = 0.71;
-    _spinner.centerOrigin();
-    _spinner.x = (FlxG.width - _spinner.width) / 2;
-    _spinner.y = (FlxG.height - _spinner.height) / 2;
-    add(_spinner);
+    var spinner = new FlxSprite("assets/images/CrazyBGSpin.png");
+    spinner.blend = BlendMode.MULTIPLY;
+    spinner.scale.x = 0.71;
+    spinner.scale.y = 0.71;
+    spinner.centerOrigin();
+    spinner.x = (FlxG.width - spinner.width) / 2;
+    spinner.y = (FlxG.height - spinner.height) / 2;
+    spinner.angularVelocity = SPINNER_SPEED;
+    add(spinner);
 
     var emitterSpacing = FlxG.width / 3;
     for (x in 0...3)
@@ -48,12 +48,6 @@ class CrazyBackground extends FlxGroup
       emitter.start(false, 0, 0.1);
       add(emitter);
     }
-  }
-
-  override public function update():Void
-  {
-    super.update();
-    _spinner.angle = (_spinner.angle + SPINNER_SPEED) % 360;
   }
 }
 
