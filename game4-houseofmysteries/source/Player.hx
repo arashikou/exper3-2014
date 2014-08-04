@@ -19,6 +19,7 @@ class Player extends FlxSprite
     makeGraphic(32, 32, FlxColor.WHEAT);
     heart = new FlxSprite();
     heart.makeGraphic(2, 2, FlxColor.RED);
+    y = FlxG.height - height;
   }
 
   override public function update():Void
