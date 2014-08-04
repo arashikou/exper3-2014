@@ -10,7 +10,8 @@ class Player extends FlxSprite
 {
   public var heart(default,null):FlxSprite;
 
-  inline static private var SPEED = 100;
+  inline static private var LOW_SPEED = 100;
+  inline static private var HIGH_SPEED = 500;
 
   public function new()
   {
@@ -30,8 +31,9 @@ class Player extends FlxSprite
     var yMove = 0;
     if (FlxG.keys.pressed.S) yMove += 1;
     if (FlxG.keys.pressed.W) yMove -= 1;
-    x += xMove * FlxG.elapsed * SPEED;
-    y += yMove * FlxG.elapsed * SPEED;
+    var speed = FlxG.keys.pressed.SHIFT ? LOW_SPEED : HIGH_SPEED;
+    x += xMove * FlxG.elapsed * speed;
+    y += yMove * FlxG.elapsed * speed;
     bound();
 
     heart.x = x + (width - heart.width) / 2;
