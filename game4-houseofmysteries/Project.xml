@@ -7,7 +7,7 @@
 
   <!--------------------------------WINDOW SETTINGS------------------------------->
 
-  <window width="800" height="450" fps="60" background="#000000" hardware="true" vsync="true" orientation="landscape" fullscreen="false" resizable="false" />
+  <window width="480" height="640" fps="60" background="#000000" hardware="true" vsync="true" orientation="landscape" fullscreen="false" resizable="false" />
 
   <!--------------------------------PATHS SETTINGS-------------------------------->
 
@@ -31,7 +31,6 @@
   <!--haxedef name="FLX_RECORD" /-->
 
   <!--Disable unused input types-->
-  <haxedef name="FLX_NO_KEYBOARD" unless="debug" />
   <haxedef name="FLX_NO_TOUCH" />
   <haxedef name="FLX_NO_GAMEPAD" />
 
