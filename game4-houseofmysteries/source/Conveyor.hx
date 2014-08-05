@@ -97,7 +97,7 @@ class Glyph extends FlxSprite
   {
     super();
     loadGraphic("assets/images/Glyphs.png", true, 8, 8);
-    for (index in 0...3)
+    for (index in 0...4)
     {
       animation.add(Std.string(index), [index]);
     }
@@ -112,6 +112,6 @@ class Glyph extends FlxSprite
 
   public function randomize():Void
   {
-    animation.play(Std.string(FlxRandom.intRanged(0, 2)));
+    animation.play(Std.string(FlxRandom.intRanged(0, 3)));
   }
 }
