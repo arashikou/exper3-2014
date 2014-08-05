@@ -15,6 +15,9 @@ class FlightState extends FlxState
 
     player = new Player();
     add(player);
+
+    var conveyor = new Conveyor(player, FlxG.mouse);
+    add(conveyor);
   }
 
   override public function destroy():Void
