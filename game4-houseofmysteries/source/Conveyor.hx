@@ -6,11 +6,6 @@ import flixel.util.FlxColor;
 import flixel.util.FlxPoint;
 import flixel.util.FlxRandom;
 
-typedef Pointlike = {
-  var x(default,never):Float;
-  var y(default,never):Float;
-};
-
 class Conveyor extends FlxTypedGroup<Glyph>
 {
   inline static private var SPACING = 20;
