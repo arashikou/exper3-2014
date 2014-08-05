@@ -59,8 +59,8 @@ class Conveyor extends FlxTypedGroup<Glyph>
           glyph.randomize();
         }
         var percent = distance / _pythagoreanDistance;
-        glyph.x = _start.x - percent * _cartesianDistance.x;
-        glyph.y = _start.y - percent * _cartesianDistance.y;
+        glyph.x = _start.x - percent * _cartesianDistance.x - glyph.width / 2;
+        glyph.y = _start.y - percent * _cartesianDistance.y - glyph.height / 2;
         counter++;
       }
       else if (glyph.alive)
