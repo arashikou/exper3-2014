@@ -1,42 +1,44 @@
 package;
 
-import flixel.FlxObject;
 import flixel.FlxSprite;
 import flixel.group.FlxTypedGroup;
 import flixel.util.FlxColor;
+import flixel.util.FlxPoint;
+
+typedef Pointlike = {
+  var x(default,never):Float;
+  var y(default,never):Float;
+};
 
 class Conveyor extends FlxTypedGroup<Glyph>
 {
   inline static private var SPACING = 20;
-  inline static private var SPEED = 3;
+  inline static private var SPEED = 3.5;
 
-  private var _targetA:FlxObject;
-  private var _targetB:FlxObject;
+  private var _start:Pointlike;
+  private var _end:Pointlike;
+  private var _cartesianDistance:FlxPoint;
+  private var _pythagoreanDistance:Float;
+  private var _offset:Float;
 
-  public function new(targetA:FlxObject, targetB:FlxObject)
+  public function new(start:Pointlike, end:Pointlike)
   {
     super();
-    _targetA = targetA;
-    _targetB = targetB;
+    _start = start;
+    _end = end;
+    _cartesianDistance = new FlxPoint();
   }
 
   override public function update():Void
   {
-    var xDistance = _targetA.x - _targetB.x;
-    var yDistance = _targetA.y - _targetB.y;
-    var distance = Math.sqrt(xDistance * xDistance + yDistance * yDistance);
-    var optimalNumberOfGlyphs = distance / SPACING + 1;
-    while (length < optimalNumberOfGlyphs)
-    {
-      add(new Glyph());
-    }
+    calculateDistances();
 
     // Update glyph progresses and find the shortest living progress
-    var shortestProgress = distance + SPACING;
+    var shortestProgress = _pythagoreanDistance + SPACING;
     forEachAlive(function(glyph:Glyph):Void
     {
       glyph.progress += SPEED;
-      if (glyph.progress > distance)
+      if (glyph.progress > _pythagoreanDistance)
       {
         glyph.kill();
       }
@@ -61,12 +63,30 @@ class Conveyor extends FlxTypedGroup<Glyph>
     // Update all glyphs' position
     forEachAlive(function(glyph:Glyph):Void
     {
-      var percent = glyph.progress / distance;
-      glyph.x = _targetA.x - percent * xDistance;
-      glyph.y = _targetA.y - percent * yDistance;
+      var percent = glyph.progress / _pythagoreanDistance;
+      glyph.x = _start.x - percent * _cartesianDistance.x;
+      glyph.y = _start.y - percent * _cartesianDistance.y;
     });
 
     super.update();
+  }
+
+  private function calculateDistances():Void
+  {
+    var xDistance = _start.x - _end.x;
+    var yDistance = _start.y - _end.y;
+    if (xDistance != _cartesianDistance.x || yDistance != _cartesianDistance.y)
+    {
+      _cartesianDistance.x = xDistance;
+      _cartesianDistance.y = yDistance;
+      _pythagoreanDistance = Math.sqrt(xDistance * xDistance +
+                                       yDistance * yDistance);
+      var optimalNumberOfGlyphs = Std.int(_pythagoreanDistance / SPACING) + 1;
+      while (length < optimalNumberOfGlyphs)
+      {
+        add(new Glyph());
+      }
+    }
   }
 }
 
