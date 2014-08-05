@@ -19,6 +19,7 @@ class Conveyor extends FlxTypedGroup<Glyph>
   private var _end:Pointlike;
   private var _cartesianDistance:FlxPoint;
   private var _pythagoreanDistance:Float;
+  private var _offset:Float;
 
   public function new(start:Pointlike, end:Pointlike)
   {
@@ -26,45 +27,35 @@ class Conveyor extends FlxTypedGroup<Glyph>
     _start = start;
     _end = end;
     _cartesianDistance = new FlxPoint();
+    _pythagoreanDistance = 0;
+    _offset = 0;
   }
 
   override public function update():Void
   {
     calculateDistances();
 
-    // Update glyph progresses and find the shortest living progress
-    var shortestProgress = _pythagoreanDistance + SPACING;
-    forEachAlive(function(glyph:Glyph):Void
+    _offset = (_offset + SPEED) % SPACING;
+
+    var counter:UInt = 0;
+    forEach(function(glyph:Glyph):Void
     {
-      glyph.progress += SPEED;
-      if (glyph.progress > _pythagoreanDistance)
+      var distance = _offset + counter * SPACING;
+      if (distance < _pythagoreanDistance)
+      {
+        if (!glyph.alive)
+        {
+          glyph.revive();
+        }
+        var percent = distance / _pythagoreanDistance;
+        glyph.x = _start.x - percent * _cartesianDistance.x;
+        glyph.y = _start.y - percent * _cartesianDistance.y;
+        counter++;
+      }
+      else if (glyph.alive)
       {
         glyph.kill();
       }
-      else
-      {
-        shortestProgress = Math.min(shortestProgress, glyph.progress);
-      }
-    });
-
-    // Add new glyphs to the empty space before that
-
-    // This for loop is hella complicated because the obvious while loop runs
-    // into a Haxe compiler bug.
-    var newCount = Std.int(shortestProgress / SPACING);
-    for (offset in 1...newCount + 1)
-    {
-      var glyph = getFirstDead();
-      glyph.revive();
-      glyph.progress = shortestProgress - offset * SPACING;
-    }
-
-    // Update all glyphs' position
-    forEachAlive(function(glyph:Glyph):Void
-    {
-      var percent = glyph.progress / _pythagoreanDistance;
-      glyph.x = _start.x - percent * _cartesianDistance.x;
-      glyph.y = _start.y - percent * _cartesianDistance.y;
     });
 
     super.update();
@@ -80,7 +71,7 @@ class Conveyor extends FlxTypedGroup<Glyph>
       _cartesianDistance.y = yDistance;
       _pythagoreanDistance = Math.sqrt(xDistance * xDistance +
                                        yDistance * yDistance);
-      var optimalNumberOfGlyphs = Std.int(_pythagoreanDistance / SPACING) + 1;
+      var optimalNumberOfGlyphs = Std.int(_pythagoreanDistance / SPACING);
       while (length < optimalNumberOfGlyphs)
       {
         add(new Glyph());
@@ -91,13 +82,10 @@ class Conveyor extends FlxTypedGroup<Glyph>
 
 class Glyph extends FlxSprite
 {
-  public var progress:Float;
-
   public function new()
   {
     super();
-    progress = 0;
-    makeGraphic(6, 8, FlxColor.PINK);
+    makeGraphic(6, 8, FlxColor.GREEN);
     kill();
   }
 
