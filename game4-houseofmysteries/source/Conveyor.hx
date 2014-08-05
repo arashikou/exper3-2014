@@ -4,6 +4,7 @@ import flixel.FlxSprite;
 import flixel.group.FlxTypedGroup;
 import flixel.util.FlxColor;
 import flixel.util.FlxPoint;
+import flixel.util.FlxRandom;
 
 typedef Pointlike = {
   var x(default,never):Float;
@@ -35,7 +36,13 @@ class Conveyor extends FlxTypedGroup<Glyph>
   {
     calculateDistances();
 
-    _offset = (_offset + SPEED) % SPACING;
+    var glyphShift = false;
+    _offset += SPEED;
+    if (_offset > SPACING)
+    {
+      _offset -= SPACING;
+      glyphShift = true;
+    }
 
     var counter:UInt = 0;
     forEach(function(glyph:Glyph):Void
@@ -46,6 +53,10 @@ class Conveyor extends FlxTypedGroup<Glyph>
         if (!glyph.alive)
         {
           glyph.revive();
+        }
+        else if (glyphShift)
+        {
+          glyph.randomize();
         }
         var percent = distance / _pythagoreanDistance;
         glyph.x = _start.x - percent * _cartesianDistance.x;
@@ -85,12 +96,22 @@ class Glyph extends FlxSprite
   public function new()
   {
     super();
-    makeGraphic(6, 8, FlxColor.GREEN);
+    loadGraphic("assets/images/Glyphs.png", true, 8, 8);
+    for (index in 0...3)
+    {
+      animation.add(Std.string(index), [index]);
+    }
     kill();
   }
 
   override public function revive():Void
   {
     super.revive();
+    randomize();
+  }
+
+  public function randomize():Void
+  {
+    animation.play(Std.string(FlxRandom.intRanged(0, 2)));
   }
 }
