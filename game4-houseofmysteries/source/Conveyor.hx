@@ -19,7 +19,6 @@ class Conveyor extends FlxTypedGroup<Glyph>
   private var _end:Pointlike;
   private var _cartesianDistance:FlxPoint;
   private var _pythagoreanDistance:Float;
-  private var _offset:Float;
 
   public function new(start:Pointlike, end:Pointlike)
   {
