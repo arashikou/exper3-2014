@@ -21,7 +21,7 @@ class Apparition extends FlxSprite
   public var form(default,null):Form;
   public var subject(default,null):Subject;
 
-  public function new(vForm:Form, vSubject:Subject)
+  public function new(vSubject:Subject, vForm:Form)
   {
     super();
     loadGraphic("assets/images/Apparitions.png", true, 32, 32);
@@ -56,7 +56,7 @@ class Apparition extends FlxSprite
 
 class Random
 {
-  static public function form(?forbidden:Form):Form
+  static public function form(?forbidden:Null<Form>):Form
   {
     return switch (forbidden)
     {
@@ -66,10 +66,10 @@ class Random
         Person;
       case null:
         FlxRandom.chanceRoll(50) ? Person : Prediction;
-    }
+    };
   }
 
-  static public function subject(?forbidden:Subject):Subject
+  static public function subject(?forbidden:Null<Subject>):Subject
   {
     return switch (forbidden)
     {
@@ -91,6 +91,6 @@ class Random
           default:
             throw "Impossible!";
         };
-    }
+    };
   }
 }
