@@ -22,7 +22,7 @@
     {
       "follow_symlinks": true,
       "name": "Game 4",
-      "path": "game4-houseofmysteries",
+      "path": "game4-madamepinna",
       "folder_exclude_patterns": ["export"]
     },
     {
