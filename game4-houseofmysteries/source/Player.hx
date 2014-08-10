@@ -17,6 +17,8 @@ class Player extends FlxSprite
   {
     super();
     makeGraphic(32, 32, FlxColor.WHEAT);
+    y = FlxG.height - height - 20;
+    x = (FlxG.width - width) / 2;
     heart = new FlxSprite();
     heart.makeGraphic(2, 2, FlxColor.RED);
   }
