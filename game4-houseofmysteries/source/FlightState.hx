@@ -5,7 +5,7 @@ import flixel.FlxState;
 
 class FlightState extends FlxState
 {
-  private var player:Player;
+  private var _player:Player;
 
   override public function create():Void
   {
@@ -13,10 +13,10 @@ class FlightState extends FlxState
     FlxG.mouse.load("assets/images/Target.png", 1, -8, -8);
     add(new CrazyBackground());
 
-    player = new Player();
-    add(player);
+    _player = new Player();
+    add(_player);
 
-    var conveyor = new Conveyor(player, FlxG.mouse);
+    var conveyor = new Conveyor(_player, FlxG.mouse);
     add(conveyor);
   }
 
