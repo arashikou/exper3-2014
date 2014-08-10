@@ -12,6 +12,8 @@ class FlightState extends FlxState
   private var _player:Player;
   private var _bullets:Bullet.Group;
   private var _squadrons:FlxTypedGroup<Squadron>;
+  private var _personTether:Conveyor;
+  private var _predictionTether:Conveyor;
 
   override public function create():Void
   {
@@ -22,10 +24,14 @@ class FlightState extends FlxState
     _player = new Player();
     _bullets = new Bullet.Group();
     _squadrons = new FlxTypedGroup<Squadron>();
+    _personTether = new Conveyor(_player);
+    _predictionTether = new Conveyor(_player);
 
     add(_squadrons);
     add(_player);
     add(_bullets);
+    add(_personTether);
+    add(_predictionTether);
   }
 
   override public function destroy():Void
@@ -45,6 +51,30 @@ class FlightState extends FlxState
         bullet.kill();
       }
     });
+
+    if (FlxG.mouse.justPressed)
+    {
+      _squadrons.forEach(function(squadron:Squadron):Void
+      {
+        squadron.forEach(function(apparition:Apparition):Void
+        {
+          if (FlxG.mouse.x >= apparition.x && FlxG.mouse.x < apparition.x + apparition.width &&
+              FlxG.mouse.y >= apparition.y && FlxG.mouse.y < apparition.y + apparition.height)
+          {
+            if (apparition.form == Person)
+            {
+              _personTether.end = apparition;
+              _personTether.revive();
+            }
+            else
+            {
+              _predictionTether.end = apparition;
+              _predictionTether.revive();
+            }
+          }
+        });
+      });
+    }
 
     if (FlxG.keys.justPressed.Y)
     {
