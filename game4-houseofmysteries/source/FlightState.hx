@@ -63,11 +63,11 @@ class FlightState extends FlxState
   private function introduce(squadron:Squadron):Void
   {
     var maxY = 0.0; // Silly Haxe bug. If this is 0, it can't discern the types for Math.max below.
-    squadron.forEachAlive(function(app:Apparition)
+    squadron.forEach(function(app:Apparition)
     {
       maxY = Math.max(maxY, app.y + app.height);
     });
-    squadron.forEachAlive(function(app:Apparition)
+    squadron.forEach(function(app:Apparition)
     {
       var oldY = app.y;
       app.y -= maxY;
