@@ -2,6 +2,7 @@ package;
 
 import flixel.FlxG;
 import flixel.FlxState;
+import flixel.group.FlxTypedGroup;
 import flixel.tweens.FlxEase;
 import flixel.tweens.FlxTween;
 
@@ -9,6 +10,7 @@ class FlightState extends FlxState
 {
   private var _player:Player;
   private var _bullets:Bullet.Group;
+  private var _squadrons:FlxTypedGroup<Squadron>;
 
   override public function create():Void
   {
@@ -17,9 +19,11 @@ class FlightState extends FlxState
     add(new CrazyBackground());
 
     _player = new Player();
-    add(_player);
-
     _bullets = new Bullet.Group();
+    _squadrons = new FlxTypedGroup<Squadron>();
+
+    add(_squadrons);
+    add(_player);
     add(_bullets);
 
     var conveyor = new Conveyor(_player, FlxG.mouse);
