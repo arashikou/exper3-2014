@@ -2,6 +2,8 @@ package;
 
 import flixel.FlxG;
 import flixel.FlxState;
+import flixel.tweens.FlxEase;
+import flixel.tweens.FlxTween;
 
 class FlightState extends FlxState
 {
@@ -40,6 +42,22 @@ class FlightState extends FlxState
       {
         bullet.kill();
       }
+    });
+  }
+
+  private function introduce(squadron:Squadron):Void
+  {
+    var maxY = 0.0; // Silly Haxe bug. If this is 0, it can't discern the types for Math.max below.
+    squadron.forEachAlive(function(app:Apparition)
+    {
+      maxY = Math.max(maxY, app.y + app.height);
+    });
+    squadron.forEachAlive(function(app:Apparition)
+    {
+      var oldY = app.y;
+      app.y -= maxY;
+      FlxTween.tween(app, { y: oldY }, 1,
+                     { type: FlxTween.ONESHOT, ease: FlxEase.expoOut });
     });
   }
 }
