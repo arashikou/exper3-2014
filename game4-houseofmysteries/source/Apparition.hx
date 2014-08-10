@@ -22,7 +22,7 @@ class Apparition extends FlxSprite
   public var form(default,null):Form;
   public var subject(default,null):Subject;
 
-  private var _bulletGroup:Bullet.Group;
+  private var _gun:BulletStrategy;
 
   public function new(vSubject:Subject, vForm:Form, bulletGroup:Bullet.Group)
   {
@@ -37,7 +37,7 @@ class Apparition extends FlxSprite
 
     form = vForm;
     subject = vSubject;
-    _bulletGroup = bulletGroup;
+    _gun = new BulletStrategy.RotatingCross(bulletGroup, this);
 
     var formName = switch(form)
     {
@@ -68,10 +68,7 @@ class Apparition extends FlxSprite
     }
     else
     {
-      var bullet = new Bullet();
-      bullet.x = x + (width - bullet.width) / 2;
-      bullet.y = y + height;
-      _bulletGroup.add(bullet);
+      _gun.fire();
     }
   }
 }
