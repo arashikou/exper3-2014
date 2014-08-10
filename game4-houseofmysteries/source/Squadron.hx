@@ -39,14 +39,29 @@ class Squadron extends FlxTypedGroup<Apparition>
 
         FlxRandom.shuffleArray(members, members.length * 4);
 
-        members[0].x = 100;
-        members[0].y = 100;
-        members[1].x = FlxG.width - 100 - members[1].width;
-        members[1].y = 100;
-        members[2].x = 100;
-        members[2].y = 200;
-        members[3].x = FlxG.width - 100 - members[3].width;
-        members[3].y = 200;
+        if (FlxRandom.chanceRoll(50))
+        {
+          members[0].x = 100;
+          members[0].y = 100;
+          members[1].x = FlxG.width - 100 - members[1].width;
+          members[1].y = 100;
+          members[2].x = 100;
+          members[2].y = 200;
+          members[3].x = FlxG.width - 100 - members[3].width;
+          members[3].y = 200;
+        }
+        else
+        {
+          var d = (FlxG.width - 200) / 4;
+          members[0].x = 100;
+          members[0].y = 120;
+          members[1].x = 100 + d;
+          members[1].y = 100;
+          members[2].x = 100 + 2 * d;
+          members[2].y = 100;
+          members[3].x = 100 + 3 * d;
+          members[3].y = 120;
+        }
       default:
         throw "Unusable size!";
     }
