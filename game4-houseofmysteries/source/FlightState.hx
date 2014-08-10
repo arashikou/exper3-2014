@@ -54,7 +54,7 @@ class FlightState extends FlxState
       });
       _squadrons.clear();
 
-      var s = new Squadron(FlxRandom.intRanged(3, 5), _bullets);
+      var s = new Squadron(FlxRandom.intRanged(1, 4), _bullets);
       _squadrons.add(s);
       introduce(s);
     }
