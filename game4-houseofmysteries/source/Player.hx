@@ -11,7 +11,7 @@ class Player extends FlxSprite
   public var heart(default,null):FlxSprite;
 
   inline static private var LOW_SPEED = 100;
-  inline static private var HIGH_SPEED = 500;
+  inline static private var HIGH_SPEED = 400;
 
   public function new()
   {
