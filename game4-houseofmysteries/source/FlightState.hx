@@ -5,6 +5,7 @@ import flixel.FlxState;
 import flixel.group.FlxTypedGroup;
 import flixel.tweens.FlxEase;
 import flixel.tweens.FlxTween;
+import flixel.util.FlxRandom;
 
 class FlightState extends FlxState
 {
@@ -44,6 +45,19 @@ class FlightState extends FlxState
         bullet.kill();
       }
     });
+
+    if (FlxG.keys.justPressed.Y)
+    {
+      _squadrons.forEach(function(squadron:Squadron):Void
+      {
+        squadron.kill();
+      });
+      _squadrons.clear();
+
+      var s = new Squadron(FlxRandom.intRanged(3, 5), _bullets);
+      _squadrons.add(s);
+      introduce(s);
+    }
   }
 
   private function introduce(squadron:Squadron):Void
