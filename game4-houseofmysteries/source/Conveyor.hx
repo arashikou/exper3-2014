@@ -11,17 +11,18 @@ class Conveyor extends FlxTypedGroup<Glyph>
   inline static private var SPACING = 20;
   inline static private var SPEED = 3.5;
 
-  private var _start:Pointlike;
-  private var _end:Pointlike;
+  public var start:Pointlike;
+  public var end:Pointlike;
+
   private var _cartesianDistance:FlxPoint;
   private var _pythagoreanDistance:Float;
   private var _offset:Float;
 
-  public function new(start:Pointlike, end:Pointlike)
+  public function new(vStart:Pointlike, vEnd:Pointlike)
   {
     super();
-    _start = start;
-    _end = end;
+    start = vStart;
+    end = vEnd;
     _cartesianDistance = new FlxPoint();
     _pythagoreanDistance = 0;
     _offset = 0;
@@ -54,8 +55,8 @@ class Conveyor extends FlxTypedGroup<Glyph>
           glyph.randomize();
         }
         var percent = distance / _pythagoreanDistance;
-        glyph.x = _start.x - percent * _cartesianDistance.x - glyph.width / 2;
-        glyph.y = _start.y - percent * _cartesianDistance.y - glyph.height / 2;
+        glyph.x = start.x - percent * _cartesianDistance.x - glyph.width / 2;
+        glyph.y = start.y - percent * _cartesianDistance.y - glyph.height / 2;
         counter++;
       }
       else if (glyph.alive)
@@ -69,8 +70,8 @@ class Conveyor extends FlxTypedGroup<Glyph>
 
   private function calculateDistances():Void
   {
-    var xDistance = _start.x - _end.x;
-    var yDistance = _start.y - _end.y;
+    var xDistance = start.x - end.x;
+    var yDistance = start.y - end.y;
     if (xDistance != _cartesianDistance.x || yDistance != _cartesianDistance.y)
     {
       _cartesianDistance.x = xDistance;
