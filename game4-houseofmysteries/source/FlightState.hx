@@ -16,11 +16,11 @@ class FlightState extends FlxState
     FlxG.mouse.load("assets/images/Target.png", 1, -8, -8);
     add(new CrazyBackground());
 
-    _bullets = new Bullet.Group();
-    add(_bullets);
-
     _player = new Player();
     add(_player);
+
+    _bullets = new Bullet.Group();
+    add(_bullets);
 
     var conveyor = new Conveyor(_player, FlxG.mouse);
     add(conveyor);
