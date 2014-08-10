@@ -1,5 +1,6 @@
 package;
 
+import flixel.FlxObject;
 import flixel.FlxSprite;
 import flixel.group.FlxTypedGroup;
 import flixel.util.FlxColor;
@@ -11,14 +12,14 @@ class Conveyor extends FlxTypedGroup<Glyph>
   inline static private var SPACING = 20;
   inline static private var SPEED = 3.5;
 
-  public var start:Pointlike;
-  public var end:Pointlike;
+  public var start:FlxObject;
+  public var end:FlxObject;
 
   private var _cartesianDistance:FlxPoint;
   private var _pythagoreanDistance:Float;
   private var _offset:Float;
 
-  public function new(?vStart:Pointlike, ?vEnd:Pointlike)
+  public function new(?vStart:FlxObject, ?vEnd:FlxObject)
   {
     super();
     start = vStart;
@@ -94,19 +95,10 @@ class Conveyor extends FlxTypedGroup<Glyph>
     }
   }
 
-  private function getPoint(object:Pointlike):FlxPoint
+  private function getPoint(object:FlxObject):FlxPoint
   {
-    var x = object.x;
-    var y = object.y;
-
-    try
-    {
-      var sizeBearer = cast(object, SizeBearing);
-      x += sizeBearer.width / 2;
-      y += sizeBearer.height / 2;
-    }
-    catch (exception:String) {}
-
+    var x = object.x + object.width / 2;
+    var y = object.y + object.height / 2;
     return new FlxPoint(x, y);
   }
 }
@@ -135,8 +127,3 @@ class Glyph extends FlxSprite
     animation.play(Std.string(FlxRandom.intRanged(0, 3)));
   }
 }
-
-typedef SizeBearing = {
-  var width(default,never):Float;
-  var height(default,never):Float;
-};
