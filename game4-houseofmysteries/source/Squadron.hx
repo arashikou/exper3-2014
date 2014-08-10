@@ -6,7 +6,7 @@ import flixel.util.FlxRandom;
 
 class Squadron extends FlxTypedGroup<Apparition>
 {
-  public function new(size:UInt)
+  public function new(size:UInt, bulletGroup:Bullet.Group)
   {
     super();
 
@@ -15,10 +15,10 @@ class Squadron extends FlxTypedGroup<Apparition>
       case 3:
         var primarySubject = Apparition.Random.subject();
 
-        add(new Apparition(primarySubject, Apparition.Random.form()));
-        add(new Apparition(primarySubject, Apparition.Random.form(members[0].form)));
+        add(new Apparition(primarySubject, Apparition.Random.form(), bulletGroup));
+        add(new Apparition(primarySubject, Apparition.Random.form(members[0].form), bulletGroup));
         add(new Apparition(Apparition.Random.subject(primarySubject),
-                           Apparition.Random.form()));
+                           Apparition.Random.form(), bulletGroup));
 
         FlxRandom.shuffleArray(members, members.length * 4);
 
@@ -32,10 +32,10 @@ class Squadron extends FlxTypedGroup<Apparition>
         var primarySubject = Apparition.Random.subject();
         var secondarySubject = Apparition.Random.subject(primarySubject);
 
-        add(new Apparition(primarySubject, Apparition.Random.form()));
-        add(new Apparition(secondarySubject, Apparition.Random.form()));
-        add(new Apparition(primarySubject, Apparition.Random.form(members[0].form)));
-        add(new Apparition(secondarySubject, Apparition.Random.form(members[1].form)));
+        add(new Apparition(primarySubject, Apparition.Random.form(), bulletGroup));
+        add(new Apparition(secondarySubject, Apparition.Random.form(), bulletGroup));
+        add(new Apparition(primarySubject, Apparition.Random.form(members[0].form), bulletGroup));
+        add(new Apparition(secondarySubject, Apparition.Random.form(members[1].form), bulletGroup));
 
         FlxRandom.shuffleArray(members, members.length * 4);
 
