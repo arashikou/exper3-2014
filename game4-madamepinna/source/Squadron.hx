@@ -94,4 +94,21 @@ class Squadron extends FlxTypedGroup<Apparition>
         throw "Unusable formation number!";
     }
   }
+
+  public function isViable():Bool
+  {
+    for (firstIndex in 0...members.length)
+    {
+        var first = members[firstIndex];
+        for (secondIndex in (firstIndex + 1)...members.length)
+        {
+            var second = members[secondIndex];
+            if (first.subject == second.subject && first.form != second.form)
+            {
+                return true;
+            }
+        }
+    }
+    return false;
+  }
 }
