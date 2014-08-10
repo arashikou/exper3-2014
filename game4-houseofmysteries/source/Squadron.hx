@@ -62,6 +62,29 @@ class Squadron extends FlxTypedGroup<Apparition>
           members[3].x = 100 + 3 * d;
           members[3].y = 120;
         }
+      case 5:
+        var primarySubject = Apparition.Random.subject();
+        var secondarySubject = Apparition.Random.subject(primarySubject);
+
+        add(new Apparition(primarySubject, Apparition.Random.form(), bulletGroup));
+        add(new Apparition(primarySubject, Apparition.Random.form(members[0].form), bulletGroup));
+        add(new Apparition(secondarySubject, Apparition.Random.form(), bulletGroup));
+        add(new Apparition(secondarySubject, Apparition.Random.form(members[2].form), bulletGroup));
+        add(new Apparition(Apparition.Random.subject(primarySubject),
+                           Apparition.Random.form(), bulletGroup));
+
+        FlxRandom.shuffleArray(members, members.length * 4);
+
+        members[0].x = 100;
+        members[0].y = 75;
+        members[1].x = FlxG.width - 100 - members[1].width;
+        members[1].y = 75;
+        members[2].x = 100;
+        members[2].y = 225;
+        members[3].x = FlxG.width - 100 - members[3].width;
+        members[3].y = 225;
+        members[4].x = (FlxG.width - members[4].width) / 2;
+        members[4].y = 150;
       default:
         throw "Unusable size!";
     }
