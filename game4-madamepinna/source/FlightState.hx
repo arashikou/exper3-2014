@@ -42,6 +42,19 @@ class FlightState extends FlxState
 
   override public function update():Void
   {
+    if (_squadrons.members.length == 0 || !_squadrons.members[0].isViable())
+    {
+      _squadrons.forEach(function(squadron:Squadron):Void
+      {
+        squadron.kill();
+      });
+      _squadrons.clear();
+
+      var s = new Squadron(FlxRandom.intRanged(1, 4), _bullets);
+      _squadrons.add(s);
+      introduce(s);
+    }
+
     super.update();
     _bullets.forEachAlive(function(bullet:Bullet):Void
     {
@@ -71,19 +84,6 @@ class FlightState extends FlxState
           }
         }
       });
-    }
-
-    if (FlxG.keys.justPressed.Y)
-    {
-      _squadrons.forEach(function(squadron:Squadron):Void
-      {
-        squadron.kill();
-      });
-      _squadrons.clear();
-
-      var s = new Squadron(FlxRandom.intRanged(1, 4), _bullets);
-      _squadrons.add(s);
-      introduce(s);
     }
   }
 
