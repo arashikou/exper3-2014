@@ -9,9 +9,9 @@ import flixel.util.FlxRandom;
 
 class FlightState extends FlxState
 {
+  private var _squadrons:FlxTypedGroup<Squadron>;
   private var _player:Player;
   private var _bullets:Bullet.Group;
-  private var _squadrons:FlxTypedGroup<Squadron>;
   private var _personTether:Conveyor;
   private var _predictionTether:Conveyor;
 
@@ -21,9 +21,9 @@ class FlightState extends FlxState
     FlxG.mouse.load("assets/images/Target.png", 1, -8, -8);
     add(new CrazyBackground());
 
+    _squadrons = new FlxTypedGroup<Squadron>();
     _player = new Player();
     _bullets = new Bullet.Group();
-    _squadrons = new FlxTypedGroup<Squadron>();
     _personTether = new Conveyor(_player);
     _predictionTether = new Conveyor(_player);
 
@@ -85,6 +85,18 @@ class FlightState extends FlxState
         }
       });
     }
+
+    if (_personTether.alive && _predictionTether.alive)
+    {
+      var tetheredPerson = cast(_personTether.end, Apparition);
+      var tetheredPrediction = cast(_predictionTether.end, Apparition);
+      if (tetheredPerson.subject == tetheredPrediction.subject)
+      {
+        bringTogether(tetheredPerson, tetheredPrediction);
+        _personTether.kill();
+        _predictionTether.kill();
+      }
+    }
   }
 
   private function introduce(squadron:Squadron):Void
@@ -101,5 +113,9 @@ class FlightState extends FlxState
       FlxTween.tween(app, { y: oldY }, 1,
                      { type: FlxTween.ONESHOT, ease: FlxEase.expoOut });
     });
+  }
+
+  private function bringTogether(a:Apparition, b:Apparition):Void
+  {
   }
 }
