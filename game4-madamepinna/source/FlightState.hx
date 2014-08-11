@@ -7,6 +7,7 @@ import flixel.tweens.FlxEase;
 import flixel.tweens.FlxTween;
 import flixel.util.FlxPoint;
 import flixel.util.FlxRandom;
+import flixel.util.FlxTimer;
 
 class FlightState extends FlxState
 {
@@ -16,6 +17,8 @@ class FlightState extends FlxState
   private var _bullets:Bullet.Group;
   private var _personTether:Conveyor;
   private var _predictionTether:Conveyor;
+  private var _shout:Shout;
+  private var _shoutKiller:FlxTimer;
 
   override public function create():Void
   {
@@ -29,6 +32,7 @@ class FlightState extends FlxState
     _bullets = new Bullet.Group();
     _personTether = new Conveyor(_player);
     _predictionTether = new Conveyor(_player);
+    _shout = new Shout();
 
     add(_squadrons);
     add(_player);
@@ -36,6 +40,9 @@ class FlightState extends FlxState
     add(_bullets);
     add(_personTether);
     add(_predictionTether);
+    add(_shout);
+
+    _shoutKiller = new FlxTimer();
   }
 
   override public function destroy():Void
@@ -133,6 +140,12 @@ class FlightState extends FlxState
       a.kill();
       b.kill();
       conveyor.kill();
+      _shout.randomize(a.subject);
+      _shout.revive();
+      _shoutKiller.start(2, function(ignored:FlxTimer):Void
+      {
+        _shout.kill();
+      });
     };
     FlxTween.tween(a, { x: center.x, y: center.y }, 0.5,
                      { type: FlxTween.ONESHOT, ease: FlxEase.expoIn, complete: collisionComplete });
