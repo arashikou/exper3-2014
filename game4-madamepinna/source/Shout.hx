@@ -16,7 +16,7 @@ class Shout extends FlxSprite
   {
     super();
 
-    makeGraphic(FlxG.width, 100, FlxColor.BLACK);
+    makeGraphic(FlxG.width, 84, FlxColor.BLACK);
     alpha = 0.5;
     x = 0;
     y = FlxG.height - height;
