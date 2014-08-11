@@ -142,7 +142,7 @@ class FlightState extends FlxState
       conveyor.kill();
       _shout.randomize(a.subject);
       _shout.revive();
-      _shoutKiller.start(2, function(ignored:FlxTimer):Void
+      _shoutKiller.start(3, function(ignored:FlxTimer):Void
       {
         _shout.kill();
       });
