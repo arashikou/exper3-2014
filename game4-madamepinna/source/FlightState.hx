@@ -5,6 +5,7 @@ import flixel.FlxState;
 import flixel.group.FlxTypedGroup;
 import flixel.tweens.FlxEase;
 import flixel.tweens.FlxTween;
+import flixel.util.FlxPoint;
 import flixel.util.FlxRandom;
 
 class FlightState extends FlxState
@@ -117,5 +118,17 @@ class FlightState extends FlxState
 
   private function bringTogether(a:Apparition, b:Apparition):Void
   {
+    var center = new FlxPoint();
+    center.x = (a.x + b.x) / 2;
+    center.y = (a.y + b.y) / 2;
+    var collisionComplete = function(ignored:FlxTween):Void
+    {
+      a.kill();
+      b.kill();
+    };
+    FlxTween.tween(a, { x: center.x, y: center.y }, 0.5,
+                     { type: FlxTween.ONESHOT, ease: FlxEase.expoIn, complete: collisionComplete });
+    FlxTween.tween(b, { x: center.x, y: center.y }, 0.5,
+                     { type: FlxTween.ONESHOT, ease: FlxEase.expoIn });
   }
 }
