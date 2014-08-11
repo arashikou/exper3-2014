@@ -127,3 +127,17 @@ class Glyph extends FlxSprite
     animation.play(Std.string(FlxRandom.intRanged(0, 3)));
   }
 }
+
+class WorkAroundHaxeLimitationGroup extends FlxTypedGroup<Conveyor>
+{
+  override public function getFirstDead():Conveyor
+  {
+    var c = super.getFirstDead();
+    if (c == null)
+    {
+      c = new Conveyor();
+      add(c);
+    }
+    return c;
+  }
+}

@@ -12,6 +12,7 @@ class FlightState extends FlxState
 {
   private var _squadrons:FlxTypedGroup<Squadron>;
   private var _player:Player;
+  private var _conveyors:Conveyor.WorkAroundHaxeLimitationGroup;
   private var _bullets:Bullet.Group;
   private var _personTether:Conveyor;
   private var _predictionTether:Conveyor;
@@ -24,12 +25,14 @@ class FlightState extends FlxState
 
     _squadrons = new FlxTypedGroup<Squadron>();
     _player = new Player();
+    _conveyors = new Conveyor.WorkAroundHaxeLimitationGroup();
     _bullets = new Bullet.Group();
     _personTether = new Conveyor(_player);
     _predictionTether = new Conveyor(_player);
 
     add(_squadrons);
     add(_player);
+    add(_conveyors);
     add(_bullets);
     add(_personTether);
     add(_predictionTether);
@@ -93,7 +96,7 @@ class FlightState extends FlxState
       var tetheredPrediction = cast(_predictionTether.end, Apparition);
       if (tetheredPerson.subject == tetheredPrediction.subject)
       {
-        bringTogether(tetheredPerson, tetheredPrediction);
+        bringTogether(tetheredPrediction, tetheredPerson);
         _personTether.kill();
         _predictionTether.kill();
       }
@@ -118,6 +121,10 @@ class FlightState extends FlxState
 
   private function bringTogether(a:Apparition, b:Apparition):Void
   {
+    var conveyor = _conveyors.getFirstDead();
+    conveyor.start = a;
+    conveyor.end = b;
+    conveyor.revive();
     var center = new FlxPoint();
     center.x = (a.x + b.x) / 2;
     center.y = (a.y + b.y) / 2;
@@ -125,6 +132,7 @@ class FlightState extends FlxState
     {
       a.kill();
       b.kill();
+      conveyor.kill();
     };
     FlxTween.tween(a, { x: center.x, y: center.y }, 0.5,
                      { type: FlxTween.ONESHOT, ease: FlxEase.expoIn, complete: collisionComplete });
