@@ -15,8 +15,7 @@ class Player extends FlxSprite
 
   public function new()
   {
-    super();
-    makeGraphic(32, 32, FlxColor.WHEAT);
+    super("assets/images/CrystalBall.png");
     y = FlxG.height - height - 20;
     x = (FlxG.width - width) / 2;
     heart = new FlxSprite();
