@@ -71,7 +71,7 @@ class FlightState extends FlxState
 
     if (FlxG.mouse.justPressed)
     {
-      _squadrons.members[0].forEach(function(apparition:Apparition):Void
+      _squadrons.members[0].forEachAlive(function(apparition:Apparition):Void
       {
         if (FlxG.mouse.x >= apparition.x && FlxG.mouse.x < apparition.x + apparition.width &&
             FlxG.mouse.y >= apparition.y && FlxG.mouse.y < apparition.y + apparition.height)
