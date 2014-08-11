@@ -100,12 +100,15 @@ class Squadron extends FlxTypedGroup<Apparition>
     for (firstIndex in 0...members.length)
     {
         var first = members[firstIndex];
-        for (secondIndex in (firstIndex + 1)...members.length)
+        if (first.alive)
         {
-            var second = members[secondIndex];
-            if (first.subject == second.subject && first.form != second.form)
+            for (secondIndex in (firstIndex + 1)...members.length)
             {
-                return true;
+                var second = members[secondIndex];
+                if (second.alive && first.subject == second.subject && first.form != second.form)
+                {
+                    return true;
+                }
             }
         }
     }
