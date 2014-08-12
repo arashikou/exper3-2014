@@ -38,7 +38,7 @@ class IntroState extends FlxState
 
   private function delayCurrentScene(ignored:FlxTween):Void
   {
-    var throwaway = new FlxTimer(5, endCurrentScene);
+    var throwaway = new FlxTimer(4, endCurrentScene);
   }
 
   private function endCurrentScene(ignored:FlxTimer):Void
