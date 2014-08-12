@@ -9,6 +9,7 @@ import flixel.util.FlxTimer;
 class IntroState extends FlxState
 {
   static private var SCENES = [
+    null,
     "assets/images/Intro1.png",
     "assets/images/Intro2.png",
     "assets/images/Intro3.png",
@@ -32,8 +33,15 @@ class IntroState extends FlxState
 
   private function startCurrentScene():Void
   {
-    _scene.loadGraphic(SCENES[_currentScene]);
-    FlxTween.tween(_scene, { alpha: 1.0 }, 0.5, { complete: delayCurrentScene });
+    if (SCENES[_currentScene] == null)
+    {
+      var throwaway = new FlxTimer(2, switchScenes);
+    }
+    else
+    {
+      _scene.loadGraphic(SCENES[_currentScene]);
+      FlxTween.tween(_scene, { alpha: 1.0 }, 0.5, { complete: delayCurrentScene });
+    }
   }
 
   private function delayCurrentScene(ignored:FlxTween):Void
@@ -51,14 +59,7 @@ class IntroState extends FlxState
     _currentScene++;
     if (_currentScene < SCENES.length)
     {
-      if (SCENES[_currentScene] != null)
-      {
-        startCurrentScene();
-      }
-      else
-      {
-        var throwaway = new FlxTimer(2, switchScenes);
-      }
+      startCurrentScene();
     }
     else
     {
