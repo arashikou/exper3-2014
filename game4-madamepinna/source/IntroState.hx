@@ -9,7 +9,12 @@ import flixel.util.FlxTimer;
 class IntroState extends FlxState
 {
   static private var SCENES = [
-    "assets/images/CrystalBall.png"
+    "assets/images/Intro1.png",
+    "assets/images/Intro2.png",
+    "assets/images/Intro3.png",
+    "assets/images/Intro4.png",
+    null,
+    "assets/images/Intro5.png"
   ];
 
   private var _scene:FlxSprite;
@@ -41,12 +46,19 @@ class IntroState extends FlxState
     FlxTween.tween(_scene, { alpha: 0.0 }, 0.5, { complete: switchScenes });
   }
 
-  private function switchScenes(ignored:FlxTween):Void
+  private function switchScenes<Whatever>(ignored:Whatever):Void
   {
     _currentScene++;
     if (_currentScene < SCENES.length)
     {
-      startCurrentScene();
+      if (SCENES[_currentScene] != null)
+      {
+        startCurrentScene();
+      }
+      else
+      {
+        var throwaway = new FlxTimer(2, switchScenes);
+      }
     }
     else
     {
