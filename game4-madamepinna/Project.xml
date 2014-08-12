@@ -2,8 +2,8 @@
 <project>
   <!------------------------------APPLICATION SETTINGS---------------------------->
 
-  <meta title="Madame Pinna's House of Mysteries" version="0.0.1" company="John W. Bruce" />
-  <app file="HouseOfMysteries" path="export" preloader="flixel.system.FlxPreloader" swf-version="11.8" />
+  <meta title="Madame Pinna Saves the World" version="0.0.1" company="John W. Bruce" />
+  <app file="MadamePinna" path="export" preloader="flixel.system.FlxPreloader" swf-version="11.8" />
 
   <!--------------------------------WINDOW SETTINGS------------------------------->
 

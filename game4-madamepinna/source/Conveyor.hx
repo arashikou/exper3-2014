@@ -1,5 +1,6 @@
 package;
 
+import flixel.FlxObject;
 import flixel.FlxSprite;
 import flixel.group.FlxTypedGroup;
 import flixel.util.FlxColor;
@@ -11,20 +12,25 @@ class Conveyor extends FlxTypedGroup<Glyph>
   inline static private var SPACING = 20;
   inline static private var SPEED = 3.5;
 
-  private var _start:Pointlike;
-  private var _end:Pointlike;
+  public var start:FlxObject;
+  public var end:FlxObject;
+
   private var _cartesianDistance:FlxPoint;
   private var _pythagoreanDistance:Float;
   private var _offset:Float;
 
-  public function new(start:Pointlike, end:Pointlike)
+  public function new(?vStart:FlxObject, ?vEnd:FlxObject)
   {
     super();
-    _start = start;
-    _end = end;
+    start = vStart;
+    end = vEnd;
     _cartesianDistance = new FlxPoint();
     _pythagoreanDistance = 0;
     _offset = 0;
+    if (start == null || end == null)
+    {
+      kill();
+    }
   }
 
   override public function update():Void
@@ -54,8 +60,9 @@ class Conveyor extends FlxTypedGroup<Glyph>
           glyph.randomize();
         }
         var percent = distance / _pythagoreanDistance;
-        glyph.x = _start.x - percent * _cartesianDistance.x - glyph.width / 2;
-        glyph.y = _start.y - percent * _cartesianDistance.y - glyph.height / 2;
+        var startPoint = getPoint(start);
+        glyph.x = startPoint.x - percent * _cartesianDistance.x - glyph.width / 2;
+        glyph.y = startPoint.y - percent * _cartesianDistance.y - glyph.height / 2;
         counter++;
       }
       else if (glyph.alive)
@@ -69,8 +76,11 @@ class Conveyor extends FlxTypedGroup<Glyph>
 
   private function calculateDistances():Void
   {
-    var xDistance = _start.x - _end.x;
-    var yDistance = _start.y - _end.y;
+    var startPoint = getPoint(start);
+    var endPoint = getPoint(end);
+
+    var xDistance = startPoint.x - endPoint.x;
+    var yDistance = startPoint.y - endPoint.y;
     if (xDistance != _cartesianDistance.x || yDistance != _cartesianDistance.y)
     {
       _cartesianDistance.x = xDistance;
@@ -83,6 +93,13 @@ class Conveyor extends FlxTypedGroup<Glyph>
         add(new Glyph());
       }
     }
+  }
+
+  private function getPoint(object:FlxObject):FlxPoint
+  {
+    var x = object.x + object.width / 2;
+    var y = object.y + object.height / 2;
+    return new FlxPoint(x, y);
   }
 }
 
@@ -108,5 +125,19 @@ class Glyph extends FlxSprite
   public function randomize():Void
   {
     animation.play(Std.string(FlxRandom.intRanged(0, 3)));
+  }
+}
+
+class WorkAroundHaxeLimitationGroup extends FlxTypedGroup<Conveyor>
+{
+  override public function getFirstDead():Conveyor
+  {
+    var c = super.getFirstDead();
+    if (c == null)
+    {
+      c = new Conveyor();
+      add(c);
+    }
+    return c;
   }
 }

@@ -2,6 +2,7 @@ package;
 
 import flixel.FlxSprite;
 import flixel.util.FlxRandom;
+import flixel.util.FlxTimer;
 
 enum Form
 {
@@ -21,7 +22,9 @@ class Apparition extends FlxSprite
   public var form(default,null):Form;
   public var subject(default,null):Subject;
 
-  public function new(vSubject:Subject, vForm:Form)
+  private var _gun:BulletStrategy;
+
+  public function new(vSubject:Subject, vForm:Form, bulletGroup:Bullet.Group)
   {
     super();
     loadGraphic("assets/images/Apparitions.png", true, 32, 32);
@@ -31,8 +34,10 @@ class Apparition extends FlxSprite
     animation.add("Prediction-Green", [3]);
     animation.add("Prediction-Red", [4]);
     animation.add("Prediction-Blue", [5]);
+
     form = vForm;
     subject = vSubject;
+    _gun = new BulletStrategy.RotatingCross(bulletGroup, this);
 
     var formName = switch(form)
     {
@@ -51,6 +56,20 @@ class Apparition extends FlxSprite
         "Blue";
     };
     animation.play('${formName}-${subjectName}');
+
+    var gunTimer = new FlxTimer(0.5, fireBullet, 0);
+  }
+
+  private function fireBullet(timer:FlxTimer):Void
+  {
+    if (!alive)
+    {
+      timer.cancel();
+    }
+    else
+    {
+      _gun.fire();
+    }
   }
 }
 
