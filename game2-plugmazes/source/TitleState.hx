@@ -69,6 +69,9 @@ class TitleState extends FlxState
   {
     super.update();
 
+    if (_currentLevel < 1) _currentLevel = 1;
+    if (_currentLevel > 3) _currentLevel = 3;
+
     _levelDisplay.text = Std.string(_currentLevel);
     _levelDisplay.x = (FlxG.width - _levelDisplay.fieldWidth) / 2;
   }
