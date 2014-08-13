@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<project>
+  <!------------------------------APPLICATION SETTINGS---------------------------->
+
+  <meta title="Madame Pinna Saves the World" version="0.0.1" company="John W. Bruce" />
+  <app file="MadamePinna" path="export" preloader="flixel.system.FlxPreloader" swf-version="11.8" />
+
+  <!--------------------------------WINDOW SETTINGS------------------------------->
+
+  <window width="480" height="640" fps="60" background="#000000" hardware="true" vsync="true" orientation="landscape" fullscreen="false" resizable="false" />
+
+  <!--------------------------------PATHS SETTINGS-------------------------------->
+
+  <source path="source" />
+  <assets path="assets" />
+  <assets path="external_assets" />
+
+  <!--------------------------------LIBRARIES------------------------------------->
+
+  <haxelib name="flixel"/>
+
+  <!--In case you want to use the addons package-->
+  <!--haxelib name="flixel-addons" /-->
+
+  <!--In case you want to use the ui package-->
+  <!--haxelib name="flixel-ui"/-->
+
+  <!--------------------------------HAXEDEFINES----------------------------------->
+
+  <!--Enable the Flixel core recording system-->
+  <!--haxedef name="FLX_RECORD" /-->
+
+  <!--Disable unused input types-->
+  <haxedef name="FLX_NO_TOUCH" />
+  <haxedef name="FLX_NO_GAMEPAD" />
+
+  <!--Disable the Flixel core debugger. Automatically gets set whenever you compile in release mode.-->
+  <haxedef name="FLX_NO_DEBUG" unless="debug" />
+
+  <!--------------------------------CUSTOM---------------------------------------->
+
+  <!--Place custom nodes like icons here (higher priority to override the HaxeFlixel icon)-->
+</project>

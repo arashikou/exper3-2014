@@ -59,6 +59,6 @@ A puzzle game about completing an electric circuit using the cables and constrai
 
 A light simulation game about moose herding.
 
-**_Madame Pinna's House of Mysteries_ - Insight as Power**
+**_Madame Pinna Saves the World_ - Insight as Power**
 
-A software toy that tells fortunes via a system of card-dealing.
+A bullet hell about predicting the future.

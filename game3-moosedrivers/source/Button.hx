@@ -42,5 +42,7 @@ class Button extends FlxSprite
     {
       animation.play("normal");
     }
+
+    super.update();
   }
 }

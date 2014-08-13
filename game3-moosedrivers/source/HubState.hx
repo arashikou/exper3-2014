@@ -17,6 +17,8 @@ class HubState extends SimulationState
 
   override public function create():Void
   {
+    super.create();
+
     // Abort if no one is left
     if (_status.mooseCount == 0 || _status.driverCount == 0)
     {
