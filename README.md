@@ -1,49 +1,47 @@
 # What is EXPER3?
 
-EXPER3 is a contest. It is a birthday gift. And it is an opportunity.
+EXPER3 was a contest. It was a birthday gift. And it was an opportunity.
 
-In May of 2014, I turned 30. My amazing wife knew that my greatest regret upon closing out my 20s was that constantly prioritizing other things (often, though not always, more responsible things) had kept me from ever pursuing my dream of making video games, even as a hobby. So as a gift, she set forth for me a challenge. To take the month of July and do a month-long game jam, a sort of game-creating NaNoWriMo. She called it EXPER3, for "Experience, Experiment, & Expertise."
+In May of 2014, I turned 30. My amazing wife knew that my greatest regret upon closing out my 20s was that constantly prioritizing other things (often, though not always, more responsible things) had kept me from ever pursuing my dream of making video games, even as a hobby. So as a gift, she set forth for me a challenge. To take the month of July and do a month-long game jam, a sort of game-creating NaNoWriMo. She called it EXPER3, for "Experience, Experiment, & Expertise." The goal was to make four games in a month while still living my normal life.
 
 It was meant to force me to make the choice to prioritize my dream. It was meant to prove to me that I could do it. It was meant to show me that I could still lead my life at the same time as pursuing my passions. I couldn't have asked for a better gift. I mean, I couldn't have even conceived of _this_ gift, but in hindsight, it was absolutely the perfect gift for my 30th birthday.
 
-And then we bought our first home and things got hectic and we realized there was no way I could be ready to start on July 1st. (Heck, I didn't have a computer or internet access at that point.) So the whole thing got delayed until July 12th.
+And then we bought our first home and things got hectic and we realized there was no way I could be ready to start on July 1st. (Heck, I didn't have a computer or internet access at that point.) So the whole thing got delayed until July 12th. But then it totally happened!
 
-But EXPER3 began on-time on the 12th, and all the checkins will be going right here. The goal is to make four games in a month while still living my normal life. Like NaNoWriMo, the results will not be "publication-ready," but they will be playable drafts that I might later refine into more complete games. And I've decided to open-source the EXPER3 drafts here. It's not just a way of sharing what I'm doing with the world, it's also a way of keeping me accountable and a way to let friends and family keep up-to-date with my work without requiring me to write long updates every day. (Thus eating into precious time.)
+Like NaNoWriMo, the results are not "publication-ready," but they are playable drafts that I could later refine into more complete games. I've decided to upload all my work to GitHub and open-source the four games. This is a way of sharing what I'm doing with the world, but during the contest, this was also a way to let friends and family keep up-to-date with my work. And it will provide me with a record of my efforts, a digital memory chest of this awesome contest.
 
-Of course, I also hope whatever is produced here could be of interest to other people, either as a fun game to play or as a reference to how to create a game with the tools I'm using.
+# What was the Format of EXPER3?
 
-# What is the Format of EXPER3?
+Amy gave me the choice of either focusing on one big game for the whole month or four smaller games. I chose the latter because I knew my eyes were often bigger than my abilities, and I could easily overcommit myself. I wanted to force myself to keep my focus small.
 
-Amy gave me the choice of either focusing on one big game for the whole month or four smaller games. I chose the latter because I know my eyes are often bigger than my abilities, and I could easily overcommit myself. I want to force myself to keep my focus small.
+Like Ludum Dare, EXPER3 had a theme that the games must adhere to. That theme was **power**. How I interpreted that was up to me. I tried to interpret it differently in each game as a creative challenge.
 
-Like Ludum Dare, EXPER3 has a theme that the games must adhere to. That theme is **power**. How I interpret that is up to me. I'm trying to make sure I interpret it differently in each game as a creative challenge.
+EXPER3 also had an unofficial second theme. That theme was **moose**. This wasn't actually a rule Amy set, but the fake newspaper she wrote as part of my birthday present needed some space-filler, and the software she was using filled it in with a second story about the global moose market. It was very funny and left an impression on the people at my birthday party. So it just seemed appropriate to include moose in EXPER3 in some capacity.
 
-EXPER3 also has an unofficial second theme. That theme is **moose**. This isn't actually a rule Amy set, but the fake newspaper she wrote as part of my birthday present needed some space-filler, and the software she was using filled it in with a second story about the global moose market. It was very funny and left an impression on the people at my birthday party. It just seems appropriate to include moose in EXPER3 in some capacity.
+# What Tools Did You Use?
 
-# What Tools Are You Using?
+I drew the art for all four games in Paint.NET. I created the sound effects for _Jump Fight_ in bfxr. I composed the music for _Jump Fight_ in Musagi. The other games either lack sound effects and music or incorporate sound and music from other people.
 
-I'm drawing the art in Paint.NET. I'm creating the sound effects in bfxr. I'm composing the music in Musagi.
-
-For source code, I'm writing all four games in Haxe, using the HaxeFlixel engine on top of the OpenFL/Lime framework. This may sound like a thick stack, but it has a number of advantages for me:
+For source code, I wrote all four games in Haxe, using the HaxeFlixel engine on top of the OpenFL/Lime framework. This may sound like a thick stack, but when I started, I perceived it as having a number of advantages for me:
 
 1. Haxe is a modern language with powerful functional programming capabilities.
-1. I used the AS3 version of Flixel to make one of the few other games I ever created, so I am familiar with its interface.
-1. HaxeFlixel has a low boilerplate cost to starting up a new project, which is something I'll be doing four times.
-1. HaxeFlixel has an API that elides just the right amount of work for what I want to do. It provides the essentials of windowing, audio, input, and sprite-based rendering, and then it gets out of the way. This means I can write four very different 2D games on the same framework.
-1. HaxeFlixel isn't _over_-engineered for the kind of simple, 2D games I'm making, so I won't be fighting needless abstractions or be waylaid by working around features I don't even want to use.
-1. I'm still a coder at heart, and that means I am most comfortable working with source code instead of a GUI. EXPER3 is not the time to try to change this.
+1. I used the AS3 version of Flixel to make one of the few other games I ever created, so I was familiar with its interface.
+1. HaxeFlixel has a low boilerplate cost to starting up a new project, which is something I had to do four times.
+1. HaxeFlixel has an API that elides just the right amount of work for what I wanted to do. It provides the essentials of windowing, audio, input, and sprite-based rendering, and then it gets out of the way. This means I could write four very different 2D games on the same framework.
+1. HaxeFlixel isn't _over_-engineered for the kind of simple, 2D games I was making, so I wouldn't be fighting needless abstractions or be waylaid by working around features I didn't even want to use.
+1. I was and am a coder at heart, and that means I was most comfortable working with source code instead of a GUI. EXPER3 was not the time to try something different.
 
-This does pose some amount of risk. Although I've used many languages like Haxe, I've never written a large project in Haxe itself. I am betting on this not being a huge impediment, but we shall see.
+The risk of using this technology was that I wasn't significantly familiar with Haxe or HaxeFlixel when I started. Learning those technologies could have eaten up time better spent on other things. Or, they could have turned out to be less well-suited to my projects than I thought. Of these, the latter definitely happened, but it didn't prevent me from completing the contest.
 
 # What Platforms Do These Games Run On?
 
-Although Haxe/Lime/OpenFL/HaxeFlixel (HLOF?) has robust support for multiple platforms, for the sake of simplicity during the contest time crunch, I'll be focusing on the same platform I'm developing on: Windows PC. That said, the games should run without modification on Mac OS X and Linux. But I won't be doing any work to support any smartphones, tablets, or game consoles during EXPER3. That's an added complication I just don't need.
+Although Haxe/Lime/OpenFL/HaxeFlixel (HLOF?) has robust support for multiple platforms, for the sake of simplicity during the contest time crunch, I focused on the same platform I was developing on: Windows PC. That said, the games' source code should compile and run without modification on Mac OS X and Linux. The games will not run on smartphones, tablets, or game consoles without modification.
 
 # How Can I Run the Games?
 
-If you are not comfortable with compiling source code from the command line, I recommend you wait. I will release downloadable binaries of all the games after the contest is over.
+The v1.0.0 release has a ZIP file attached that contains Windows executables for all four games. You can find this release by looking for the text that says something like "5 releases" near the top of this webpage. Just unzip the file you downloaded, and you should see four directories, one for each game. There's no need to install them to your computer, just run the programs from there. And to "uninstall," just delete the directory you created when unzipping.
 
-If you are comfortable with compilation, you'll first need to install [Haxe](http://www.openfl.org/documentation/setup/install-haxe/), [Lime](http://www.openfl.org/documentation/setup/install-lime/), [OpenFL](http://www.openfl.org/documentation/setup/install-openfl/), and [HaxeFlixel](http://haxeflixel.com/documentation/install-haxeflixel/), in that order. These games are simple enough that they perform well even on the Neko VM, so there's no need to set up your platform-specific Lime toolchain. Once this is done, you can `cd` into any game's directory and execute `lime test neko` to run the game.
+If you are comfortable with (or prefer) source code compilation, you'll first need to install [Haxe](http://www.openfl.org/documentation/setup/install-haxe/), [Lime](http://www.openfl.org/documentation/setup/install-lime/), [OpenFL](http://www.openfl.org/documentation/setup/install-openfl/), and [HaxeFlixel](http://haxeflixel.com/documentation/install-haxeflixel/), in that order. These games are simple enough that they perform well even on the Neko VM, so there's no need to set up your platform-specific Lime toolchain. Once this is done, you can `cd` into any game's directory and execute `lime test neko` to run the game.
 
 # So What Are the Games?
 
