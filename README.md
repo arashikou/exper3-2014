@@ -39,7 +39,7 @@ Although Haxe/Lime/OpenFL/HaxeFlixel (HLOF?) has robust support for multiple pla
 
 # How Can I Run the Games?
 
-The v1.0.0 release has a ZIP file attached that contains Windows executables for all four games. You can find this release by looking for the text that says something like "5 releases" near the top of this webpage. Just unzip the file you downloaded, and you should see four directories, one for each game. There's no need to install them to your computer, just run the programs from there. And to "uninstall," just delete the directory you created when unzipping.
+The [v1.0.0 release](https://github.com/arashikou/exper3/releases/tag/v1.0.0) has a ZIP file attached that contains Windows executables for all four games. You can also [click here](https://github.com/arashikou/exper3/releases/download/v1.0.0/exper3.zip) to download that same file. Just unzip the file you downloaded, and you should see four directories, one for each game. There's no need to install them to your computer, just run the programs from there. And to "uninstall," just delete the directory that was created when unzipping.
 
 If you are comfortable with (or prefer) source code compilation, you'll first need to install [Haxe](http://www.openfl.org/documentation/setup/install-haxe/), [Lime](http://www.openfl.org/documentation/setup/install-lime/), [OpenFL](http://www.openfl.org/documentation/setup/install-openfl/), and [HaxeFlixel](http://haxeflixel.com/documentation/install-haxeflixel/), in that order. These games are simple enough that they perform well even on the Neko VM, so there's no need to set up your platform-specific Lime toolchain. Once this is done, you can `cd` into any game's directory and execute `lime test neko` to run the game.
 
